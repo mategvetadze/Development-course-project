@@ -63,4 +63,25 @@ STRUGGLE I saw: as a beginner tutor nobody knew him, so he joined a company that
 COST I can name: hours of preparation for just 3 students, a large share of his income going to the company, so he earned little for the time spent. In the end he quit the company and now has to find students on his own
 ```
 
+```
+AUTHOR: Mate Gvetadze
+WHO I watched: Tamar, the owner of a small neighborhood grocery shop in Kutaisi where regular customers buy "on credit" and pay at the end of the month
+STRUGGLE I saw: she writes every credit purchase by hand in a paper notebook ("nisia"). The pages are messy, some customers say they already paid or that the amount is wrong, and she has no easy way to see the total a person owes or to remind them. When a customer asks "how much do I owe?", she spends several minutes flipping pages and adding numbers with a calculator while other customers wait in line
+COST I can name: around 40 customers in the notebook, about 30 minutes every evening adding up totals, roughly 300-400 GEL per month that is never paid back because nobody can prove the amount, and regular arguments with customers
+```
+
+```
+AUTHOR: Mate Gvetadze
+WHO I watched: my friend Irakli, a barber who runs a small 2-chair barbershop in Kutaisi and takes bookings only through phone calls and Instagram messages
+STRUGGLE I saw: while cutting hair he has to stop to answer calls and messages, and he keeps appointments in his head or on a piece of paper. Twice in one week he booked two clients for the same time, and clients who forget their appointment simply don't show up, leaving him with an empty chair. Clients also complain they can't see which times are free without calling
+COST I can name: 10-15 interruptions per day to answer the phone, about 5 no-shows per week (around 100 GEL lost weekly at 20 GEL per haircut), and 2 angry clients who left after a double booking
+```
+
+```
+AUTHOR: Mate Gvetadze
+WHO I watched: my friend Luka, a KIU student who travels to the university every day by marshrutka (minibus) from the other side of Kutaisi
+STRUGGLE I saw: there is no real schedule or live information about when the next marshrutka will arrive or which route passes his stop. He waits at the stop not knowing if the bus is 2 minutes or 25 minutes away, and when a route changes or a marshrutka is full he only finds out standing there. Many times he gives up and takes a taxi so he won't be late for his lecture
+COST I can name: on average 15-20 minutes of waiting per trip (about 3 hours per week), 2-3 taxi rides per week at 5-7 GEL each (around 60 GEL per month), and being late to the first lecture at least once a week
+```
+
 
