@@ -36,9 +36,9 @@ Record keeping: From Week 3, product decisions go in `DECISIONS.md` with a link 
 
 ## When it breaks
 
-1. Name it in the team channel within 48 hours of noticing. Silence is how last year's teams collapsed.  
-2. Any teammate who accumulates 3 formal warnings or consistently fails to contribute will be required to leave the team.  
-3. In such cases or if unresolved after one standup, we will immediately notify Zeshan Ahmad (zeshan.ahmad@kiu.edu.ge) for formal mediation and removal processing.
+1. **Early Notification:** Any issue, delay, or technical blocker must be officially posted in the team channel (Instagram/Discord) within 48 hours of noticing it.
+2. **Warning System & Accountability:** If a teammate fails to respond within the 3-hour response window or misses a task without prior notice, they receive a formal warning in the chat.
+3. **Escalation & Removal:** Accumulating 3 formal warnings, or proposing major scope changes without a 3-member consensus, triggers an internal review. If unresolved within one standup, the team will escalate the case to Zeshan Ahmad (zeshan.ahmad@kiu.edu.ge) for formal course mediation or team removal.
 
 ## Sign-off
 
