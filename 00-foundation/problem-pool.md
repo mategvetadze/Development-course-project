@@ -84,4 +84,11 @@ STRUGGLE I saw: there is no real schedule or live information about when the nex
 COST I can name: on average 15-20 minutes of waiting per trip (about 3 hours per week), 2-3 taxi rides per week at 5-7 GEL each (around 60 GEL per month), and being late to the first lecture at least once a week
 ```
 
+```
+AUTHOR: Saba
+WHO I watched: Low-income families in my neighborhood who rely on informal hand-me-downs and donated items from local neighbors and relatives.
+STRUGGLE I saw: Whenever they urgently need seasonal clothing, children's supplies, or basic household items, they are restricted to asking a small circle of immediate neighbors, facing emotional discomfort and often coming up empty-handed due to their limited local network.
+COST I can name: Days spent without essential household items, emotional strain and awkwardness from repeated personal solicitation, and complete reliance on immediate geographical surroundings.
+```
+
 
