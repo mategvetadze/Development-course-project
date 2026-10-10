@@ -4,7 +4,7 @@ Week: 4 · Asker: saba tabukashvili · Logger: no one · Consent: unfortunately 
 
 **Context:** Third-year computer science student at KIU. Not employed and not in an internship or any program. Wants an internship or study/exchange abroad, especially in Germany (has studied German since school). Contacted through: Messenger, by Ani (per outreach-tracker.md).  Language of the interview: english
 
-**Our prediction:**
+**Our prediction:**We are wrong if students describing their job search do not raise on their own, before we mention it, either that there are too few jobs in their field or that the pay and requirements offered are unfair.
 
 ## Quotes (verbatim; ★ = surprise)
 
