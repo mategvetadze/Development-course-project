@@ -1,3 +1,7 @@
+
+**Our prediction:** We are wrong if students describing their job search do not raise on their own, before we mention it, either that there are too few jobs in their field or that the pay and requirements offered are unfair.
+
+
 1. What are you studying, and what year are you in?
 2. Are you currently working somewhere, or are you doing an internship?
 3. Where do you usually look for job openings or internships?
