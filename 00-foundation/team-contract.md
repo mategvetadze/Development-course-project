@@ -14,8 +14,8 @@ Accountabilities below say who makes sure something happens. They do not say who
 | :--- | :--- | :--- | :--- |
 | Archil Sanikidze | @Archi-lee-Sun | Discovery: interview quality, synthesis | [we will write] |
 | Mate Gvetadze | @mate_gvetadze | Build: repo, fullstack development, code | [we will write] |
-| Ani | @ANANKE231 | Build: fullstack development, deployment | [we will write] |
-| Saba | @[saba_github] | Delivery: deadlines, submissions, milestone tags | [we will write] |
+| Ani purtskhvanidze | @ANANKE231 | Build: fullstack development, deployment | lado sitchinava |
+| Saba | @tabukashvilisaba | Delivery: deadlines, submissions, milestone tags | anna pakhuridze |
 
 > **Note on 4-member setup:** Build accountability is shared between Mate and Ani across fullstack development (both frontend and backend) and deployment to satisfy the 4-member structure requirement.
 
@@ -49,4 +49,4 @@ Committing this file is signing it.
 | Archil Sanikidze | @Archi-lee-Sun | September 28, 2026 |
 | Mate Gvetadze | @mate_gvetadze | September 28, 2026 |
 | Ani | @ANANKE231 | September 28, 2026 |
-| Saba | @[saba_github] | September 28, 2026 |
+| Saba | @tabukashvilisaba | September 28, 2026 |
