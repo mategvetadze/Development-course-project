@@ -12,16 +12,16 @@
 
 **What they are NOT:**
 - Experienced developers looking for senior or full-time roles: they search with different requirements and often through recruiters.
-- Students looking for non-IT jobs, or who already have a job through a family connection: a different market, or no search at all.
+- Students who want to find job with their profession
 
 **How we reach five of them this week:**
 
 | Person or channel | Who on our team | Contacted? |
 |---|---|---|
-| Murtaz Babunashvili | ani purtskhvanidze | yes |
+| Murtaz Babunashvili | saba tabukashvili | yes |
 | Lado Sichinava | ani purtskhvanidze | yes |
 | Ana Pakhuridze | saba tabukashvili | yes |
-| Anri Tabukashvili | saba tabukashvili | yes |
+| karli mukbaniani | saba tabukashvili | yes |
 
 
 **Evidence so far:** 00-foundation/problem-pool.md, Saba's statement about Giorgi (98 applications, 0 offers). Murtaz's details are from saba , i got interview from him but without interview i already knew his about finding jobs , because he is my friend. After interviews: links to logs go here.
