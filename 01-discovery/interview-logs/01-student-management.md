@@ -4,7 +4,7 @@ Week: 4 · Asker: saba tabukashvili · Logger: ani purtskhvanidze · Consent: no
 
 **Context:** Third-year management student at KIU. Not working and not doing an internship; looking for internship and entry-level jobs in management, business, marketing or similar. Contacted through: Instagram, by Saba (per outreach-tracker.md). Language of the interview: English.
 
-**Our prediction:** she talked about it herself , and from her speaking i think her problem is the closest one
+**Our prediction:** We are wrong if students describing their job search do not raise on their own, before we mention it, either that there are too few jobs in their field or that the pay and requirements offered are unfair.
 
 ## Quotes (verbatim; ★ = surprise)
 
