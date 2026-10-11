@@ -1,4 +1,4 @@
-# Interview 07 · Third-year Computer Science student · (code name: CS-7)
+# Interview 07 · Third-year Computer Science student · (code name: CS-5)
 
 Week: not recorded · Asker: not recorded · Logger: not recorded · Consent: participant knew the interview would be used for a student project (confirmed by team member on 2026-10-11); recording consent for this individual interview not separately documented · Real or practice: real interview (confirmed by team member); course participation not separately documented
 
