@@ -1,6 +1,6 @@
 # Interview 07 · Third-year Computer Science student · (code name: CS-5)
 
-Week: not recorded · Asker: not recorded (source supplied by Ani) · Logger: not recorded · Consent: unknown; confirm before publication · Real or practice: reported interview; confirm participant is not in this course
+Week: not recorded · Asker: not recorded (source supplied by Ani) · Logger: not recorded · Consent: participant knew the interview would be used for a student project (confirmed by team member on 2026-10-11); recording consent for this individual interview not separately documented · Real or practice: real interview (confirmed by team member); course participation not separately documented
 
 **Context:** Third-year Computer Science student, not working or interning. First interview in `anisinterviews.pdf`, pages 1–2. The PDF gives no participant name; identity must not be inferred from the outreach tracker.
 
@@ -21,4 +21,4 @@ Week: not recorded · Asker: not recorded (source supplied by Ani) · Logger: no
 **Commitment:** Not recorded.
 **Next:** Ask for the text of that posting and the exact response received.
 
-**Source and verification:** `anisinterviews.pdf`, pp. 1–2, first interview. Interview date, participant identity, consent, interviewer/logger and course participation were not recorded in the supplied PDF; verify with Ani before publishing or counting as fully compliant.
+**Source and verification:** `anisinterviews.pdf`, pp. 1–2, first interview. A team member confirmed on 2026-10-11 that the interview was real and the participant knew it would be used for a student project. Interview date, participant identity, interviewer/logger, individual recording consent and course participation remain undocumented in the PDF.

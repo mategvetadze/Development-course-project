@@ -1,6 +1,6 @@
 # Interview 08 · Second-year Business Administration student · (code name: Business-1)
 
-Week: not recorded · Asker: not recorded (source supplied by Ani) · Logger: not recorded · Consent: unknown; confirm before publication · Real or practice: reported interview; confirm participant is not in this course
+Week: not recorded · Asker: not recorded (source supplied by Ani) · Logger: not recorded · Consent: participant knew the interview would be used for a student project (confirmed by team member on 2026-10-11); recording consent for this individual interview not separately documented · Real or practice: real interview (confirmed by team member); course participation not separately documented
 
 **Context:** Second-year Business Administration student considering Marketing. Helps at a relative's shop on weekends. Second interview in `anisinterviews.pdf`, pages 2–3. The PDF gives no participant name; identity must not be inferred from the outreach tracker.
 
@@ -21,4 +21,4 @@ Week: not recorded · Asker: not recorded (source supplied by Ani) · Logger: no
 **Commitment:** Not recorded.
 **Next:** Ask for an example of a duplicated post and what information was missing from it.
 
-**Source and verification:** `anisinterviews.pdf`, pp. 2–3, second interview. Interview date, participant identity, consent, interviewer/logger and course participation were not recorded in the supplied PDF; verify with Ani before publishing or counting as fully compliant.
+**Source and verification:** `anisinterviews.pdf`, pp. 2–3, second interview. A team member confirmed on 2026-10-11 that the interview was real and the participant knew it would be used for a student project. Interview date, participant identity, interviewer/logger, individual recording consent and course participation remain undocumented in the PDF.

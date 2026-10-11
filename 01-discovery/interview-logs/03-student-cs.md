@@ -1,6 +1,6 @@
 # Interview 03 · Third-year Computer Science student · (code name: CS-2)
 
-Week: not recorded · Asker: not recorded (source supplied by Archil) · Logger: not recorded · Consent: unknown; confirm before publication · Real or practice: reported interview; confirm participant is not in this course
+Week: not recorded · Asker: not recorded (source supplied by Archil) · Logger: not recorded · Consent: participant knew the interview would be used for a student project (confirmed by team member on 2026-10-11); recording consent for this individual interview not separately documented · Real or practice: real interview (confirmed by team member); course participation not separately documented
 
 **Context:** Third-year Computer Science student, not working or interning. Interview source: `archilisinterviews.pdf`, page 1. The source PDF is outside the team repository. Public log uses a code name.
 
@@ -21,4 +21,4 @@ Week: not recorded · Asker: not recorded (source supplied by Archil) · Logger:
 **Commitment:** Not recorded.
 **Next:** Ask which specific opportunity was missed and where its announcement appeared.
 
-**Source and verification:** `archilisinterviews.pdf`, p. 1. Interview date, consent, interviewer/logger and course participation were not recorded in the supplied PDF; verify with Archil before publishing or counting as fully compliant.
+**Source and verification:** `archilisinterviews.pdf`, p. 1. A team member confirmed on 2026-10-11 that the interview was real and the participant knew it would be used for a student project. Interview date, interviewer/logger, individual recording consent and course participation remain undocumented in the PDF.
