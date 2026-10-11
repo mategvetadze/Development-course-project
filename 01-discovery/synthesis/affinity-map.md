@@ -77,6 +77,21 @@ Interviews behind it (5): `01`, `02`, `04`, `06`, `08`. `05` describes checking 
 
 For `04`, `06` and `08`, the quotes establish selection criteria; they do not by themselves prove that an application was abandoned. `02` directly reports delay. `01` reports choosing only relevant positions.
 
+## Pattern 5
+
+Pattern: For some students, finding work also means tracking courses and career events they believe can lead to employment.
+
+Interviews behind it (3): `03`, `04`, `06`.
+
+### Quotes (verbatim, each tagged with its log number)
+
+* `03`: “I am also interested in hackathons and courses because they are closely related to my future employment, so I always look for them along with jobs!”
+* `04`: “jobs.ge, LinkedIn, and also on the pages of various companies like TBC, BOG, EPAM.”
+* `04`: “Also, it would be great to have something that provides hackathons, internships, and courses, because, for example, after completing courses from EPAM, TBC, or Quantori, they employ you themselves.”
+* `06`: “Just like in tech, participating in these legal clinics and training programs is often the best way to get employed directly by them afterward!” (`archilisinterviews.pdf`, p. 4, Q13)
+
+`03` says they already search for hackathons and courses alongside jobs; `04` checks company pages and describes company courses as a route to hiring. `06` values legal clinics and training, but does not say they currently search for them. The missed TBC course and legal clinic in Pattern 3 show a related discovery problem. This pattern does not establish that any particular platform feature would solve it.
+
 ## Not yet a pattern
 
 These are exact participant statements retained from the logs or original sources. They give context, describe a workaround, or suggest a feature, but do not independently establish another recurring problem.
@@ -86,12 +101,9 @@ These are exact participant statements retained from the logs or original source
 * `02`: “especially in the Germany since I have been studying the German language since I was in the school” (distinct interest in opportunities abroad)
 * `02`: “Searching the specific platforms with AI makes it easier to find the job.” (reported workaround)
 * `03`: “Various websites, and offers provided by the university.” (sources used)
-* `03`: “I am also interested in hackathons and courses because they are closely related to my future employment, so I always look for them along with jobs!” (adjacent opportunities sought)
-* `04`: “jobs.ge, LinkedIn, and also on the pages of various companies like TBC, BOG, EPAM.” (sources used)
-* `04`: “Also, it would be great to have something that provides hackathons, internships, and courses, because, for example, after completing courses from EPAM, TBC, or Quantori, they employ you themselves.” (feature suggestion and perceived career path)
 * `05`: “From KIU's (Kutaisi International University) information channels, companies' official vacancy websites, and friends.” (sources used)
 * `05`: “If they require the skills that I have developed, then I realize this vacancy is for me.” (selection criterion)
 * `05`: “Yes, jobs.ge, ChatGPT, LinkedIn, etc.” (tools used)
 * `08`: “I messaged two places and sent my CV to one.” (outcome of one search, without a stated problem in this sentence)
 
-The examples of courses, hackathons and legal training show that some participants look beyond job advertisements. They do not yet show that a separate product feature is needed. The original hypothesis about a general shortage of jobs and unfair compensation is not established by the quotes above; this map records the interview evidence without deciding the hypothesis verdict.
+The original hypothesis about a general shortage of jobs and unfair compensation is not established by the quotes above; this map records the interview evidence without deciding the hypothesis verdict.
