@@ -13,3 +13,4 @@ After discussing these issues, our team decided to develop a product that would 
 The text above was committed before any real interview but did not include a "we are wrong if" line. We add it here, based only on the claims above. It was not changed after reading the interview logs.
 
 **Our prediction:** We are wrong if students describing their job search do not raise on their own, before we mention it, either that there are too few jobs in their field or that the pay and requirements offered are unfair.
+Week 3 verdict: killed. Evidence: logs 01, 02, 03, 04, 05, 06, 07, 08. See DECISIONS.md.
