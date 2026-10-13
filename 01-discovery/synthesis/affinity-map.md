@@ -1,6 +1,6 @@
 # Affinity Map
 
-Eight distinct interview logs were reviewed: `01`–`08`. `01` is the Saba–Anna interview; its supplied transcript is the same interview, not a ninth participant. Quotes from `03`–`06` were checked against `archilisinterviews.pdf`, and quotes from `07`–`08` against `anisinterviews.pdf`. The original messages behind `02` were not supplied, so its quotations are attributed to that log rather than independently verified against a transcript. A team member confirmed on 2026-10-11 that all participants knew their interviews would be used for the student project. The older `02` log still says “Consent: unfortunately no”; this discrepancy needs correction by its author. The log has not been changed.
+Quotes from 09 are translated from Georgian in the log; no separate transcript was supplied, so they are attributed to that log. The 09 log header also says "Week: 5" and "Consent: unfortunately no"; both need correction by its author.
 
 For `01`, several lines labelled verbatim in the log differ from the supplied Saba–Anna transcript. The affected entries below use exact excerpts from that transcript instead; the original log has not been changed. Bracketed numbers identify interview logs, not numbers of mentions. Context and feature suggestions are kept in **Not yet a pattern** and do not count as evidence for a problem pattern.
 
@@ -8,7 +8,7 @@ For `01`, several lines labelled verbatim in the log differ from the supplied Sa
 
 Pattern: Searching across scattered sources and sorting through irrelevant posts makes relevant opportunities hard to find.
 
-Interviews behind it (7): `01`, `03`, `04`, `05`, `06`, `07`, `08`.
+Interviews behind it (7): `01`, `03`, `04`, `05`, `06`, `07`, `08`,`09`.
 
 ### Quotes (verbatim, each tagged with its log number)
 
@@ -19,6 +19,7 @@ Interviews behind it (7): `01`, `03`, `04`, `05`, `06`, `07`, `08`.
 * `06`: “It is exhausting having to sift through so many irrelevant job postings across different websites.”
 * `07`: “Filtering was hard. On Facebook, many unrelated jobs showed up, and I had to spend most of my time sorting through them.”
 * `08`: “Too many posts, and half of them are the same job posted again by different people.”
+* `09`: "There are a lot of jobs, but few that fit you." (translated from Georgian; raised before the interviewer mentioned it)
 
 `08` specifically describes duplicated posts; other participants describe different forms of search effort. `02` describes schedule fit instead of this difficulty.
 
@@ -26,7 +27,7 @@ Interviews behind it (7): `01`, `03`, `04`, `05`, `06`, `07`, `08`.
 
 Pattern: Applicants spend extra effort establishing whether a posting actually fits them because eligibility or basic job terms are unclear or inconsistent.
 
-Interviews behind it (4): `01`, `06`, `07`, `08`.
+Interviews behind it (4): `01`, `06`, `07`, `08`,`09`.
 
 ### Quotes (verbatim, each tagged with its log number)
 
@@ -105,5 +106,10 @@ These are exact participant statements retained from the logs or original source
 * `05`: “If they require the skills that I have developed, then I realize this vacancy is for me.” (selection criterion)
 * `05`: “Yes, jobs.ge, ChatGPT, LinkedIn, etc.” (tools used)
 * `08`: “I messaged two places and sent my CV to one.” (outcome of one search, without a stated problem in this sentence)
+* 09: "My priority in the job search is growth and gaining practical knowledge, not income." (translated; selection criterion)
+09: "Mostly on LinkedIn, on social networks or on Georgian job sites." (translated; sources used)
+09: "I check these sites almost every day." (translated; frequency)
+09: "I have probably sent my CV to 10-12 places, but many came back negative, and I am still waiting for some." (translated; outcome of applying)
+09: "I don't know if such tools exist, it would be good if they do." (translated; hypothetical, weak signal, not a feature request)
 
-The original hypothesis about a general shortage of jobs and unfair compensation is not established by the quotes above; this map records the interview evidence without deciding the hypothesis verdict.
+The original hypothesis is not established across the logs. The clearest direct hits are 09 (pay versus requirements, raised unprompted) and 06 (a "junior" role requiring 3 years of experience), so it remains a minority finding.
