@@ -1,6 +1,6 @@
 # Interview 08 · Second-year Business Administration student · (code name: Business-1)
 
-Week: not recorded · Asker: not recorded · Logger: not recorded · Consent: participant knew the interview would be used for a student project (confirmed by team member on 2026-10-11); recording consent for this individual interview not separately documented · Real or practice: real interview (confirmed by team member); course participation not separately documented
+Week: not recorded · Asker: ANANKE231 · Logger: not recorded · Consent: participant knew the interview would be used for a student project (confirmed by team member on 2026-10-11); recording consent for this individual interview not separately documented · Real or practice: real interview (confirmed by team member); course participation not separately documented
 
 **Context:** Second-year Business Administration student considering Marketing. Helps at a relative's shop on weekends. Second interview in anisinterviews.pdf, pages 2–3. The PDF gives no participant name; identity must not be inferred from the outreach tracker.
 
