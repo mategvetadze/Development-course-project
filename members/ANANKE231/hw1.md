@@ -25,13 +25,15 @@ I joined team Prometheus with Saba Tabukashvili, Archil Sanikidze and Mate Gveta
 
 ## 3. My DECISIONS.md citations
 
-**Week 3 · Kill your favorite idea**
+## 3. My DECISIONS.md citations
 
-In the lab we discussed the interview questions together as a team. I then interviewed two students myself and wrote both logs: 07 (a third-year Computer Science student) and 08 (a second-year Business Administration student). In 07 the posts said "junior level", but the student was told they needed experience. In 08 the student found many duplicate posts and turned off job alerts because they were irrelevant. I presented what I learned to the team.
+All lines are in [DECISIONS.md](https://github.com/mategvetadze/Development-course-project/blob/main/DECISIONS.md).
 
-Links:
-- [07-student-cs.md](https://github.com/mategvetadze/Development-course-project/blob/main/01-discovery/interview-logs/07-student-cs.md)
-- [08-student-business.md](https://github.com/mategvetadze/Development-course-project/blob/main/01-discovery/interview-logs/08-student-business.md)
+| The line, copied | What I did for it |
+|---|---|
+| Wk3 · Prediction "We are wrong if students describing their job search do not raise on their own, before we mention it, either that there are too few jobs in their field or that the pay and requirements offered are unfair." verdict: killed · evidence: 01-discovery/interview-logs/01-student-management.md, ... 07-student-cs.md, 08-student-business.md · owner: AS | I asked and logged interviews 07 and 08, which are two of the logs behind this verdict. |
+| Wk4 · Problem statement v1: Students lose time and miss opportunities because relevant job posts are scattered across many sources and mixed with irrelevant ones · evidence: 01-discovery/problem-statement.md, synthesis/patterns-analysis.md · owner: ST | I did not write this line. I helped write the problem statement it points to. |
+| (your new Wk4 follow-up line, if you add it) | I wrote this line from my interviews 07 and 08. |
 
 **Week 4 · The prototype is the conversation**
 
