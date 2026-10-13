@@ -25,7 +25,7 @@ I joined team Prometheus with Saba Tabukashvili, Archil Sanikidze and Mate Gveta
 
 **Week 2 · Evidence over opinion**
 
-I brought two problems to the problem pool. The first was about a friend who drove around the city center looking for a parking space and arrived 15 minutes late to an appointment. The second was about a KIU student who kept deadlines in different chats and notes, missed an assignment date, and lost 10 points. The team reviewed everyone's problems together, and I helped choose the final problem. We chose the job-search problem.
+I brought two problems to the problem pool, and the parking one is written twice with two different friends. The first was about friends who drove around the city center looking for a parking space and arrived 15 minutes late to an appointment. The second was about a KIU student who kept deadlines in different chats and notes, missed an assignment date, and lost 10 points. The team reviewed everyone's problems together, and I helped choose the final problem. We chose the job-search problem.
 
 [link: 00-foundation/problem-pool.md](https://github.com/mategvetadze/Development-course-project/blob/main/00-foundation/problem-pool.md)
 
