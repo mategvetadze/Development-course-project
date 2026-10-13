@@ -23,7 +23,22 @@ I joined team Prometheus with Saba Tabukashvili, Archil Sanikidze and Mate Gveta
 
 [link: 00-foundation/team-contract.md](https://github.com/mategvetadze/Development-course-project/blob/main/00-foundation/team-contract.md)
 
-## 3. My DECISIONS.md citations
+**Week 2 · Evidence over opinion**
+
+I brought two problems to the problem pool. The first was about a friend who drove around the city center looking for a parking space and arrived 15 minutes late to an appointment. The second was about a KIU student who kept deadlines in different chats and notes, missed an assignment date, and lost 10 points. The team reviewed everyone's problems together, and I helped choose the final problem. We chose the job-search problem.
+
+[link: 00-foundation/problem-pool.md](https://github.com/mategvetadze/Development-course-project/blob/main/00-foundation/problem-pool.md)
+
+**Week 3 · Kill your favorite idea**
+
+In the lab we discussed the interview questions together as a team. I then interviewed two students and wrote both logs: 07 (a third-year Computer Science student) and 08 (a second-year Business Administration student). In 07 the posts said "junior level", but the student was told they needed experience. In 08 the student found many duplicate posts and turned off job alerts because they were irrelevant. I discussed both interviews with my teammates.
+
+- [07-student-cs.md](https://github.com/mategvetadze/Development-course-project/blob/main/01-discovery/interview-logs/07-student-cs.md)
+- [08-student-business.md](https://github.com/mategvetadze/Development-course-project/blob/main/01-discovery/interview-logs/08-student-business.md)
+
+**Week 4 · The prototype is the conversation**
+
+This week I summed up what I learned from my two interviews (07 and 08) and discussed them with my teammates.
 
 ## 3. My DECISIONS.md citations
 
@@ -31,13 +46,4 @@ All lines are in [DECISIONS.md](https://github.com/mategvetadze/Development-cour
 
 | The line, copied | What I did for it |
 |---|---|
-| Wk3 · Prediction "We are wrong if students describing their job search do not raise on their own, before we mention it, either that there are too few jobs in their field or that the pay and requirements offered are unfair." verdict: killed · evidence: 01-discovery/interview-logs/01-student-management.md, ... 07-student-cs.md, 08-student-business.md · owner: AS | I asked and logged interviews 07 and 08, which are two of the logs behind this verdict. |
-| Wk4 · Problem statement v1: Students lose time and miss opportunities because relevant job posts are scattered across many sources and mixed with irrelevant ones · evidence: 01-discovery/problem-statement.md, synthesis/patterns-analysis.md · owner: ST | I did not write this line. I helped write the problem statement it points to. |
-| (your new Wk4 follow-up line, if you add it) | I wrote this line from my interviews 07 and 08. |
-
-**Week 4 · The prototype is the conversation**
-
-This week I did my two interviews (07 and 08) and summed up what I learned from them. I discussed them with my teammates, and I helped write the problem statement.
-
-Links:
-- [problem-statement.md](https://github.com/mategvetadze/Development-course-project/blob/main/01-discovery/problem-statement.md)
+| Wk3 · Prediction "We are wrong if students describing their job search do not raise on their own, before we mention it, either that there are too few jobs in their field or that the pay and requirements offered are unfair." verdict: killed · evidence: 01-discovery/interview-logs/01-student-management.md, 01-discovery/interview-logs/02-student-cs.md, 01-discovery/interview-logs/03-student-cs.md, 01-discovery/interview-logs/04-student-cs.md, 01-discovery/interview-logs/05-student-cs.md, 01-discovery/interview-logs/06-student-law.md, 01-discovery/interview-logs/07-student-cs.md, 01-discovery/interview-logs/08-student-business.md · owner: AS | I asked and logged interviews 07 and 08, which are two of the logs behind this verdict. |
