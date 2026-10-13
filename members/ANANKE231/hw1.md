@@ -2,7 +2,7 @@
 
 ## 1. My interview log
 
-| Log file | My role (asked / logged / both) | What this interview changed, in one sentence |
+| Log file (link) | My role (asked / logged / both) | What this interview changed, in one sentence |
 |---|---|---|
 | [07-student-cs.md](https://github.com/mategvetadze/Development-course-project/blob/main/01-discovery/interview-logs/07-student-cs.md) | both | A posting labelled "junior" still required experience, so the problem is not only too few jobs but also posts that don't show whether you qualify. |
 | [08-student-business.md](https://github.com/mategvetadze/Development-course-project/blob/main/01-discovery/interview-logs/08-student-business.md) | both | Duplicate posts and missing basics like salary and hours turned a planned ten-minute search into an hour, and the student turned off job alerts as irrelevant. |
@@ -11,9 +11,9 @@ The quote I heard myself that mattered most, with its log number:
 
 "The posts said junior level, so I contacted them." (07)
 
-One moment I broke the Mom Test, and what I asked instead next time:
+One moment I broke the Mom Test, and what I asked instead next time (name the log):
 
-In log 07 I asked: "How did the search process end? Did you apply for any jobs or send your CV?" It was two questions in one. The answer was a real story (the posts said junior level, but they were told they needed experience), but I could have got more detail by asking only one thing. Next time I would ask: "Walk me through what happened after you decided to apply."
+In log 08 I asked: "Have you ever tried using any tool or platform to make your job search easier?" This question points the person toward solutions instead of what they actually did. The student answered: "Not really. I once turned on job alerts on LinkedIn, but I got so many irrelevant emails that I turned them off." That was useful, but it was a lucky answer, because the question could just as easily have got "no" or a wish. Next time I would ask about a real past event: "Tell me about the last time you got a job alert. What did you do with it?"
 
 ## 2. Pattern journal, Weeks 1 to 4
 
@@ -33,6 +33,7 @@ I brought two problems to the problem pool. The first was about a friend who dro
 
 In the lab we discussed the interview questions together as a team. I then interviewed two students and wrote both logs: 07 (a third-year Computer Science student) and 08 (a second-year Business Administration student). In 07 the posts said "junior level", but the student was told they needed experience. In 08 the student found many duplicate posts and turned off job alerts because they were irrelevant. I discussed both interviews with my teammates.
 
+Links:
 - [07-student-cs.md](https://github.com/mategvetadze/Development-course-project/blob/main/01-discovery/interview-logs/07-student-cs.md)
 - [08-student-business.md](https://github.com/mategvetadze/Development-course-project/blob/main/01-discovery/interview-logs/08-student-business.md)
 
