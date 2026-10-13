@@ -1,0 +1,22 @@
+# Problem Statement
+
+
+## The statement
+
+University students in Georgia who are searching for an internship or an entry-level job describe their search as the main thing they do about work (01, 02, 03, 04, 05, 06, 07, 08, 09). When they sit down to search, they open post after post across several websites, company pages, social networks and university channels, and read each one to see whether it is relevant and whether they qualify (01, 04, 06, 07). It costs them 1-2 hours every Saturday and Sunday (09), about 2-3 missed deadlines in a year (01, 07), and in some cases a course, a legal clinic or an internship they learned about too late (04, 06, 08). Today they check LinkedIn, jobs.ge, company pages, Facebook and Instagram, university channels and friends by hand, open each post, and sometimes message people to ask the salary and the hours (01, 04, 05, 08). That fails them because, as 01 says, "I have to open many job posts to find out whether I'm actually eligible," and as 08 says, "Too many posts, and half of them are the same job posted again by different people" (01, 08).
+
+## What the evidence ruled out
+
+The problem we believed before interviewing: there are too few jobs in the students' field, or the pay and requirements offered are unfair.
+
+- Not established across the logs. Only 09 raised pay against requirements unprompted (1500 GEL for 6 office days, 3 languages, 5+ years of experience), and 06 described a "junior" role asking for 3 years of experience. Most logs describe finding and sorting posts instead (01, 04, 06, 07, 08).
+- TODO: replace the line above with the numbers from our Week 3 verdict line in `DECISIONS.md`.
+
+## What is still open
+
+- 03, 04 and 06 searched often and still missed opportunities, so irregular checking does not explain every miss (03, 04, 06). Question for the next interview: "The last time you missed something, where and when did you first see it?"
+
+## Pattern behind it
+
+- Pattern: Searching across scattered sources and sorting through irrelevant posts makes relevant opportunities hard to find.
+- Root cause: In the reported searches, dispersed sources and mixed or duplicate postings make students check opportunities manually to identify relevant ones (01, 04, 06, 07, 08).
