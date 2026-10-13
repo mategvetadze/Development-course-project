@@ -25,4 +25,10 @@ I joined team Prometheus with Saba Tabukashvili, Archil Sanikidze and Mate Gveta
 
 ## 3. My DECISIONS.md citations
 
-(to be written)
+**Week 3 · Kill your favorite idea**
+
+In the lab we discussed the interview questions together as a team. I then interviewed two students myself and wrote both logs: 07 (a third-year Computer Science student) and 08 (a second-year Business Administration student). In 07 the posts said "junior level", but the student was told they needed experience. In 08 the student found many duplicate posts and turned off job alerts because they were irrelevant. I presented what I learned to the team.
+
+Links:
+- [07-student-cs.md](https://github.com/mategvetadze/Development-course-project/blob/main/01-discovery/interview-logs/07-student-cs.md)
+- [08-student-business.md](https://github.com/mategvetadze/Development-course-project/blob/main/01-discovery/interview-logs/08-student-business.md)
