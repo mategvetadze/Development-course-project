@@ -32,3 +32,10 @@ In the lab we discussed the interview questions together as a team. I then inter
 Links:
 - [07-student-cs.md](https://github.com/mategvetadze/Development-course-project/blob/main/01-discovery/interview-logs/07-student-cs.md)
 - [08-student-business.md](https://github.com/mategvetadze/Development-course-project/blob/main/01-discovery/interview-logs/08-student-business.md)
+
+**Week 4 · The prototype is the conversation**
+
+This week I did my two interviews (07 and 08) and summed up what I learned from them. I discussed them with my teammates, and I helped write the problem statement.
+
+Links:
+- [problem-statement.md](https://github.com/mategvetadze/Development-course-project/blob/main/01-discovery/problem-statement.md)
