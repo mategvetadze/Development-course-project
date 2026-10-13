@@ -17,7 +17,11 @@ In log 07 I asked: "How did the search process end? Did you apply for any jobs o
 
 ## 2. Pattern journal, Weeks 1 to 4
 
-(to be written)
+**Week 1 · Act like an owner, not a role**
+
+I joined team Prometheus with Saba Tabukashvili, Archil Sanikidze and Mate Gvetadze. We wrote the team contract together. We thought about the roles, about who can make which part of the work better, and I wrote some of the rules. I also read the rules the others wrote and agreed with them.
+
+[link: 00-foundation/team-contract.md](https://github.com/mategvetadze/Development-course-project/blob/main/00-foundation/team-contract.md)
 
 ## 3. My DECISIONS.md citations
 
