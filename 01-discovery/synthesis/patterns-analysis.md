@@ -2,7 +2,7 @@
 
 ## Pattern 1: Searching across scattered sources and sorting through irrelevant posts makes relevant opportunities hard to find.
 
-Interviews behind it: `01`, `03`, `04`, `05`, `06`, `07`, `08`.
+Interviews behind it: `01`, `03`, `04`, `05`, `06`, `07`, `08`,09.
 
 1. Why are relevant opportunities hard to find? Participants describe opening and sorting many posts, including irrelevant or duplicate ones (`01`, `04`, `06`, `07`, `08`); `03` struggles to find the right vacancy and `05` says public vacancies are still missed.
 2. Why does sorting take effort? Opportunities appear across websites, company and university pages, and social channels (`01`, `03`, `04`, `05`, `06`), while some of those channels mix relevant posts with unrelated or repeated ones (`07`, `08`).
@@ -13,10 +13,11 @@ Which of the answers above is a guess rather than a quote? The grouping of these
 
 ## Pattern 2: Applicants spend extra effort establishing whether a posting actually fits them because eligibility or basic job terms are unclear or inconsistent.
 
-Interviews behind it: `01`, `06`, `07`, `08`.
+Interviews behind it: `01`, `06`, `07`, `08`,09.
 
 1. Why does deciding whether to apply take extra effort? `01` opens posts to check eligibility and skipped positions when requirements or schedule were unclear; `08` messaged people to learn salary and hours.
 2. Why can the initial posting fail to settle the decision? `06` found a “junior” requirement of three years' experience, `07` was invited to contact a “junior” posting but was then told experience was needed, and `08` found basic terms missing.
+3. “09 lists 6 office days, 3 languages, 5+ years of experience and leadership skills for a 1500 GEL salary.” Root cause-ში “inconsistent with the posting’s apparent level” → “inconsistent with the posting’s apparent level or the pay offered”
 
 Root cause, one sentence: In these cases, the information needed to judge fit was absent, hard to locate, or inconsistent with the posting's apparent level (`01`, `06`, `07`, `08`).
 
