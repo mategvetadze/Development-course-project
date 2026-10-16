@@ -17,8 +17,8 @@ Name (invented) and one-line sketch: Nino, a third-year student at a Georgian un
 | Person or channel | Who on our team | Contacted? |
 |---|---|---|
 | Murtaz Babunashvili | saba tabukashvili | yes |
-| Lado Sichinava | ani purtskhvanidze | yes |
-| Ana Pakhuridze | saba tabukashvili | yes |
+| Lado Sitchinava | ani purtskhvanidze | yes |
+| Anna Pakhuridze | saba tabukashvili | yes |
 | karli mukbaniani | saba tabukashvili | yes |
 
 **Evidence so far:** `00-foundation/problem-pool.md`; interview logs `01-discovery/interview-logs/01` to `09` (details cited by number above).
