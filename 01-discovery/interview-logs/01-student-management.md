@@ -8,14 +8,13 @@ Week: 4 · Asker: saba tabukashvili · Logger: ani purtskhvanidze · Consent: no
 
 ## Quotes (verbatim; ★ = surprise)
 
-* "The most frustrating part was having to search through many different platforms and vacancies."
-* "I have to open many job posts to find out whether I'm actually eligible." ★
-* "there were also positions that I liked but didn't apply for because I wasn't sure whether they meet my requirements" ★ (she skipped jobs she liked because she could not tell whether she qualified)
-* "Sometimes I found an interesting vacancy after the deadline had already passed, especially when I wasn't checking the platforms regularly." (about 2-3 times in the last year)
-* "I don't have a fixed schedule, so I usually check when I have time or when I'm specifically looking for an opportunity."
-* "I don't apply to every vacancy I see because I prefer to apply only when the position seems relevant to my skills, studies, and experience." (about 5-10 applications in the last 3 months)
-* "I would find it useful to have one platform where relevant opportunities are collected in one place" (feature talk: logged, not counted as evidence)
-
+- "The most frustrating part was having to search through many different platforms and vacancies."
+- "I have to open many job posts to find out whether I'm actually eligible." ★
+- "there were also positions that I liked but didn't apply for because I wasn't sure whether they meet my requirements and my schedule" ★ (she skipped jobs she liked because she could not tell whether she qualified)
+- "Sometimes I found an interesting vacancy after the deadline and had already passed, especially when I was not checking the platforms regularly." (about 2-3 times in the last year)
+- "I don't have a fixed schedule, so I usually check when I have time or when I'm especially looking for an opportunity."
+- "I prefer to apply only when the position seems relevant to my skills, studies and experience." (about 5-10 applications in the last 3 months)
+- "I will find it useful to have one platform where relevant opportunities are collected in one place" (feature talk: logged, not counted as evidence)
 **Workaround:** LinkedIn, jobs.ge, company websites, Instagram and Facebook pages where companies post, plus friends and university groups. Uses her laptop to update her CV and apply. For each posting she checks responsibilities, requirements (are students accepted, is experience required), hours, location and salary by opening it.
 **Cost:** About 2-3 missed deadlines in a year. Some liked positions not applied to because eligibility or schedule was unclear. About 5-10 applications in 3 months. No stated money or hours cost.
 **Frequency:** Checks platforms irregularly, roughly every few days to a week; no fixed schedule.
