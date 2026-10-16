@@ -1,8 +1,8 @@
-# Affinity Map
 
-Quotes from 09 are translated from Georgian in the log; no separate transcript was supplied, so they are attributed to that log. The 09 log header also says "Week: 5" and "Consent: unfortunately no"; both need correction by its author.
 
-For `01`, several lines labelled verbatim in the log differ from the supplied Saba–Anna transcript. The affected entries below use exact excerpts from that transcript instead; the original log has not been changed. Bracketed numbers identify interview logs, not numbers of mentions. Context and feature suggestions are kept in **Not yet a pattern** and do not count as evidence for a problem pattern.
+Affinity Map
+
+Quotes from 09 are translated from Georgian in the log. Bracketed numbers identify interview logs, not numbers of mentions. Context and feature suggestions are kept in "Not yet a pattern" and do not count as evidence for a problem pattern.
 
 ## Pattern 1
 
