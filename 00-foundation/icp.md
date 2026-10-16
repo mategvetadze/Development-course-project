@@ -6,13 +6,13 @@ Name (invented) and one-line sketch: Nino, a third-year student at a Georgian un
 
 **The moment the problem shows up:** When she sits down to search, usually on a weekend or when she has free time, and opens post after post across several websites and social pages to check whether each one is relevant and whether she qualifies (01, 04, 06, 07, 09).
 
-**What it costs them:** Time: 1-2 hours every Saturday and Sunday (09). Missed chances: about 2-3 missed deadlines in a year (01, 07), and a course, a legal clinic or an internship learned about too late (04, 06, 08). Some positions she liked were skipped because she could not tell whether she qualified (01).
+**What it costs them:** Time: 1-2 hours every Saturday and Sunday (09). Missed chances: about 2-3 missed deadlines (07), a vacancy found after its deadline (01), and a course, a legal clinic or an internship learned about too late (04, 06, 08). Some positions she liked were skipped because she could not tell whether she qualified (01).
 
 **What they do about it today:** She checks LinkedIn, jobs.ge, company pages, Facebook, Instagram, university channels and friends by hand (01, 04, 05, 07, 09). She opens each post to read the requirements (01, 06), and sometimes messages the poster to ask the salary and hours (08).
 
 **What they are NOT:** Experienced developers looking for senior or full-time roles; they search with different requirements and often through recruiters.
 
-**How we reach five of them this week:**
+**How we reach four of them this week:**
 
 | Person or channel | Who on our team | Contacted? |
 |---|---|---|
