@@ -4,7 +4,7 @@ Team name: Prometheus · Date: September 28, 2026 · CS-PD Fall 2026
 
 ## The rule (pre-written, sign under it)
 
-> No member may answer a question about the product with "that is not my role."
+ No member may answer a question about the product with: that is not my role.
 
 Accountabilities below say who makes sure something happens. They do not say who is allowed to care. Any member may be asked about any part of the product.
 
@@ -26,7 +26,7 @@ Accountabilities below say who makes sure something happens. They do not say who
 - Response window: Messages acknowledged within 3 hours  
 - Silent teammate with a deadline near: A teammate failing to respond within 3 hours receives a formal warning. Accumulating 3 warnings triggers immediate escalation to lab mentors for team mediation or removal.  
 - Demo-ready: any member can screen-share the current product state in any lab, on 2 minutes notice  
-
+Tracking who did what: commit history on GitHub and owner initials in DECISIONS.md.
 ## How we decide
 
 Small stuff: Any two members.  
