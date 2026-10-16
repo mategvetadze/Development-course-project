@@ -1,4 +1,4 @@
-# Competitive Landscape Seed
+
 
 ## What interviewees actually use today
 
@@ -18,12 +18,4 @@
 
 Job websites and social networks (LinkedIn, jobs.ge, Facebook, Instagram). They are named in the most logs (01, 03, 04, 05, 06, 07, 09), and nobody says they stopped using them; the complaints are about sorting through too many posts, not about leaving (04, 07).
 
-## Alternatives nobody mentioned
 
-TODO (team): list here the competitors you expected or found that no interviewee named. They do not go in the table above.
-
-## Self-check before committing
-
-- Every row in the table has a log number.
-- At least one row is not software (friends, reading requirements by hand, not applying).
-- The "fails at" column quotes interviewees only.
