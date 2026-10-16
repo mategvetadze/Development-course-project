@@ -2,13 +2,13 @@
 
 ## The statement
 
-University students in Georgia who are searching for an internship or an entry-level job open post after post across several websites, company pages, social networks and university channels, and read each one to see whether it is relevant and whether they qualify (01, 04, 06, 07). It costs them missed deadlines (07 estimates 2-3, 01 found a vacancy after its deadline, 08 saw an internship the day after its deadline) and, in some cases, a course, a legal clinic or an internship they learned about too late (04, 06, 08). Today they check LinkedIn, jobs.ge, company pages, Facebook and Instagram, university channels and friends by hand, open each post, and sometimes message people to ask the salary and the hours (01, 04, 05, 08). That fails them because, as 01 says, "I have to open many job posts to find out whether I'm actually eligible," and as 08 says, "Too many posts, and half of them are the same job posted again by different people" (01, 08).
+University students in Georgia who are searching for an internship or an entry-level job open post after post across several websites, company pages, social networks and university channels, and read each one to see whether it is relevant and whether they qualify (01, 04, 06, 07). It costs them 1-2 hours every Saturday and Sunday (09) and missed deadlines (07 estimates 2-3, 01 found a vacancy after its deadline, 08 saw an internship the day after its deadline) and, in some cases, a course, a legal clinic or an internship they learned about too late (04, 06, 08). Today they check LinkedIn, jobs.ge, company pages, Facebook and Instagram, university channels and friends by hand, open each post, and sometimes message people to ask the salary and the hours (01, 04, 05, 08). That fails them because, as 01 says, "I have to open many job posts to find out whether I'm actually eligible," and as 08 says, "Too many posts, and half of them are the same job posted again by different people" (01, 08).
 
 ## What the evidence ruled out
 
 The problem we believed before interviewing: there are too few jobs in the students' field, or the pay and requirements offered are unfair.
 
-- Not established across the logs. 06 described a "junior" role asking for 3 years of experience, and 07 was told a "junior" posting needed experience. Most logs describe finding and sorting posts instead (01, 04, 06, 07, 08). Our Week 3 verdict on the original prediction is "killed" (see DECISIONS.md).
+- Not established across the logs. Only 09 raised pay against requirements unprompted (1500 GEL for 6 office days, 3 languages, 5+ years of experience). 06 described a "junior" role asking for 3 years of experience, and 07 was told a "junior" posting needed experience. Most logs describe finding and sorting posts instead (01, 04, 06, 07, 08). Our Week 3 verdict on the original prediction is "killed" (see DECISIONS.md).
 
 ## What is still open
 
