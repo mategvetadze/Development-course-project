@@ -1,1 +1,0 @@
-Wk2 · Investigate: how students in Kutaisi search for a job and why most applications go unanswered · evidence: 00-foundation/problem-pool.md (Saba, Giorgi), 00-foundation/four-filters-scorecard.md · runner-up: beginner tutors finding students · owner: AS
