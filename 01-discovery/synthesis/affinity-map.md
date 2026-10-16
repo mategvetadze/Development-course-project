@@ -8,7 +8,7 @@ For `01`, several lines labelled verbatim in the log differ from the supplied Sa
 
 Pattern: Searching across scattered sources and sorting through irrelevant posts makes relevant opportunities hard to find.
 
-Interviews behind it (7): `01`, `03`, `04`, `05`, `06`, `07`, `08`,`09`.
+Interviews behind it (8): `01`, `03`, `04`, `05`, `06`, `07`, `08`, `09`.
 
 ### Quotes (verbatim, each tagged with its log number)
 
@@ -27,7 +27,7 @@ Interviews behind it (7): `01`, `03`, `04`, `05`, `06`, `07`, `08`,`09`.
 
 Pattern: Applicants spend extra effort establishing whether a posting actually fits them because eligibility or basic job terms are unclear or inconsistent.
 
-Interviews behind it (4): `01`, `06`, `07`, `08`,`09`.
+Interviews behind it (5): `01`, `06`, `07`, `08`, `09`.
 
 ### Quotes (verbatim, each tagged with its log number)
 

@@ -10,7 +10,7 @@ University students in Georgia who are searching for an internship or an entry-l
 The problem we believed before interviewing: there are too few jobs in the students' field, or the pay and requirements offered are unfair.
 
 - Not established across the logs. Only 09 raised pay against requirements unprompted (1500 GEL for 6 office days, 3 languages, 5+ years of experience), and 06 described a "junior" role asking for 3 years of experience. Most logs describe finding and sorting posts instead (01, 04, 06, 07, 08).
-- TODO: replace the line above with the numbers from our Week 3 verdict line in `DECISIONS.md`.
+- The Week 3 `DECISIONS.md` line marks the original prediction **killed** and cites interviews `01`–`08`. It does not state a numerical count of participants who independently raised each claim; do not invent one. Interview `09` was added later and needs consent verification before it can be used as submitted evidence.
 
 ## What is still open
 
