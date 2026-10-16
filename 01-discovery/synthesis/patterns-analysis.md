@@ -17,9 +17,9 @@ Interviews behind it: `01`, `06`, `07`, `08`,09.
 
 1. Why does deciding whether to apply take extra effort? `01` opens posts to check eligibility and skipped positions when requirements or schedule were unclear; `08` messaged people to learn salary and hours.
 2. Why can the initial posting fail to settle the decision? `06` found a “junior” requirement of three years' experience, `07` was invited to contact a “junior” posting but was then told experience was needed, and `08` found basic terms missing.
-3. “09 lists 6 office days, 3 languages, 5+ years of experience and leadership skills for a 1500 GEL salary.” Root cause-ში “inconsistent with the posting’s apparent level” → “inconsistent with the posting’s apparent level or the pay offered”
+3. Interview 09 describes a posting with six office days, three languages, more than five years of experience, and leadership skills for 1500 GEL. This adds an example of requirements that may be inconsistent with the pay offered.
 
-Root cause, one sentence: In these cases, the information needed to judge fit was absent, hard to locate, or inconsistent with the posting's apparent level (`01`, `06`, `07`, `08`).
+Root cause, one sentence: In these cases, the information needed to judge fit was absent, hard to locate, or inconsistent with the posting's apparent level or pay offered (`01`, `06`, `07`, `08`, `09`).
 
 Which of the answers above is a guess rather than a quote? “Absent, hard to locate, or inconsistent” combines different reported cases; the interviews do not show why employers wrote the posts that way or whether a different applicant would have been accepted.
 
@@ -60,4 +60,4 @@ Which of the answers above is a guess rather than a quote? The interviews do not
 
 Strongest pattern (most interviews, clearest root cause): Pattern 1 — Searching across scattered sources and sorting through irrelevant posts makes relevant opportunities hard to find.
 
-Why it is the strongest, in two sentences, citing log numbers: Seven interviews support the finding: `01`, `04`, `06`, `07` and `08` directly describe manual sorting or irrelevant posts, while `03` and `05` describe difficulty finding relevant opportunities. The explanation reaches an observable cause—dispersed sources mixed with irrelevant or duplicate posts—without relying on an unverified claim about the number of jobs (`01`, `04`, `07`, `08`).
+Why it is the strongest, in two sentences, citing log numbers: Eight interviews are listed for Pattern 1; seven are described in this supporting explanation: `01`, `04`, `06`, `07` and `08` directly describe manual sorting or irrelevant posts, while `03` and `05` describe difficulty finding relevant opportunities. The explanation reaches an observable cause—dispersed sources mixed with irrelevant or duplicate posts—without relying on an unverified claim about the number of jobs (`01`, `04`, `07`, `08`).
