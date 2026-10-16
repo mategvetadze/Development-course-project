@@ -3,4 +3,4 @@ Wk3 · Prediction "We are wrong if students describing their job search do not r
 
 Wk4 · Problem statement v1: Students lose time and miss opportunities because relevant job posts are scattered across many sources and mixed with irrelevant ones · evidence: 01-discovery/problem-statement.md, 01-discovery/synthesis/patterns-analysis.md · owner: ST
 
-Wk4 · Follow-up from interviews 07 and 08: ask for the text of the "junior" posting that required experience, and an example of a duplicated post and what information was missing · evidence: 01-discovery/interview-logs/07-student-cs.md, 01-discovery/interview-logs/08-student-business.md · owner: AP
+
