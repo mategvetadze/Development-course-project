@@ -1,5 +1,5 @@
-Interview 03 · Student, Computer Science and Mathematics, Tbilisi Free University · (code name: CS-2)
-Week: 5 · Asker: saba tabukashvili · Logger: no one · Consent: yes (confirmed by message)· Real or practice: real , he is not on this course
+Interview 09 · Student, Computer Science and Mathematics, Tbilisi Free University · (code name: CS-2)
+Week: 4 · Asker: saba tabukashvili · Logger: no one · Consent: yes (confirmed by message)· Real or practice: real , he is not on this course
 Context: Student of computer science and mathematics at Tbilisi Free University (year: 3). Not employed, but has a strong wish to work. His priority is growth and practical experience (junior to senior), not income. Contacted through: instagram. Language of the interview: Georgian 
 
 **Our prediction:** We are wrong if students describing their job search do not raise on their own, before we mention it, either that there are too few jobs in their field or that the pay and requirements offered are unfair.
