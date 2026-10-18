@@ -1,8 +1,6 @@
+# Affinity Map
 
-
-Affinity Map
-
-Quotes from 09 are translated from Georgian in the log. Bracketed numbers identify interview logs, not numbers of mentions. Context and feature suggestions are kept in "Not yet a pattern" and do not count as evidence for a problem pattern.
+Quotes from `09` are translated from Georgian in the log. Bracketed numbers identify interview logs, not numbers of mentions. Context and feature suggestions are kept in "Not yet a pattern" and do not count as evidence for a problem pattern.
 
 ## Pattern 1
 
@@ -38,8 +36,9 @@ Interviews behind it (5): `01`, `06`, `07`, `08`, `09`.
 * `07`: “The posts said junior level, so I contacted them”
 * `07`: “They told me to contact them, and then said they needed experience.”
 * `08`: “I had to message people just to ask basic things like the salary and the hours.”
+* `09`: "Salary: 1500 GEL, which is disgusting." (translated from Georgian; said after listing 6 days in the office, 3 foreign languages, 5+ years of experience and leadership skills; raised before the interviewer mentioned it)
 
-The underlying details differ: `01`, `06` and `07` discuss eligibility or experience; `08` had to ask for salary and hours. The quotes do not show that every apparently unsuitable posting was actually suitable.
+The underlying details differ: `01`, `06` and `07` discuss eligibility or experience; `08` had to ask for salary and hours; `09` describes requirements that look inconsistent with the pay. The quotes do not show that every apparently unsuitable posting was actually suitable.
 
 ## Pattern 3
 
@@ -72,9 +71,9 @@ Interviews behind it (5): `01`, `02`, `04`, `06`, `08`. `05` describes checking 
 * `02`: “The compatibility. Studying at the university and looking for the job which will align with the timetable is the most frustrating because those two go well together rarely.”
 * `02`: “the job / internship must align with my studies, i.e. it must help me to develop my personal career.”
 * `02`: “I am not sending any applications yet.” (also quoted under “Not answered” in log `02`)
-* `04`: “Salary, and how much time it requires since I am also studying at the university.” (`archilisinterviews.pdf`, p. 2, Q6)
-* `06`: “The working hours have to fit around my university schedule” (`archilisinterviews.pdf`, p. 4, Q6; exact excerpt)
-* `08`: “whether the schedule works with my classes.” (`anisinterviews.pdf`, second interview, Q6; exact excerpt)
+* `04`: “Salary, and how much time it requires since I am also studying at the university.”
+* `06`: “The working hours have to fit around my university schedule”
+* `08`: “whether the schedule works with my classes.”
 
 For `04`, `06` and `08`, the quotes establish selection criteria; they do not by themselves prove that an application was abandoned. `02` directly reports delay. `01` reports choosing only relevant positions.
 
@@ -89,7 +88,7 @@ Interviews behind it (3): `03`, `04`, `06`.
 * `03`: “I am also interested in hackathons and courses because they are closely related to my future employment, so I always look for them along with jobs!”
 * `04`: “jobs.ge, LinkedIn, and also on the pages of various companies like TBC, BOG, EPAM.”
 * `04`: “Also, it would be great to have something that provides hackathons, internships, and courses, because, for example, after completing courses from EPAM, TBC, or Quantori, they employ you themselves.”
-* `06`: “Just like in tech, participating in these legal clinics and training programs is often the best way to get employed directly by them afterward!” (`archilisinterviews.pdf`, p. 4, Q13)
+* `06`: “Just like in tech, participating in these legal clinics and training programs is often the best way to get employed directly by them afterward!”
 
 `03` says they already search for hackathons and courses alongside jobs; `04` checks company pages and describes company courses as a route to hiring. `06` values legal clinics and training, but does not say they currently search for them. The missed TBC course and legal clinic in Pattern 3 show a related discovery problem. This pattern does not establish that any particular platform feature would solve it.
 
@@ -106,10 +105,10 @@ These are exact participant statements retained from the logs or original source
 * `05`: “If they require the skills that I have developed, then I realize this vacancy is for me.” (selection criterion)
 * `05`: “Yes, jobs.ge, ChatGPT, LinkedIn, etc.” (tools used)
 * `08`: “I messaged two places and sent my CV to one.” (outcome of one search, without a stated problem in this sentence)
-* 09: "My priority in the job search is growth and gaining practical knowledge, not income." (translated; selection criterion)
-09: "Mostly on LinkedIn, on social networks or on Georgian job sites." (translated; sources used)
-09: "I check these sites almost every day." (translated; frequency)
-09: "I have probably sent my CV to 10-12 places, but many came back negative, and I am still waiting for some." (translated; outcome of applying)
-09: "I don't know if such tools exist, it would be good if they do." (translated; hypothetical, weak signal, not a feature request)
+* `09`: "My priority in the job search is growth and gaining practical knowledge, not income." (translated; selection criterion)
+* `09`: "Mostly on LinkedIn, on social networks or on Georgian job sites." (translated; sources used)
+* `09`: "I check these sites almost every day." (translated; frequency)
+* `09`: "I have probably sent my CV to 10-12 places, but many came back negative, and I am still waiting for some." (translated; outcome of applying)
+* `09`: "I don't know if such tools exist, it would be good if they do." (translated; hypothetical, weak signal, not a feature request)
 
-The original hypothesis is not established across the logs. The clearest direct hits are 09 (pay versus requirements, raised unprompted) and 06 (a "junior" role requiring 3 years of experience), so it remains a minority finding.
+The original hypothesis is not established across the logs. The clearest direct hits are `09` (pay versus requirements, raised unprompted) and `06` (a "junior" role requiring 3 years of experience), so it remains a minority finding.

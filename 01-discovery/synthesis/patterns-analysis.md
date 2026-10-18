@@ -4,8 +4,8 @@
 
 Interviews behind it: `01`, `03`, `04`, `05`, `06`, `07`, `08`, `09`.
 
-1. Why are relevant opportunities hard to find? Participants describe opening and sorting many posts, including irrelevant or duplicate ones (`01`, `04`, `06`, `07`, `08`); `03` struggles to find the right vacancy and `05` says public vacancies are still missed.
-2. Why does sorting take effort? Opportunities appear across websites, company and university pages, and social channels (`01`, `03`, `04`, `05`, `06`), while some of those channels mix relevant posts with unrelated or repeated ones (`07`, `08`).
+1. Why are relevant opportunities hard to find? Participants describe opening and sorting many posts, including irrelevant or duplicate ones (`01`, `04`, `06`, `07`, `08`); `03` struggles to find the right vacancy, `05` says public vacancies are still missed, and `09` says there are many jobs but few that fit.
+2. Why does sorting take effort? Opportunities appear across websites, company and university pages, and social channels (`01`, `03`, `04`, `05`, `06`, `09`), while some of those channels mix relevant posts with unrelated or repeated ones (`07`, `08`).
 
 Root cause, one sentence: In the reported searches, dispersed sources and mixed or duplicate postings make students check opportunities manually to identify relevant ones (`01`, `04`, `06`, `07`, `08`).
 
@@ -30,7 +30,7 @@ Interviews behind it: `01`, `03`, `04`, `06`, `07`, `08`.
 1. Why were opportunities missed? `01` found a vacancy after its deadline, `04` missed a TBC course, `06` learned of a legal clinic or internship too late, and `08` saw an internship after its deadline; `03` reports missing events while `07` gives an estimate without an example.
 2. Why was the information not seen in time? `01` says searches were irregular, and `08` also reports irregular checking; `03`, `04` and `06` searched frequently yet still reported misses, so irregular checking cannot explain every case.
 
-Root cause, one sentence: Timely discovery failed in several reported searches, but the interviews identify irregular checking as a contributor only for some participants and do not establish one shared deeper cause (`01`, `03`, `04`, `06`, `08`).
+Root cause, one sentence: Irregular checking contributed to late discovery for `01` and `08`, while `03`, `04` and `06` still missed opportunities despite frequent searching, so we have one observable cause for some cases and no established shared cause for the rest (`01`, `03`, `04`, `06`, `08`).
 
 Which of the answers above is a guess rather than a quote? A common explanation such as poor notifications or late publication would be a guess: the interviews do not show when or where each missed opportunity was first announced. `03` explicitly says they do not forget deadlines, so missed events must not be treated as forgotten application deadlines.
 
@@ -60,5 +60,4 @@ Which of the answers above is a guess rather than a quote? The interviews do not
 
 Strongest pattern (most interviews, clearest root cause): Pattern 1 — Searching across scattered sources and sorting through irrelevant posts makes relevant opportunities hard to find.
 
-Why it is the strongest, in two sentences, citing log numbers: Seven interviews support the finding: `01`, `04`, `06`, `07` and `08` directly describe manual sorting or irrelevant posts, while `03` and `05` describe difficulty finding relevant opportunities. The explanation reaches an observable cause (dispersed sources mixed with irrelevant or duplicate posts) without relying on an unverified claim about the number of jobs (`01`, `04`, `07`, `08`).
-
+Why it is the strongest, in two sentences, citing log numbers: Eight interviews support the finding: `01`, `04`, `06`, `07` and `08` directly describe manual sorting or irrelevant posts, while `03`, `05` and `09` describe difficulty finding relevant or fitting opportunities. The explanation reaches an observable cause (dispersed sources mixed with irrelevant or duplicate posts) without relying on an unverified claim about the number of jobs (`01`, `04`, `07`, `08`).

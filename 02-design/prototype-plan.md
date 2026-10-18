@@ -1,7 +1,5 @@
 # Prototype Plan
 
-
-
 ## 1. The riskiest assumption
 
 We assume that a student who sees a job post's key facts (requirements, hours, salary, deadline) on one card will decide to apply or skip without asking to open the original post.
@@ -16,15 +14,14 @@ A third-year university student who is looking for an internship can decide, for
 
 | Choice (paper / clickable / coded) | Why it is the cheapest thing that can kill the assumption in section 1 | Tool | Time we will spend |
 |---|---|---|---|
-| Paper | The assumption is about whether a student trusts a card, not about software. Five real posts rewritten as paper cards test it. The full original post sits in a sealed envelope; opening it counts as a failure. | Pen, paper, printed real posts | 1 hour |
+| Paper | The assumption is about whether a student trusts a card, not about software. Five real posts rewritten as paper cards test it. The full original post sits in a sealed envelope; opening it counts against the card. | Pen, paper, printed real posts | 1 hour |
 
 ## 4. Screens, each traced to evidence
 
 | Screen | What the tester does on it | The log or problem-statement sentence that earns it |
 |---|---|---|
-| 1. Five cards laid out together | Reads the five cards and picks apply or skip for each one | Problem statement, sentence 2: students open post after post across several sources (01, 04, 06, 07) |
-| 2. One card shows requirements, hours, salary, deadline | Checks whether they qualify and whether the schedule fits | 01 skipped liked positions because she was unsure she qualified; 06 found 3 years of experience asked for a "junior" role; 08 asked for salary and hours |
-| 3. Deadline shown on each card | Notices which post closes first and says which one they would do first | 01, 04, 06, 08 missed a deadline, course or internship |
+| 1. Five cards laid out together | Reads the five cards and picks apply or skip for each one | Problem statement, sentence 2: students open post after post across several sources (01, 04, 06, 07, 08) |
+| 2. Each card shows requirements, hours, salary and deadline | Checks whether they qualify, whether the schedule fits, and whether the deadline is still open | 01 skipped liked positions because they were unsure they qualified; 06 found 3 years of experience asked for a "junior" role; 08 asked for salary and hours; 01, 04, 06 and 08 missed a deadline, course or internship |
 
 Will not appear, even if a tool generates it: login, notifications, search or filters, a ranking or score, CV upload, chat, user profiles, a "recommended for you" list.
 
@@ -34,12 +31,15 @@ Write this before the first session, and do not edit it after.
 
 **Task, read aloud to the tester, word for word:** "Here are five job posts on paper cards. For each one, tell me out loud whether you would apply or skip it, and why. Use only the cards. The envelope has the full post, but you can only open it if you really need it."
 
-**Success looks like:** The tester says apply or skip for all five cards within 5 minutes and opens the envelope for no more than 1 card.
+**A session passes only if all three are true:**
+- The tester says apply or skip for all five cards within 5 minutes.
+- The tester opens the envelope, or asks to see the original post, for 1 card or fewer.
+- The tester says out loud that they would still check the original post before deciding, for 1 card or fewer.
 
-**Failure looks like:**
-- The tester opens the envelope, or asks to see the original post, for 3 or more of the 5 cards.
+**A session fails if any one of these happens:**
+- The tester opens the envelope, or asks to see the original post, for 2 or more of the 5 cards.
 - The tester takes longer than 5 minutes to decide on all five.
-- The tester says out loud that they would still check the original post before deciding, for 3 or more cards.
+- The tester says out loud that they would still check the original post before deciding, for 2 or more cards.
 
 **Decision rule:** Out of 5 testers, if 3 or more fail, the assumption is wrong. We then stop building a card that replaces opening the post, and instead test whether students can remove irrelevant and repeated posts from a long list (Pattern 1, logs 01, 04, 06, 07, 08).
 
@@ -51,11 +51,11 @@ People from our ICP who are not in this course. Code names only. At least 2 who 
 
 | Code name | From log, or new | Who on the team books them |
 |---|---|---|
-| T1 | TODO (team) | TODO (team) |
-| T2 | TODO (team) | TODO (team) |
-| T3 | TODO (team) | TODO (team) |
-| T4 | new | TODO (team) |
-| T5 | new | TODO (team) |
+| T1 | TODO (team decides) | TODO (initials) |
+| T2 | TODO (team decides) | TODO (initials) |
+| T3 | TODO (team decides) | TODO (initials) |
+| T4 | new | TODO (initials) |
+| T5 | new | TODO (initials) |
 
 ## Self-check before committing
 
