@@ -45,17 +45,19 @@ Write this before the first session, and do not edit it after.
 
 **Our prediction of the first thing a tester gets wrong:** They will open the envelope on the card whose salary or hours are missing, because they will not trust a card that leaves out the terms (08).
 
-## 6. Five testers
+## 6. Five testers (recruitment plan, not confirmed bookings)
 
 People from our ICP who are not in this course. Code names only. At least 2 who have not been interviewed before.
 
 | Code name | From log, or new | Who on the team books them |
 |---|---|---|
-| T1 | TODO (team decides) | TODO (initials) |
-| T2 | TODO (team decides) | TODO (initials) |
-| T3 | TODO (team decides) | TODO (initials) |
-| T4 | new | TODO (initials) |
-| T5 | new | TODO (initials) |
+| T1 | Interview 07 participant — invitation not confirmed | AP (proposed; confirm) |
+| T2 | Interview 08 participant — invitation not confirmed | AP (proposed; confirm) |
+| T3 | Interview 01 participant — invitation not confirmed | AS (proposed; confirm) |
+| T4 | New participant — not recruited | MG (proposed; confirm) |
+| T5 | New participant — not recruited | ST (proposed; confirm) |
+
+**Planning status:** These are proposed recruiting assignments, not confirmed bookings or participant consent. Confirm availability and ownership with the team before testing.
 
 ## Self-check before committing
 
