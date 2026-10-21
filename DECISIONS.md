@@ -1,0 +1,7 @@
+Wk2 · Investigate: how students in Kutaisi search for a job and why most applications go unanswered · evidence: 00-foundation/problem-pool.md (Saba, Giorgi), 00-foundation/four-filters-scorecard.md · runner-up: beginner tutors finding students · owner: AS
+Wk3 · Prediction "We are wrong if students describing their job search do not raise on their own, before we mention it, either that there are too few jobs in their field or that the pay and requirements offered are unfair." verdict: killed · evidence: 01-discovery/interview-logs/01-student-management.md, 01-discovery/interview-logs/02-student-cs.md, 01-discovery/interview-logs/03-student-cs.md, 01-discovery/interview-logs/04-student-cs.md, 01-discovery/interview-logs/05-student-cs.md, 01-discovery/interview-logs/06-student-law.md, 01-discovery/interview-logs/07-student-cs.md, 01-discovery/interview-logs/08-student-business.md · owner: AS
+
+Wk4 · Problem statement v1: Students lose time and miss opportunities because relevant job posts are scattered across many sources and mixed with irrelevant ones · evidence: 01-discovery/problem-statement.md, 01-discovery/synthesis/patterns-analysis.md · owner: ST
+
+
+Wk5 · North star: Number of students who complete apply-or-skip decisions for all five job cards within five minutes, per week; rejected prototype opens (does not prove value) and job card views (does not prove decisions) · evidence: 03-build/analytics/event-schema.md, 01-discovery/interview-logs/01-student-management.md, 01-discovery/interview-logs/08-student-business.md · owner: AP
