@@ -1,6 +1,6 @@
 # MVP Boundary
 
-Save this file as: 03-build/mvp-boundary.md · Filled-in example: Lab-6/examples/mvp-boundary.md (Sakhli)
+
 
 The smallest complete user journey that tests whether the product creates value. Complete: the person gets the value, start to finish. Smallest: nothing that is not on that path is in Sprint 1.
 
