@@ -1,6 +1,6 @@
 # Event Schema
 
-Save this file as: 03-build/analytics/event-schema.md
+
 
 Every event has four parts: name (actor_verb_object), fired by, properties, owner. No personal data on any event: no names, emails, phone numbers or CV content.
 
