@@ -5,3 +5,10 @@ Wk4 · Problem statement v1: Students lose time and miss opportunities because r
 
 
 Wk5 · North star: Number of students who complete apply-or-skip decisions for all five job cards within five minutes, per week; rejected prototype opens (does not prove value) and job card views (does not prove decisions) · evidence: 03-build/analytics/event-schema.md, 01-discovery/interview-logs/01-student-management.md, 01-discovery/interview-logs/08-student-business.md · owner: AP
+
+
+
+
+Wk6 · MVP boundary: 5-step journey (curator publishes 5 cards to student finishes apply-or-skip on all five); cut scraping, sign-in, deadline reminders, field picker, courses and hackathons · evidence: 03-build/mvp-boundary.md, logs 01, 06, 07, 08, 10, 11 · owner: MG
+
+Wk6 · Prototype track: B, existing prototype in 02-design/prototype/; frozen test runs on it, 3 sessions logged in 02-design/user-testing/usability-findings.md before the Week 7 lab · evidence: 02-design/prototype-plan.md · owner: AS
