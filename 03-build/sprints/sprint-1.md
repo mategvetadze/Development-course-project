@@ -12,11 +12,11 @@ Each teammate fills in their own row honestly. The story hours below (17 h) must
 
 | Initials | Hours free | When, specifically |
 |---|---|---|
-| MG | [ ] | [days and times] |
+| MG | 6 | Tue 20:00–22:00, Thu 20:00–22:00, Sun 18:00–20:00 |
 | AP | [ ] | [days and times] |
 | AS | [ ] | [days and times] |
-| ST | [ 4 ] | friday 22:00-12:00 and saturday the same time |
-| **Total** | [ ] | |
+| ST | 4 | friday 22:00–02:00 and saturday the same time |
+| **Total** | 10+ (AP/AS TBD) | story hours planned: 17 h — cut or slip if AP/AS hours stay empty |
 
 ## The board
 
@@ -82,4 +82,4 @@ If S1 (the curator admin page) is not done by the Wednesday evening before the W
 
 The boundary line is in 03-build/mvp-boundary.md. Our prototype exists (02-design/prototype/) but has no logged test sessions, so we are on Track B:
 
-Wk6 · Prototype track: B, existing prototype in 02-design/prototype/; frozen test runs on it, 3 sessions logged in 02-design/user-testing/usability-findings.md before the Week 7 lab · evidence: 02-design/prototype-plan.md · owner: [saba tabukashvili]
+Wk6 · Prototype track: B, existing prototype in 02-design/prototype/; frozen test runs on it, 3 sessions logged in 02-design/user-testing/usability-findings.md before the Week 7 lab · evidence: 02-design/prototype-plan.md · owner: AS
