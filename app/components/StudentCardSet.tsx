@@ -1,8 +1,10 @@
+
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { CardSet } from "@/lib/cards";
 import { apiUrl } from "@/lib/api";
+import { getPostHog } from "@/lib/posthog-client";
 
 const SKIP_REASONS = [
   "not_my_field",
@@ -13,75 +15,156 @@ const SKIP_REASONS = [
   "other",
 ] as const;
 
+const REASON_LABELS: Record<(typeof SKIP_REASONS)[number], string> = {
+  not_my_field: "Not my field",
+  not_eligible: "I don't qualify",
+  hours: "Hours don't fit",
+  pay: "Pay",
+  not_interested: "Not interested",
+  other: "Other",
+};
+
 type Decision = "apply" | "skip";
 
 function anonymousId() {
   const key = "cc_anon";
-  let id = typeof window !== "undefined" ? localStorage.getItem(key) : null;
-  if (!id) {
-    id = crypto.randomUUID();
-    localStorage.setItem(key, id);
+  try {
+    let id = localStorage.getItem(key);
+    if (!id) {
+      id = crypto.randomUUID();
+      localStorage.setItem(key, id);
+    }
+    return id;
+  } catch {
+    return crypto.randomUUID();
   }
-  return id;
+}
+
+// Timestamps are taken only in effects and click handlers, never during render.
+function nowMs() {
+  return Date.now();
 }
 
 export function StudentCardSet({ set, source }: { set: CardSet; source: string }) {
   const [choices, setChoices] = useState<Record<string, Decision | null>>({});
   const [skipFor, setSkipFor] = useState<string | null>(null);
+  const [pending, setPending] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [summary, setSummary] = useState<
     { role: string; deadline: string; source_url: string }[] | null
   >(null);
-  const [startedAt] = useState(() => Date.now());
-  const anon = useMemo(() => (typeof window === "undefined" ? "" : anonymousId()), []);
 
+  const anon = useRef("");
+  const opened = useRef(false);
+  const viewed = useRef<Set<string>>(new Set());
+  const viewedAt = useRef<Record<string, number>>({});
+  const firstViewAt = useRef<number | null>(null);
+  const cardEls = useRef<Record<string, HTMLElement | null>>({});
+
+  // student_opens_card_set: once per page load. The ref stops React's double run in dev.
   useEffect(() => {
-    // student_opens_card_set — wire PostHog client in S5
-    console.info("student_opens_card_set", { set_id: set.id, source });
+    if (opened.current) return;
+    opened.current = true;
+    anon.current = anonymousId();
+    const ph = getPostHog();
+    // Same id as the backend's anonymous_id, so browser and server events join up in PostHog.
+    ph?.identify(anon.current);
+    ph?.capture("student_opens_card_set", { set_id: set.id, source });
   }, [set.id, source]);
 
+  // student_views_card: once per card, when half of it is on screen.
+  useEffect(() => {
+    if (summary) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const id = (entry.target as HTMLElement).dataset.cardId;
+          const card = set.cards.find((c) => c.id === id);
+          if (!card || viewed.current.has(card.id)) continue;
+          viewed.current.add(card.id);
+          const now = nowMs();
+          viewedAt.current[card.id] = now;
+          if (firstViewAt.current === null) firstViewAt.current = now;
+          getPostHog()?.capture("student_views_card", {
+            set_id: set.id,
+            card_id: card.id,
+            position: card.position,
+          });
+        }
+      },
+      { threshold: 0.5 },
+    );
+    for (const el of Object.values(cardEls.current)) if (el) observer.observe(el);
+    return () => observer.disconnect();
+  }, [set, summary]);
+
   async function decide(cardId: string, decision: Decision, skip_reason?: string) {
+    if (pending || choices[cardId]) return; // no double taps
     const card = set.cards.find((c) => c.id === cardId);
     if (!card) return;
-    const ms_on_card = Date.now() - startedAt;
-    const res = await fetch(apiUrl("/api/decide"), {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        set_id: set.id,
-        card_id: cardId,
-        position: card.position,
-        decision,
-        skip_reason: skip_reason || null,
-        ms_on_card,
-        anonymous_id: anon,
-        ms_total: Date.now() - startedAt,
-      }),
-    });
-    const data = await res.json();
-    if (!res.ok) {
-      alert(data.error || "Could not save decision");
-      return;
-    }
-    setChoices((prev) => ({ ...prev, [cardId]: decision }));
-    setSkipFor(null);
+
+    // Open the post BEFORE waiting for the server: iPhones block tabs opened after a wait.
     if (decision === "apply" && card.source_url) {
       window.open(card.source_url, "_blank", "noopener,noreferrer");
     }
-    if (data.summary) setSummary(data.summary);
+
+    setPending(cardId);
+    setError(null);
+    const now = nowMs();
+    try {
+      const res = await fetch(apiUrl("/api/decide"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          set_id: set.id,
+          card_id: cardId,
+          position: card.position,
+          decision,
+          skip_reason: skip_reason || null,
+          ms_on_card: viewedAt.current[cardId] ? now - viewedAt.current[cardId] : null,
+          anonymous_id: anon.current || anonymousId(),
+          ms_total: firstViewAt.current ? now - firstViewAt.current : null,
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setError(data.error || "Could not save. Check your connection and tap again.");
+        return;
+      }
+      setChoices((prev) => ({ ...prev, [cardId]: decision }));
+      setSkipFor(null);
+      if (data.summary) setSummary(data.summary);
+    } catch {
+      setError("Could not save. Check your connection and tap again.");
+    } finally {
+      setPending(null);
+    }
   }
 
   return (
     <section>
+      {error && (
+        <p className="note" role="alert" style={{ color: "#b42318" }}>
+          {error}
+        </p>
+      )}
+
       {set.cards.map((card) => {
         const choice = choices[card.id];
         return (
-          <article className="card" key={card.id}>
+          <article
+            className="card"
+            key={card.id}
+            data-card-id={card.id}
+            ref={(el) => {
+              cardEls.current[card.id] = el;
+            }}
+          >
             <p className="note">
               {card.position}/5 · {card.source} · {card.field}
             </p>
-            <h2 style={{ margin: "0.2rem 0 0.6rem", fontSize: "1.2rem" }}>
-              {card.role}
-            </h2>
+            <h2 style={{ margin: "0.2rem 0 0.6rem", fontSize: "1.2rem" }}>{card.role}</h2>
             <p style={{ marginTop: 0 }}>{card.company}</p>
             <div className="meta">
               <div>
@@ -102,26 +185,32 @@ export function StudentCardSet({ set, source }: { set: CardSet; source: string }
               </div>
               <div>
                 <strong>Deadline</strong>
-                <div>{card.deadline}</div>
+                <div>{card.deadline || "Not stated"}</div>
               </div>
             </div>
             {choice ? (
-              <p className="note">Recorded: {choice}</p>
+              <p className="note">{choice === "apply" ? "Applying ↗" : "Skipped"}</p>
             ) : (
               <div className="actions">
-                <button type="button" className="skip" onClick={() => setSkipFor(card.id)}>
+                <button
+                  type="button"
+                  className="skip"
+                  disabled={!!pending}
+                  onClick={() => setSkipFor(card.id)}
+                >
                   Skip
                 </button>
                 <button
                   type="button"
                   className="apply"
+                  disabled={!!pending}
                   onClick={() => decide(card.id, "apply")}
                 >
-                  Apply
+                  {pending === card.id ? "Saving…" : "Apply"}
                 </button>
               </div>
             )}
-            {skipFor === card.id && (
+            {skipFor === card.id && !choice && (
               <div style={{ marginTop: "0.75rem" }}>
                 <p className="note">Why skip?</p>
                 <div className="actions" style={{ flexWrap: "wrap" }}>
@@ -130,9 +219,10 @@ export function StudentCardSet({ set, source }: { set: CardSet; source: string }
                       key={reason}
                       type="button"
                       className="skip"
+                      disabled={!!pending}
                       onClick={() => decide(card.id, "skip", reason)}
                     >
-                      {reason}
+                      {REASON_LABELS[reason]}
                     </button>
                   ))}
                 </div>
@@ -154,7 +244,7 @@ export function StudentCardSet({ set, source }: { set: CardSet; source: string }
                   <a href={row.source_url} target="_blank" rel="noreferrer">
                     {row.role}
                   </a>{" "}
-                  · deadline {row.deadline}
+                  · deadline {row.deadline || "not stated"}
                 </li>
               ))}
             </ul>
