@@ -9,9 +9,9 @@ Wk5 · North star: Number of students who complete apply-or-skip decisions for a
 
 
 
-Wk6 · MVP boundary: 5-step journey (curator publishes 5 cards to student finishes apply-or-skip on all five); cut scraping, sign-in, deadline reminders, field picker, courses and hackathons · evidence: 03-build/mvp-boundary.md, logs 01, 06, 07, 08, 10, 11 · owner: MG
+Wk6 · MVP boundary: 5-step journey (curator publishes five cards to Nino completes five apply-or-skip decisions and sees an apply list); cut scraping, sign-in, reminders, field picker, search/filters · evidence: 03-build/mvp-boundary.md, 01-discovery/problem-statement.md, interview logs 01, 06, 07, 08, 02-design/prototype-plan.md · owner: MG
 
-Wk6 · Prototype track: B, existing prototype in 02-design/prototype/; frozen test runs on it, 3 sessions logged in 02-design/user-testing/usability-findings.md before the Week 7 lab · evidence: 02-design/prototype-plan.md · owner: AS
+Wk6 · Prototype track: B (existing clickable prototype at 02-design/prototype/index.html; under 3 sessions); run the frozen test and log 3 sessions before Week 7 · evidence: 02-design/user-testing/test-plan.md, 02-design/user-testing/usability-findings.md · owner: AS
 
 Wk6 · Stack: FastAPI Python backend (`backend/`) + Next.js phone UI (`app/`) + Neon + PostHog; same event names as 03-build/analytics/event-schema.md · evidence: 03-build/architecture/architecture.md, backend/README.md · owner: MG
 

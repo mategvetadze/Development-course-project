@@ -1,85 +1,110 @@
-# Sprint 1
+# Sprint 1 — Prometheus / CareerCards
 
-
+**Goal:** Deploy one complete five-card decision journey to a public phone-accessible URL, with `student_completes_card_set` visible in PostHog. This plan records the Week 6-to-Week 7 sprint; actual completion must be demonstrated, not assumed.
 
 ## Definition of done
 
-A story is done when it is merged to main, deployed at the public URL, walked on a phone by a teammate who did not build it, and its events show in PostHog's Activity view.
+A story is **done** only when code in this team's repository is merged into `main`, running at the README public URL, independently walked on a phone by its named reviewer, and its specified event is visible with the correct properties in PostHog Activity.
 
 ## Real hours before the Week 7 lab
 
-Each teammate fills in their own row honestly. The story hours below (17 h) must not exceed the total; if they do, use the slip rule or cut.
+The repository documents MG's and ST's availability, but AP's and AS's available hours are not confirmed. **AP is the frontend owner** for steps 2–4 (S3–S5). AP's 4 hours below are a proposed workload estimate, **not** a claim of confirmed free time. Confirm AP's actual hours and schedule before committing this sprint plan. This plan covers remaining fixes/integration rather than writing the whole system from scratch.
 
-| Initials | Hours free | When, specifically |
-|---|---|---|
-| MG | 6 | Tue 20:00–22:00, Thu 20:00–22:00, Sun 18:00–20:00 |
-| AP | [ ] | [days and times] |
-| AS | [ ] | [days and times] |
-| ST | 4 | friday 22:00–02:00 and saturday the same time |
-| **Total** | 10+ (AP/AS TBD) | story hours planned: 17 h — cut or slip if AP/AS hours stay empty |
+| Initials | Hours free counted | When, specifically |
+|---|---:|---|
+| MG (Mate Gvetadze) | 6 | Tue 20:00–22:00; Thu 20:00–22:00; Sun 18:00–20:00 (from original sprint file) |
+| AP (Ani Purtskhvanidze) | TBD; 4 h planned for frontend | **AP to confirm actual free hours and dates before committing** |
+| AS (Archil Sanikidze) | 0 (not confirmed) | AS must enter actual available hours before team commits the sprint |
+| ST (Saba Tabukashvili) | 4 | Original file: Friday 22:00–02:00 (four hours); second Saturday window mentioned but not counted until confirmed |
+| **Total confirmed free** | **10 h (MG 6 + ST 4)** | **10 h stories planned: MG 6 + AP 4; AP needs to confirm availability (ST has 4 h available for review/backup)** |
+
+**Team initials:** MG = Mate Gvetadze; AP = Ani Purtskhvanidze; AS = Archil Sanikidze; ST = Saba Tabukashvili (`00-foundation/team-contract.md`). AS curates the five verified openings; **AP develops the student-facing frontend (S3, S4, S5)**; ST supports review/QA. Owner and reviewer are different for every story.
 
 ## The board
 
-GitHub Projects on the team repo, linked from the README. Columns: next, doing, review, done. One card per story. Merge to main every day anyone works.
-
-Curation is not a story but it has an owner: AS picks this week's five real internship or entry-level openings that accept students and fills in every field before S1 is reviewed.
+Use **GitHub Projects** linked from the repository's README (link **not yet supplied**). Columns: **next → doing → review → done**. Make one card per story; merge to `main` every day work is done. The README currently contains a placeholder for the project-board URL, so the team must insert the real URL.
 
 ## Stories
 
-### S5 first · Deploy and instrument · owner MG · reviewer ST · 2 h
+**Priority order:** North-star story is listed first. **Execution order:** Do the deploy skeleton immediately on the first work session, then land the highest-value journey step; the deploy story is listed last as required by the sprint template. Because most code already exists, estimates below cover fixes, integration, testing and review rather than greenfield development.
 
-Do this on the first evening, with Lab-6/setup/SHIP-STACK-SETUP.md, so every later story deploys the day it merges. Public URL in the README's Live product row, all five schema events visible in PostHog's Activity view, reconcile check written (decisions rows in Neon = student_decides_card events in PostHog). The Week 7 lab adds the dashboard.
+### S1 · Step 5: student completes five decisions (north star) · owner MG · reviewer AP · 1 h
 
-### S1 · Curator publishes this week's five cards · owner MG · reviewer AS · 4 h
+**As** Nino, **I** finish five decisions and see the jobs I want to pursue with deadlines, **so that** I can choose next actions without re-reading five listings.
 
-As the curator, I enter five openings with their eligibility, hours, pay and deadline and publish them so that students never have to open a post to find out whether they qualify.
+**Acceptance criteria:**
+- Given four distinct saved choices, when I make the fifth choice on my phone, then the apply list appears with original links and deadlines (or states that I skipped all five).
+- And Neon contains exactly five decision rows for the same `set_id` and `anonymous_id`, not more.
+- And `student_completes_card_set` appears once in PostHog with `set_id`, `apply_count`, `skip_count`, `ms_total` (the north star qualifies only when `ms_total <= 300000`).
 
-Acceptance criteria:
-- Given /admin/TOKEN on a phone, when I fill five cards (role, company, field, source, source_url, students OK yes/no, experience required, hours, pay, deadline) and tap Publish, then I see "Published: 5 cards"
-- And a card_sets row and five cards rows exist; the same page with a wrong token shows "Not found"
-- And curator_publishes_card_set fires with set_id, card_count 5
+**Smallest demo:** Decide all five cards within five minutes; show the summary, the five database rows and one completion event.
 
-Smallest demo that proves it: publish five cards on a phone, show the rows, show the event.
+### S2 · Step 1: curator publishes five verified cards · owner MG · reviewer AS · 2 h
 
-### S2 · Student opens the link and sees five cards · owner AP · reviewer MG · 4 h
+**As** the team curator, **I** publish five complete opportunity cards, **so that** Nino can assess eligibility from one place.
 
-As Nino, I open one link on my phone and see five openings so that I do not have to check five places.
+**Acceptance criteria:**
+- Given five real, de-duplicated openings, when the curator fills role, company, field, source, URL, students OK, experience, hours, pay and deadline and taps Publish, then the page shows `Published: 5 cards`.
+- And Neon has one new `card_sets` row and five matching `cards` rows. A wrong `X-Admin-Token` **rejects Publish**; the admin page itself may still load.
+- And `curator_publishes_card_set` appears in PostHog with `set_id`, `card_count=5`.
 
-Acceptance criteria:
-- Given the public URL with ?src=instagram on a phone browser, when it loads, then I see five cards with no pinch-zoom needed, each showing role, company, source, students/first-years OK, experience, hours, pay and deadline
-- And a card with an empty pay field shows "Pay: not stated" instead of nothing
-- And student_opens_card_set fires once per load with set_id and source; student_views_card fires once per card with card_id and position
+**Smallest demo:** Publish one set from a phone; confirm its five records and the server event.
 
-Smallest demo that proves it: open the link with ?src=instagram, scroll the five cards, show the events.
+### S3 · Step 2: student opens the set · owner AP · reviewer ST · 2 h
 
-### S3 · Student decides apply or skip · owner AP · reviewer AS · 4 h
+**As** Nino, **I** open the shared link and see five curated jobs on my phone, **so that** I avoid hunting across several sources.
 
-As Nino, I tap Apply or Skip on each card so that I decide in seconds instead of reading the whole post.
+**Acceptance criteria:**
+- Given the public URL ending `?src=instagram` and a published set, when opened on a phone, then five cards are visible/scrollable with readable labels and no horizontal overflow.
+- And the page retrieves only the latest published set from Neon without requiring login.
+- And `student_opens_card_set` fires once per page load with `set_id` and `source=instagram` in PostHog.
 
-Acceptance criteria:
-- Given the five cards, when I tap Apply, then the original post opens in a new tab and the card shows "Applying"; when I tap Skip and choose a reason, the card shows "Skipped"
-- And one decisions row exists per card with the anonymous id, decision and skip_reason; a second tap on the same card does not add a second row
-- And student_decides_card fires with set_id, card_id, position, decision, skip_reason, ms_on_card
+**Smallest demo:** Open the URL in a new phone tab and show five cards plus the open event.
 
-Smallest demo that proves it: apply to one card, skip one as "not eligible", show the two rows and two events.
+### S4 · Step 3: student reads the important facts · owner AP · reviewer AS · 1 h
 
-### S4 · Student finishes the set (north star) · owner MG · reviewer AP · 3 h
+**As** Nino, **I** see the eligibility, requirements, hours, pay and deadline on each card, **so that** I can decide without opening the original post for missing facts.
 
-As Nino, I finish all five cards and see the ones I chose with their deadlines so that I do not miss them.
+**Acceptance criteria:**
+- Given any card, when it enters at least half the phone viewport, then its role, company, source, field, eligibility, experience, hours, pay and deadline are on that card; missing pay is explicitly `not stated`.
+- And the card can be viewed without a login or opening its employer link.
+- And `student_views_card` fires once per card per page view with `set_id`, `card_id`, `position` (1–5).
 
-Acceptance criteria:
-- Given four cards decided, when I decide the fifth, then I see a summary listing the cards I chose to apply to, each with its deadline and a link to the original post
-- And the summary appears only once per student per set
-- And student_completes_card_set fires once with set_id, apply_count, skip_count, ms_total
+**Smallest demo:** Scroll through the five cards and show five distinct view events.
 
-Smallest demo that proves it: decide all five cards on a phone in under five minutes, show the summary, show the event with ms_total below 300000.
+### S5 · Step 4: student chooses Apply or Skip · owner AP · reviewer MG · 1 h
+
+**As** Nino, **I** choose Apply or Skip and a skip reason for each opening, **so that** I can keep only opportunities worth pursuing.
+
+**Acceptance criteria:**
+- Given an undecided card, when I tap Apply, then its original listing opens and the card is marked Applying; when I tap Skip and select a reason, it is marked Skipped.
+- And Neon has one decision row per `(set_id, card_id, anonymous_id)` even after a double tap; Apply opening a new tab must not stop the save.
+- And `student_decides_card` fires only on a newly saved row with `set_id`, `card_id`, `position`, `decision`, `skip_reason`, `ms_on_card`.
+
+**Smallest demo:** Apply once, skip once with reason, retry a decided card, and show only two rows/events.
+
+### S6 · Deploy and instrument · owner MG · reviewer ST · 3 h
+
+**Do the deployment setup first**, using `Lab-6/setup/SHIP-STACK-SETUP.md` if available, then complete the gate as the final story. Host Next.js on Vercel, FastAPI on Render, Neon Postgres and PostHog. Fix missing `app/lib/posthog-client.ts` (referenced by StudentCardSet in the ZIP) before a frontend build.
+
+**Acceptance criteria:**
+- Given a phone on mobile data, when the README Live product URL is opened, then five published cards load and the fifth choice produces a summary.
+- And the URL is inserted into README; a different teammate walks every step on a phone.
+- And all five schema events are visible in PostHog Activity with properties, with the north-star event triggered from production.
+- And the gate reconciliation is written in `03-build/analytics/event-schema.md`: PostHog `student_decides_card` count vs Neon decision rows, and PostHog `student_completes_card_set` vs students with five decisions (same date range and environment). Record numbers, not an unsupported claim that they match.
+
+**Smallest demo:** On a real phone, open the live URL, finish five decisions, show PostHog Activity and the recorded reconciliation numbers.
+
+**Total story hours:** S1 1 + S2 2 + S3 2 + S4 1 + S5 1 + S6 3 = **10 h**. **Owner allocation:** MG 6 h; **AP 4 h (frontend, availability not yet confirmed)**. ST has 4 h of documented availability for review and integration support; AS handles curation/review subject to confirmation. **Capacity check is pending until AP confirms at least 4 h before Week 7**; if not, reassign or re-scope the frontend stories rather than claiming the plan fits.
 
 ## Slip rule
 
-If S1 (the curator admin page) is not done by the Wednesday evening before the Week 7 lab, the admin page moves to Sprint 2 and AS's five cards go in through a seed script that also fires curator_publishes_card_set. S4 and its student_completes_card_set event stay no matter what, because without them the north star cannot be measured.
+If the curator admin UI (S2) cannot publish by the **evening before the Week 7 lab**, move the **admin form UI only** to Sprint 2 and publish AS's five verified cards using a temporary controlled seed script that produces `curator_publishes_card_set`. **Keep** the five-card public view, Apply/Skip decisions, completion summary, PostHog `student_completes_card_set`, and production deployment: without them, Nino receives no measurable value. If publishing cannot be done safely or verified, report the gate blocked instead of claiming completion.
 
 ## The DECISIONS.md lines
 
-The boundary line is in 03-build/mvp-boundary.md. Our prototype exists (02-design/prototype/) but has no logged test sessions, so we are on Track B:
+**Boundary:** copy the exact Wk6 boundary line from `03-build/mvp-boundary.md`.
 
-Wk6 · Prototype track: B, existing prototype in 02-design/prototype/; frozen test runs on it, 3 sessions logged in 02-design/user-testing/usability-findings.md before the Week 7 lab · evidence: 02-design/prototype-plan.md · owner: AS
+**Prototype track:** **B**, because `02-design/prototype/index.html` exists but `02-design/user-testing/usability-findings.md` documents **0 completed sessions**. Schedule and log **three real** frozen-test sessions before the Week 7 lab; the present ZIP contains no evidence of those completed sessions.
+
+`Wk6 · Prototype track: B (existing clickable prototype at 02-design/prototype/index.html; under 3 sessions); run the frozen test and log 3 sessions before Week 7 · evidence: 02-design/user-testing/test-plan.md, 02-design/user-testing/usability-findings.md · owner: AS`
