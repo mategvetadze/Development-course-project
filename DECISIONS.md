@@ -14,3 +14,5 @@ Wk6 · MVP boundary: 5-step journey (curator publishes 5 cards to student finish
 Wk6 · Prototype track: B, existing prototype in 02-design/prototype/; frozen test runs on it, 3 sessions logged in 02-design/user-testing/usability-findings.md before the Week 7 lab · evidence: 02-design/prototype-plan.md · owner: AS
 
 Wk6 · Stack: FastAPI Python backend (`backend/`) + Next.js phone UI (`app/`) + Neon + PostHog; same event names as 03-build/analytics/event-schema.md · evidence: 03-build/architecture/architecture.md, backend/README.md · owner: MG
+
+Wk7 · Gate open at rung 0: missing public URL, events in PostHog, reconcile numbers and dashboard, owners and times in sprint-2.md · evidence: 03-build/sprints/sprint-2.md · owner: AP

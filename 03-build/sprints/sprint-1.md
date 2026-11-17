@@ -43,7 +43,7 @@ Smallest demo that proves it: publish five cards on a phone, show the rows, show
 
 ### S2 · Student opens the link and sees five cards · owner AP · reviewer MG · 4 h
 
-As a CS student, I open one link on my phone and see five openings so that I do not have to check five places.
+As Nino, I open one link on my phone and see five openings so that I do not have to check five places.
 
 Acceptance criteria:
 - Given the public URL with ?src=instagram on a phone browser, when it loads, then I see five cards with no pinch-zoom needed, each showing role, company, source, students/first-years OK, experience, hours, pay and deadline
@@ -54,7 +54,7 @@ Smallest demo that proves it: open the link with ?src=instagram, scroll the five
 
 ### S3 · Student decides apply or skip · owner AP · reviewer AS · 4 h
 
-As a CS student, I tap Apply or Skip on each card so that I decide in seconds instead of reading the whole post.
+As Nino, I tap Apply or Skip on each card so that I decide in seconds instead of reading the whole post.
 
 Acceptance criteria:
 - Given the five cards, when I tap Apply, then the original post opens in a new tab and the card shows "Applying"; when I tap Skip and choose a reason, the card shows "Skipped"
@@ -65,7 +65,7 @@ Smallest demo that proves it: apply to one card, skip one as "not eligible", sho
 
 ### S4 · Student finishes the set (north star) · owner MG · reviewer AP · 3 h
 
-As a CS student, I finish all five cards and see the ones I chose with their deadlines so that I do not miss them.
+As Nino, I finish all five cards and see the ones I chose with their deadlines so that I do not miss them.
 
 Acceptance criteria:
 - Given four cards decided, when I decide the fifth, then I see a summary listing the cards I chose to apply to, each with its deadline and a link to the original post
