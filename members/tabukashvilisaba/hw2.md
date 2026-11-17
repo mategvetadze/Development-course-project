@@ -1,4 +1,3 @@
-[hw2.md](https://github.com/user-attachments/files/34981241/hw2.md)
 # Homework 2 · Saba Tabukashvili (@tabukashvilisaba) · Prometheus
 
 AI use: I used Claude to draft the Lab 6 planning files and Sprint 2, and to review and fix `StudentCardSet.tsx`. Every file was checked against our interview logs and `icp.md` before I committed it; logged in `docs/ai-usage-log.md`.
@@ -12,9 +11,9 @@ AI use: I used Claude to draft the Lab 6 planning files and Sprint 2, and to rev
 | Architecture: diagram, stack, secrets, the riskiest part on deploy day | Lab 6, architecture | [6ad7028](https://github.com/mategvetadze/Development-course-project/commit/6ad7028d07e184ca5c360b9001c359c7f65364da) | n/a | Not yet |
 | Sprint 1 plan: stories, acceptance criteria, slip rule | Lab 6, sprint | [c804359](https://github.com/mategvetadze/Development-course-project/commit/c804359a8610a5d789fa8bb6fe291602d97c3e07) | n/a | Not yet |
 | MVP boundary and prototype-track lines in DECISIONS.md | Lab 6, decisions | [a50c966](https://github.com/mategvetadze/Development-course-project/commit/a50c966e5d421a43bad27799507264233aa1b13e) | n/a | n/a |
-| PostHog started in the browser (`app/lib/posthog-client.ts`) | R2 | [532d7bc](https://github.com/mategvetadze/Development-course-project/commit/532d7bc01a9797d34657b3b2dc73e6103ec5b204) | No, not deployed yet | Not yet |
-| Browser events `student_opens_card_set` and `student_views_card`, Apply opening on iPhone, double-tap guard, in `StudentCardSet.tsx` | R2 | [32c7c8d](https://github.com/mategvetadze/Development-course-project/commit/32c7c8d) | No, not deployed yet | Not yet |
-| Event schema: where each event fires, plus the live column and reconcile table | Rung 4 | [55335e8](https://github.com/mategvetadze/Development-course-project/commit/55335e867612057fe55e32d436760704ce3b2276) | n/a | Not yet |
+| PostHog started in the browser (`app/lib/posthog-client.ts`) | Sprint 2, ST1 | [532d7bc](https://github.com/mategvetadze/Development-course-project/commit/532d7bc01a9797d34657b3b2dc73e6103ec5b204) | No, not deployed yet | Not yet |
+| Browser events `student_opens_card_set` and `student_views_card`, Apply opening on iPhone, double-tap guard, in `StudentCardSet.tsx` | Sprint 2, ST1 | [32c7c8d](https://github.com/mategvetadze/Development-course-project/commit/32c7c8d) | No, not deployed yet | Not yet |
+| Event schema: where each event fires, plus the live column and reconcile table | Rung 4 (prepared for AP's check) | [55335e8](https://github.com/mategvetadze/Development-course-project/commit/55335e867612057fe55e32d436760704ce3b2276) | n/a | Not yet |
 | README rows for Live product, dashboard and board | Rungs 1 and 5 | [83e9d25](https://github.com/mategvetadze/Development-course-project/commit/83e9d25f10a17bc97f31061704554215efc0de97) | Links still empty | n/a |
 
 **The piece I am least sure works for a real person, and how I will know by Lab 8:** the first visit. Our backend is on Render's free plan, which sleeps after 15 minutes, so the first student of the day may wait up to a minute for the cards. I will compare `student_opens_card_set` with `student_views_card` for position 1: opens with no views mean people left before the cards loaded.
@@ -35,7 +34,7 @@ I wrote and committed our MVP boundary, schema, architecture and Sprint 1 plan. 
 
 ### Week 7 · Ship to learn
 
-The gate did not pass on time: our README still said "coming Week 7". The lesson for me is that a plan with no build story for me let me stay outside the code, so in Sprint 2 I took the deploy and the browser events. Reading MG's code before deploying was my hack: a ten-minute review found two missing events that would have made our first reconcile fail. I tested the fix on a phone-sized screen before committing.
+The gate did not pass on time: our README still said "coming Week 7". The lesson for me is that a plan with no build story for me let me stay outside the code, so in Sprint 2 I took my own story (ST1, the browser events) and I review MG's deploy and dashboard. Reading MG's code before deploying was my hack: a ten-minute review found two missing events that would have made our first reconcile fail. I tested the fix on a phone-sized screen before committing.
 
 ## 3. My DECISIONS.md lines
 
@@ -43,10 +42,6 @@ Wk6 · MVP boundary: 5-step journey (curator publishes 5 cards to student finish
 
 I committed this line ([a50c966](https://github.com/mategvetadze/Development-course-project/commit/a50c966e5d421a43bad27799507264233aa1b13e)); the evidence is the cut list in `03-build/mvp-boundary.md`, where every cut cites an interview log or the value hypothesis.
 
-Wk7 · Gate open at rung 1: missing production URL, journey on production, north star event, reconcile and dashboard; owners and times in sprint-2.md · evidence: 03-build/sprints/sprint-2.md · owner: ST
-
-The evidence is the gate table in `03-build/sprints/sprint-2.md` and the README's empty Live product row.
-
 ## 4. My person this week
 
-The field-week person I am responsible for: Mgmt-1, 3rd-year Management student (log 01) · how and when the link reaches them: an Instagram message with the production URL ending in `?src=instagram`, the day the gate passes. I will open the site myself first, so she does not hit the Render cold start.
+The field-week person I am responsible for: T3, 3rd-year management student (interview 01) · how and when the link reaches them: an Instagram message with the production URL ending in `?src=instagram`, the day the gate passes. I will open the site myself first, so she does not hit the Render cold start.
