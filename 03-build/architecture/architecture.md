@@ -45,5 +45,5 @@ One public student page, one curator page (token in the URL). No accounts in Spr
 - Frontend env (`app/.env.local`): `NEXT_PUBLIC_API_URL`
 - Backend env (`backend/.env`): `DATABASE_URL`, `ADMIN_TOKEN`, `POSTHOG_KEY`, `POSTHOG_HOST`, `CORS_ORIGINS`
 - Root `.gitignore` lists `.env*` and `backend/.venv/`
-- No student PII: decisions store anonymous id + fixed skip reasons only
+- Personal data we store, and where: none about a person. Table `decisions` holds `anonymous_id` (random id made by the app), `decision`, `skip_reason` (fixed list) and `ms_on_card`; tables `card_sets` and `cards` hold job-post facts only. No names, emails or phone numbers are stored or put on an event
 - Deploy-day risk: Apply opens another tab before the decide request finishes — fire `student_decides_card` from the server after the insert, then open the tab (frontend already waits on `fetch` before `window.open`)

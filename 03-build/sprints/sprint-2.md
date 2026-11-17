@@ -14,7 +14,7 @@ Our definition of done: merged to `main`, deployed at the public URL, walked on 
 | S4 Student finishes the set (north star) | MG | No | Same three clauses missing |
 | S5 Deploy and instrument | MG | No | No public URL, no events in PostHog Activity, reconcile check not written |
 
-**Slip rule:** not fired yet. If S1 (admin page) is still not deployed by the evening before Lab 8, the admin page moves to Sprint 3 and AS's five cards go in through a seed script that also fires `curator_publishes_card_set`; S4 and `student_completes_card_set` stay.
+**Slip rule:** did not fire yet; nothing has moved. If S1 (admin page) is still not deployed by the evening before Lab 8, the admin page moves to Sprint 3 and AS's five cards go in through a seed script that also fires `curator_publishes_card_set`; S4 and `student_completes_card_set` stay.
 
 ## The gate
 
@@ -40,13 +40,37 @@ Our definition of done: merged to `main`, deployed at the public URL, walked on 
 
 In this order: missing rungs, then anything that slipped from Sprint 1, then at most one new story, and only if a walk or a test session asked for it. The sum of hours must not exceed the total above.
 
-### Climb rungs 1 to 5 (S5 from Sprint 1) · owner MG · reviewer ST · [N] h
+### Rungs 1 to 3 · Deploy, walk the journey, see the north star event in Activity · owner MG · reviewer ST · [N] h
 
-Same criteria as S5 in `sprint-1.md`: public URL in the README's Live product row, all five schema events visible in PostHog Activity, reconcile numbers in `03-build/analytics/event-schema.md`, dashboard link in the README's Analytics dashboard row.
+**As** Nino, **I** open the production URL on my phone on mobile data and finish all five cards **so that** I decide apply or skip without opening the posts.
 
-### S1 to S4 deployed and walked · owners as in `sprint-1.md` · reviewers as in `sprint-1.md` · [N] h
+**Acceptance criteria:**
+- Given the production URL (README's Live product row) on a phone with Wi-Fi off, when it loads, then I see five cards
+- And a teammate who did not build S4 finishes all five decisions and sees the summary
+- And PostHog Activity shows `curator_publishes_card_set`, `student_opens_card_set`, `student_views_card`, `student_decides_card` and `student_completes_card_set`, each with its schema properties, fired once, from production
 
-Same acceptance criteria as in `sprint-1.md`, now checked on a phone at the production URL.
+**Smallest demo that proves it:** open the production URL on a phone, decide five cards, read each row aloud in PostHog Activity.
+
+### Rung 4 · Reconcile the counts · owner AP · reviewer MG · [N] h
+
+**As** the team, **we** count `student_completes_card_set` two ways **so that** we believe the dashboard.
+
+**Acceptance criteria:**
+- Given the gate window, when PostHog's Trends insight counts `student_completes_card_set` and a SQL query counts the matching rows in Neon, then both numbers are written in the Gate reconcile block of `03-build/analytics/event-schema.md`
+- And if they differ, the cause and the fix are written there with a commit link
+- And PostHog's internal-user filter is set so our own test clicks are not counted
+
+**Smallest demo that proves it:** show the two numbers side by side and the filter.
+
+### Rung 5 · Dashboard · owner MG · reviewer ST · [N] h
+
+**As** the team, **we** open one link to see the north star **so that** Lab 8 can read what real people did.
+
+**Acceptance criteria:**
+- Given the PostHog dashboard link, when opened without logging in, then it shows Trends for `student_completes_card_set`, the journey steps in order, and Retention
+- And the link is in the README's Analytics dashboard row
+
+**Smallest demo that proves it:** open the link in a private window.
 
 ## Field week: who uses it
 

@@ -33,7 +33,7 @@ The smallest complete user journey that tests whether the product creates value.
 | Applying inside our app / CV builder | Students apply on the original site; "CV felt too empty" is only log 10 (not yet a pattern) | Never for in-app applying; CV help only if it becomes a pattern |
 | Salary fairness rating | The original pay/scarcity prediction was weakened (DECISIONS.md); the card shows the pay as a fact, students judge it | Never, unless later logs bring it back |
 | Opportunities abroad | Only log 02 | When 2+ logs raise it |
-| AI matching to the student's profile | 5 hand-picked cards need no matching; 02 is the only log using AI | After real decision data shows which cards get skipped and why |
+| AI matching to the student's profile | 5 hand-picked cards need no matching; only 02 and 05 mention AI, and only as a search workaround | After real decision data shows which cards get skipped and why |
 | Employer side (companies posting directly) | No employer interviews yet; tests nothing about the student's decision | After student-side value is shown |
 
 ## Step to event
@@ -52,4 +52,4 @@ Event names are copied from 03-build/analytics/event-schema.md.
 
 ## The DECISIONS.md line
 
-Wk6 · MVP boundary: 5-step journey (curator publishes 5 cards to student finishes apply-or-skip on all five); cut scraping, sign-in, deadline reminders, field picker, courses and hackathons · evidence: 03-build/mvp-boundary.md, logs 01, 06, 07, 08, 10, 11 · owner: MG
+Wk6 · MVP boundary: 5-step journey (curator publishes 5 cards to student finishes apply-or-skip on all five); cut scraping, sign-in, deadline reminders, field picker, courses and hackathons · evidence: 03-build/mvp-boundary.md, logs 02, 03, 04, 06, 07, 08, 10, 11 · owner: MG
