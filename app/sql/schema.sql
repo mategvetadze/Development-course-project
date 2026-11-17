@@ -19,7 +19,8 @@ create table if not exists cards (
   hours text not null,
   pay text not null,
   deadline date not null,
-  unique (set_id, position)
+  unique (set_id, position),
+  unique (set_id, id)
 );
 
 create table if not exists decisions (
@@ -33,6 +34,9 @@ create table if not exists decisions (
     or skip_reason in ('not_my_field', 'not_eligible', 'hours', 'pay', 'not_interested', 'other')
   ),
   ms_on_card int,
+  ms_total bigint check (ms_total >= 0),
   created_at timestamptz not null default now(),
-  unique (set_id, card_id, anonymous_id)
+  unique (set_id, card_id, anonymous_id),
+  constraint decisions_card_set_fkey foreign key (set_id, card_id)
+    references cards(set_id, id) on delete cascade
 );

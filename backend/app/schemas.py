@@ -1,7 +1,8 @@
 from typing import Literal
 from uuid import UUID
+from datetime import date
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, HttpUrl, TypeAdapter, field_validator
 
 
 SkipReason = Literal[
@@ -32,6 +33,19 @@ class CardIn(BaseModel):
         if not v or not v.strip():
             raise ValueError("must not be blank")
         return v.strip()
+
+    @field_validator("deadline")
+    @classmethod
+    def valid_deadline(cls, v: str) -> str:
+        if date.fromisoformat(v).isoformat() != v:
+            raise ValueError("must be YYYY-MM-DD")
+        return v
+
+    @field_validator("source_url")
+    @classmethod
+    def valid_source_url(cls, v: str) -> str:
+        TypeAdapter(HttpUrl).validate_python(v)
+        return v
 
 
 class PublishRequest(BaseModel):
@@ -68,12 +82,12 @@ class CardSetOut(BaseModel):
 class DecideRequest(BaseModel):
     set_id: UUID
     card_id: UUID
-    position: int
+    position: int = Field(ge=1, le=5)
     decision: Literal["apply", "skip"]
     skip_reason: SkipReason | None = None
-    ms_on_card: int | None = None
+    ms_on_card: int | None = Field(default=None, ge=0, le=2147483647)
     anonymous_id: str
-    ms_total: int | None = None
+    ms_total: int | None = Field(default=None, ge=0, le=9007199254740991)
 
     @field_validator("anonymous_id")
     @classmethod
@@ -91,5 +105,12 @@ class AppliedSummary(BaseModel):
 
 class DecideResponse(BaseModel):
     ok: bool = True
+    complete: bool
+    summary: list[AppliedSummary] | None = None
+    decision: Literal["apply", "skip"]
+
+
+class DecisionState(BaseModel):
+    choices: dict[str, Literal["apply", "skip"]]
     complete: bool
     summary: list[AppliedSummary] | None = None
