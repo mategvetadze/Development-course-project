@@ -3,8 +3,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { CardSet } from "@/lib/cards";
-import { apiUrl } from "@/lib/api";
-import { getPostHog } from "@/lib/posthog-client";
+import { apiError, apiUrl } from "@/lib/api";
+import { getPostHog } from "@/lib/posting-client";
 
 const SKIP_REASONS = [
   "not_my_field",
@@ -49,12 +49,14 @@ export function StudentCardSet({ set, source }: { set: CardSet; source: string }
   const [choices, setChoices] = useState<Record<string, Decision | null>>({});
   const [skipFor, setSkipFor] = useState<string | null>(null);
   const [pending, setPending] = useState<string | null>(null);
+  const [restoring, setRestoring] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [summary, setSummary] = useState<
     { role: string; deadline: string; source_url: string }[] | null
   >(null);
 
   const anon = useRef("");
+  const inFlight = useRef(false);
   const opened = useRef(false);
   const viewed = useRef<Set<string>>(new Set());
   const viewedAt = useRef<Record<string, number>>({});
@@ -66,11 +68,37 @@ export function StudentCardSet({ set, source }: { set: CardSet; source: string }
     if (opened.current) return;
     opened.current = true;
     anon.current = anonymousId();
+    try {
+      const saved = Number(localStorage.getItem(`cc_first_view:${set.id}:${anon.current}`));
+      if (saved > 0 && saved <= nowMs()) firstViewAt.current = saved;
+    } catch { /* Storage can be unavailable in private browsing. */ }
     const ph = getPostHog();
     // Same id as the backend's anonymous_id, so browser and server events join up in PostHog.
     ph?.identify(anon.current);
     ph?.capture("student_opens_card_set", { set_id: set.id, source });
   }, [set.id, source]);
+
+  // A reload must display the first decisions already accepted by the server.
+  useEffect(() => {
+    let cancelled = false;
+    setRestoring(true);
+    async function restore() {
+      try {
+        const res = await fetch(apiUrl(`/api/sets/${set.id}/decisions?anonymous_id=${encodeURIComponent(anon.current)}`),
+          { cache: "no-store" });
+        const data = await res.json();
+        if (!res.ok) throw new Error(apiError(data, "Could not load saved decisions."));
+        if (cancelled) return;
+        setChoices(data.choices);
+        setSummary(data.summary);
+        setRestoring(false);
+      } catch (e) {
+        if (!cancelled) setError(`${e instanceof Error ? e.message : "Could not load saved decisions."} Reload to retry.`);
+      }
+    }
+    void restore();
+    return () => { cancelled = true; };
+  }, [set.id]);
 
   // student_views_card: once per card, when half of it is on screen.
   useEffect(() => {
@@ -85,7 +113,12 @@ export function StudentCardSet({ set, source }: { set: CardSet; source: string }
           viewed.current.add(card.id);
           const now = nowMs();
           viewedAt.current[card.id] = now;
-          if (firstViewAt.current === null) firstViewAt.current = now;
+          if (firstViewAt.current === null) {
+            firstViewAt.current = now;
+            try {
+              localStorage.setItem(`cc_first_view:${set.id}:${anon.current}`, String(now));
+            } catch { /* Keep the in-memory timestamp when storage is unavailable. */ }
+          }
           getPostHog()?.capture("student_views_card", {
             set_id: set.id,
             card_id: card.id,
@@ -100,9 +133,10 @@ export function StudentCardSet({ set, source }: { set: CardSet; source: string }
   }, [set, summary]);
 
   async function decide(cardId: string, decision: Decision, skip_reason?: string) {
-    if (pending || choices[cardId]) return; // no double taps
+    if (restoring || inFlight.current || choices[cardId]) return; // no double taps
     const card = set.cards.find((c) => c.id === cardId);
     if (!card) return;
+    inFlight.current = true;
 
     // Open the post BEFORE waiting for the server: iPhones block tabs opened after a wait.
     if (decision === "apply" && card.source_url) {
@@ -122,22 +156,23 @@ export function StudentCardSet({ set, source }: { set: CardSet; source: string }
           position: card.position,
           decision,
           skip_reason: skip_reason || null,
-          ms_on_card: viewedAt.current[cardId] ? now - viewedAt.current[cardId] : null,
+          ms_on_card: viewedAt.current[cardId] ? Math.max(0, now - viewedAt.current[cardId]) : null,
           anonymous_id: anon.current || anonymousId(),
-          ms_total: firstViewAt.current ? now - firstViewAt.current : null,
+          ms_total: firstViewAt.current ? Math.max(0, now - firstViewAt.current) : null,
         }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        setError(data.error || "Could not save. Check your connection and tap again.");
+        setError(apiError(data, "Could not save. Check your connection and tap again."));
         return;
       }
-      setChoices((prev) => ({ ...prev, [cardId]: decision }));
+      setChoices((prev) => ({ ...prev, [cardId]: data.decision }));
       setSkipFor(null);
       if (data.summary) setSummary(data.summary);
     } catch {
       setError("Could not save. Check your connection and tap again.");
     } finally {
+      inFlight.current = false;
       setPending(null);
     }
   }
@@ -195,7 +230,7 @@ export function StudentCardSet({ set, source }: { set: CardSet; source: string }
                 <button
                   type="button"
                   className="skip"
-                  disabled={!!pending}
+                  disabled={restoring || !!pending}
                   onClick={() => setSkipFor(card.id)}
                 >
                   Skip
@@ -203,7 +238,7 @@ export function StudentCardSet({ set, source }: { set: CardSet; source: string }
                 <button
                   type="button"
                   className="apply"
-                  disabled={!!pending}
+                  disabled={restoring || !!pending}
                   onClick={() => decide(card.id, "apply")}
                 >
                   {pending === card.id ? "Saving…" : "Apply"}
@@ -219,7 +254,7 @@ export function StudentCardSet({ set, source }: { set: CardSet; source: string }
                       key={reason}
                       type="button"
                       className="skip"
-                      disabled={!!pending}
+                      disabled={restoring || !!pending}
                       onClick={() => decide(card.id, "skip", reason)}
                     >
                       {REASON_LABELS[reason]}

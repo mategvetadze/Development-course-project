@@ -1,11 +1,42 @@
 
-from fastapi import APIRouter, HTTPException
+from uuid import UUID
+
+from fastapi import APIRouter, HTTPException, Query
 
 from app.analytics import capture
 from app.db import get_conn
-from app.schemas import AppliedSummary, DecideRequest, DecideResponse
+from app.schemas import AppliedSummary, DecideRequest, DecideResponse, DecisionState
 
 router = APIRouter(prefix="/api", tags=["decide"])
+
+
+def decision_state(conn, set_id: UUID, anonymous_id: str) -> DecisionState:
+    rows = conn.execute(
+        """
+        select c.id, d.decision, c.role, c.deadline::text as deadline, c.source_url
+        from decisions d join cards c on c.id = d.card_id and c.set_id = d.set_id
+        where d.set_id = %s and d.anonymous_id = %s
+        order by c.position
+        """,
+        (set_id, anonymous_id),
+    ).fetchall()
+    complete = len(rows) == 5
+    return DecisionState(
+        choices={str(row["id"]): row["decision"] for row in rows},
+        complete=complete,
+        summary=[AppliedSummary(**row) for row in rows if row["decision"] == "apply"] if complete else None,
+    )
+
+
+@router.get("/sets/{set_id}/decisions", response_model=DecisionState)
+def get_decisions(set_id: UUID, anonymous_id: str = Query(min_length=1)):
+    try:
+        with get_conn() as conn:
+            if not conn.execute("select 1 from card_sets where id = %s", (set_id,)).fetchone():
+                raise HTTPException(status_code=404, detail="Set not found")
+            return decision_state(conn, set_id, anonymous_id)
+    except RuntimeError as e:
+        raise HTTPException(status_code=503, detail=str(e)) from e
 
 
 @router.post("/decide", response_model=DecideResponse)
@@ -16,13 +47,23 @@ def decide_card(body: DecideRequest):
     try:
         with get_conn() as conn:
             with conn.transaction():
+                # Serialize one student's set, including different cards/tabs.
+                # The lock is released by PostgreSQL on commit or rollback.
+                conn.execute("select pg_advisory_xact_lock(hashtextextended(%s, 0))",
+                             (f"{body.set_id}:{body.anonymous_id}",))
+                card = conn.execute("select position from cards where id = %s and set_id = %s",
+                                    (body.card_id, body.set_id)).fetchone()
+                if card is None:
+                    raise HTTPException(status_code=404, detail="Card not found in this set")
+                if card["position"] != body.position:
+                    raise HTTPException(status_code=400, detail="Incorrect card position")
                 # "returning 1" tells us whether a NEW row was saved.
                 # A repeat tap on the same card saves nothing, so it must fire nothing.
                 inserted = conn.execute(
                     """
                     insert into decisions (
-                      set_id, card_id, anonymous_id, decision, skip_reason, ms_on_card
-                    ) values (%s, %s, %s, %s, %s, %s)
+                      set_id, card_id, anonymous_id, decision, skip_reason, ms_on_card, ms_total
+                    ) values (%s, %s, %s, %s, %s, %s, %s)
                     on conflict (set_id, card_id, anonymous_id) do nothing
                     returning 1
                     """,
@@ -33,37 +74,15 @@ def decide_card(body: DecideRequest):
                         body.decision,
                         body.skip_reason if body.decision == "skip" else None,
                         body.ms_on_card,
+                        body.ms_total,
                     ),
                 ).fetchone() is not None
 
-                count_row = conn.execute(
-                    """
-                    select count(*)::int as n
-                    from decisions
-                    where set_id = %s and anonymous_id = %s
-                    """,
-                    (body.set_id, body.anonymous_id),
-                ).fetchone()
-                count = count_row["n"]
-
-                applied_rows = []
-                if count >= 5:
-                    applied_rows = conn.execute(
-                        """
-                        select c.role, c.deadline::text as deadline, c.source_url
-                        from decisions d
-                        join cards c on c.id = d.card_id
-                        where d.set_id = %s
-                          and d.anonymous_id = %s
-                          and d.decision = 'apply'
-                        order by c.position
-                        """,
-                        (body.set_id, body.anonymous_id),
-                    ).fetchall()
+                state = decision_state(conn, body.set_id, body.anonymous_id)
     except RuntimeError as e:
         raise HTTPException(status_code=503, detail=str(e)) from e
 
-    # Events fire only after a new row is committed, so PostHog count = database count.
+    # Only newly committed decisions attempt analytics; retries keep the first choice.
     if inserted:
         capture(
             distinct_id=body.anonymous_id,
@@ -71,28 +90,24 @@ def decide_card(body: DecideRequest):
             properties={
                 "set_id": str(body.set_id),
                 "card_id": str(body.card_id),
-                "position": body.position,
+                "position": card["position"],
                 "decision": body.decision,
                 "skip_reason": body.skip_reason if body.decision == "skip" else None,
                 "ms_on_card": body.ms_on_card,
             },
         )
 
-    if count < 5:
-        return DecideResponse(complete=False)
-
-    summary = [AppliedSummary(**row) for row in applied_rows]
-
-    # North star: only the request that saved the 5th row fires it, exactly once.
-    if inserted and count == 5:
+    # The per-student lock makes exactly one request observe the fifth new row.
+    if inserted and state.complete:
         capture(
             distinct_id=body.anonymous_id,
             event="student_completes_card_set",
             properties={
                 "set_id": str(body.set_id),
-                "apply_count": len(summary),
-                "skip_count": 5 - len(summary),
+                "apply_count": len(state.summary),
+                "skip_count": 5 - len(state.summary),
                 "ms_total": body.ms_total,
             },
         )
-    return DecideResponse(complete=True, summary=summary)
+    return DecideResponse(complete=state.complete, summary=state.summary,
+                          decision=state.choices[str(body.card_id)])
