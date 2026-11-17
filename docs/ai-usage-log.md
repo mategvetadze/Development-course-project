@@ -9,3 +9,8 @@ Wk6 · MG · Cursor · README, test-plan.md, usability-findings scaffold, ai-usa
 Wk6 · MG · Cursor · app/ Next.js skeleton (pages, admin token route, publish/decide APIs, Neon schema) · needs Node 20+, Neon, PostHog, Vercel before Live product URL; not deployed yet
 Wk6 · MG · Cursor · backend/ FastAPI (publish, sets/latest, decide + PostHog) · Next.js API routes removed; frontend calls NEXT_PUBLIC_API_URL; architecture + DECISIONS updated
 Wk7 · AP · Claude · fixes to event-schema.md, mvp-boundary.md, sprint-1.md, sprint-2.md against the Lab 5-7 templates · AP checked every change against the lecturer's templates and our logs; hours, predictions and field-week people left empty for the team to fill
+
+
+
+Wk7 · ST used Claude to review MG's StudentCardSet.tsx and to write the fix: PostHog client init (app/lib/posthog-client.ts), student_opens_card_set and student_views_card events, Apply on iPhone, double-tap guard. Tested by ST on a phone-sized screen before committing.
+Wk6–7 · ST used Claude to draft 03-build/mvp-boundary.md, architecture.md, sprint-1.md, sprint-2.md, the event schema rows and the hw2 outline; facts checked against our interview logs and icp.md.
