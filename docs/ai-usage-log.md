@@ -8,3 +8,4 @@ Wk6 · MG · Cursor · mvp-boundary / architecture / sprint-1 drafting support �
 Wk6 · MG · Cursor · README, test-plan.md, usability-findings scaffold, ai-usage-log · filled from Lab-5/Lab-6 templates and team DECISIONS.md; no invented test sessions
 Wk6 · MG · Cursor · app/ Next.js skeleton (pages, admin token route, publish/decide APIs, Neon schema) · needs Node 20+, Neon, PostHog, Vercel before Live product URL; not deployed yet
 Wk6 · MG · Cursor · backend/ FastAPI (publish, sets/latest, decide + PostHog) · Next.js API routes removed; frontend calls NEXT_PUBLIC_API_URL; architecture + DECISIONS updated
+Wk7 · AP · Claude · fixes to event-schema.md, mvp-boundary.md, sprint-1.md, sprint-2.md against the Lab 5-7 templates · AP checked every change against the lecturer's templates and our logs; hours, predictions and field-week people left empty for the team to fill
