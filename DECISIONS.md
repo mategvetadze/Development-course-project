@@ -16,3 +16,5 @@ Wk6 · Prototype track: B (existing clickable prototype at 02-design/prototype/i
 Wk6 · Stack: FastAPI Python backend (`backend/`) + Next.js phone UI (`app/`) + Neon + PostHog; same event names as 03-build/analytics/event-schema.md · evidence: 03-build/architecture/architecture.md, backend/README.md · owner: MG
 
 Wk7 · Gate open at rung 0: missing public URL, events in PostHog, reconcile numbers and dashboard, owners and times in sprint-2.md · evidence: 03-build/sprints/sprint-2.md · owner: AP
+
+Wk7 · Gate status clarified: no public URL, production PostHog events, matched counts or dashboard were verifiable in the supplied repository snapshot; gate remains open at rung 0 until a phone walk confirms rung 1 · evidence: README.md, 03-build/analytics/event-schema.md, 03-build/sprints/sprint-2.md · owner: AP

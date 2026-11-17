@@ -1,3 +1,4 @@
+
 "use client";
 
 import posthog from "posthog-js";
@@ -14,7 +15,8 @@ export function getPostHog() {
     posthog.init(key, {
       api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://eu.i.posthog.com",
       ui_host: "https://eu.posthog.com",
-      capture_pageview: true,
+      capture_pageview: false,
+      autocapture: false,
     });
     started = true;
   }
