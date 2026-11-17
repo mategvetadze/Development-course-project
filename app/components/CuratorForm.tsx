@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { apiUrl } from "@/lib/api";
+import { apiError, apiUrl } from "@/lib/api";
 
 const emptyCard = () => ({
   role: "",
@@ -42,7 +42,7 @@ export function CuratorForm({ token }: { token: string }) {
         body: JSON.stringify({ cards }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Publish failed");
+      if (!res.ok) throw new Error(apiError(data, "Publish failed"));
       setMessage(`Published: ${data.card_count} cards (set ${data.set_id})`);
     } catch (e) {
       setMessage(e instanceof Error ? e.message : "Publish failed");
