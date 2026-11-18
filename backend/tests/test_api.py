@@ -35,7 +35,7 @@ CARD = dict(role="Engineer", company="Example", field="IT", source="Example",
             hours="Part time", pay="", deadline="2027-01-01")
 
 
-class ApiTests(unittest.TestCase):
+class DatabaseTestCase(unittest.TestCase):
     schema_file = ROOT / "sql/schema.sql"
 
     def setUp(self):
@@ -82,6 +82,8 @@ class ApiTests(unittest.TestCase):
         with get_conn() as conn:
             return conn.execute("select * from analytics_outbox order by occurred_at, id").fetchall()
 
+
+class ApiTests(DatabaseTestCase):
     def test_publish_decide_reload_summary_and_idempotency(self):
         self.assertIsNone(self.client.get("/api/sets/latest").json())
         cards = self.publish()

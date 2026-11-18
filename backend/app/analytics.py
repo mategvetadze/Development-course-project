@@ -27,13 +27,16 @@ def capture(distinct_id: str, event: str, properties: dict | None = None, *, tim
         client = get_posthog()
         if client is None:
             return False
-        accepted, _ = client.capture(distinct_id, event, {**(properties or {}), "$insert_id": str(event_id)},
+        accepted, _ = client.capture(distinct_id, event, {**(properties or {}), "$insert_id": str(event_id),
+                                     "$process_person_profile": False, "$ip": None},
                                      timestamp=timestamp, uuid=event_id)
         client.flush()
         return bool(accepted)
-    except Exception:
+    except Exception as error:
         # Do not log SDK exceptions: upstream messages may contain credentials.
-        logger.warning("Analytics delivery failed for %s; event remains pending", event)
+        status = getattr(error, "status", None)
+        logger.warning("Analytics delivery failed for %s (%s, status=%s); event remains pending",
+                       event, type(error).__name__, status if isinstance(status, int) else "unavailable")
         return False
 
 

@@ -15,7 +15,7 @@ from app import analytics
 from app.db import get_conn
 
 
-class OutboxTests(base.ApiTests):
+class OutboxTests(base.DatabaseTestCase):
     def finish(self):
         cards = self.publish()
         self.client.post(f'/api/sets/{cards["id"]}/start', json={"anonymous_id": "student"})
@@ -106,6 +106,8 @@ class TransportTests(unittest.TestCase):
             self.assertEqual(event["properties"]["$insert_id"], str(event_id))
             self.assertEqual(event["timestamp"], at.isoformat())
             self.assertEqual(event["distinct_id"], "anonymous-test-id")
+            self.assertFalse(event["properties"]["$process_person_profile"])
+            self.assertIsNone(event["properties"]["$ip"])
         finally:
             server.shutdown()
             server.server_close()

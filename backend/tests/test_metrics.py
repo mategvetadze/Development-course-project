@@ -13,7 +13,7 @@ from app.config import get_settings
 from app.db import get_conn
 
 
-class MetricTests(base.ApiTests):
+class MetricTests(base.DatabaseTestCase):
     def start(self, cards, anonymous_id="student", **extra):
         result = self.client.post(f'/api/sets/{cards["id"]}/start',
                                   json={"anonymous_id": anonymous_id, **extra})

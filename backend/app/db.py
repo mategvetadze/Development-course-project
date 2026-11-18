@@ -12,5 +12,8 @@ def get_conn() -> Iterator[psycopg.Connection]:
     settings = get_settings()
     if not settings.database_url:
         raise RuntimeError("DATABASE_URL is not set")
-    with psycopg.connect(settings.database_url, row_factory=dict_row) as conn:
-        yield conn
+    try:
+        with psycopg.connect(settings.database_url, row_factory=dict_row, connect_timeout=10) as conn:
+            yield conn
+    except psycopg.OperationalError:
+        raise RuntimeError("Database unavailable; please try again") from None
