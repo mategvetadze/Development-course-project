@@ -22,7 +22,7 @@ if not BASE_URL:
 info = conninfo_to_dict(BASE_URL)
 if info.get("host") not in ("127.0.0.1", "localhost", "::1") or not info.get("dbname", "").startswith("careercards_test"):
     raise RuntimeError("Tests require a loopback careercards_test* database")
-os.environ.update(DATABASE_URL=BASE_URL, ADMIN_TOKEN="test-admin", POSTHOG_KEY="")
+os.environ.update(DATABASE_URL=BASE_URL, ADMIN_TOKEN="test-admin", POSTHOG_KEY="", APP_ENV="test")
 
 from app.config import get_settings
 from app.db import get_conn
@@ -220,6 +220,7 @@ class MigrationTests(ApiTests):
         super().setUp()
         with get_conn() as conn:
             conn.execute((ROOT / "sql/migrations/001_decision_integrity.sql").read_text())
+            conn.execute((ROOT / "sql/migrations/002_server_completion.sql").read_text())
 
     def test_preserves_legacy_invalid_rows_but_excludes_them_from_completion(self):
         # Recreate the old schema to demonstrate migration against existing bad data.
@@ -236,7 +237,9 @@ class MigrationTests(ApiTests):
             row = conn.execute("select count(*) as n, max(ms_total) as timing from decisions").fetchone()
             self.assertEqual(row, {"n": 1, "timing": None})
         state = self.client.get(f'/api/sets/{first["id"]}/decisions', params={"anonymous_id": "student"}).json()
-        self.assertEqual(state, {"choices": {}, "complete": False, "summary": None})
+        self.assertEqual(state, {"choices": {}, "complete": False, "summary": None,
+                                "analytics": {"environment": "test", "is_internal": False},
+                                "started_at": None, "session_exists": False})
         self.assertEqual(self.send(first, 0).status_code, 200)
         with self.assertRaises(psycopg.errors.ForeignKeyViolation):
             with get_conn() as conn:
