@@ -20,6 +20,9 @@ dist/
 build/
 *.tsbuildinfo
 next-env.d.ts
+app/test-results/
+app/playwright-report/
+app/public/prototype/
 
 # logs / OS / IDE
 npm-debug.log*

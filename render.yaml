@@ -1,0 +1,31 @@
+# Existing architecture: FastAPI on Render, frontend on Vercel (app/), Neon DB.
+# No production migration runs automatically. The owner first applies schema.sql
+# on an empty database, or the numbered missing migrations on an existing one.
+# Readiness fails until the schema is available; no historical metrics are invented.
+services:
+  - type: web
+    name: careercards-api
+    runtime: python
+    rootDir: backend
+    plan: free
+    autoDeploy: false
+    buildCommand: pip install -r requirements.lock
+    startCommand: python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health/ready
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.16
+      - key: APP_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: ADMIN_TOKEN
+        generateValue: true
+      - key: POSTHOG_KEY
+        sync: false
+      - key: POSTHOG_HOST
+        value: https://eu.i.posthog.com
+      - key: CORS_ORIGINS
+        sync: false
+      - key: INTERNAL_ANONYMOUS_IDS
+        value: ""

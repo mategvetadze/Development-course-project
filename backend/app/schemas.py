@@ -1,8 +1,10 @@
-from typing import Literal
+from typing import Annotated, Literal
 from uuid import UUID
-from datetime import date
+from datetime import date, datetime
 
-from pydantic import BaseModel, Field, HttpUrl, TypeAdapter, field_validator
+from pydantic import BaseModel, Field, HttpUrl, StringConstraints, TypeAdapter, field_validator
+
+AnonymousId = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=128)]
 
 
 SkipReason = Literal[
@@ -86,16 +88,8 @@ class DecideRequest(BaseModel):
     decision: Literal["apply", "skip"]
     skip_reason: SkipReason | None = None
     ms_on_card: int | None = Field(default=None, ge=0, le=2147483647)
-    anonymous_id: str
+    anonymous_id: AnonymousId
     ms_total: int | None = Field(default=None, ge=0, le=9007199254740991)
-
-    @field_validator("anonymous_id")
-    @classmethod
-    def anon_ok(cls, v: str) -> str:
-        if not v or not v.strip():
-            raise ValueError("anonymous_id required")
-        return v.strip()
-
 
 class AppliedSummary(BaseModel):
     role: str
@@ -114,3 +108,15 @@ class DecisionState(BaseModel):
     choices: dict[str, Literal["apply", "skip"]]
     complete: bool
     summary: list[AppliedSummary] | None = None
+    analytics: dict
+    started_at: datetime | None = None
+    session_exists: bool = False
+
+
+class SessionRequest(BaseModel):
+    anonymous_id: AnonymousId
+
+
+class SessionResponse(BaseModel):
+    started_at: datetime | None
+    analytics: dict

@@ -1,0 +1,61 @@
+{
+  "name": "Prometheus — required MVP",
+  "insights": [
+    {
+      "name": "North Star — unique students completing in five minutes, weekly",
+      "query": {
+        "kind": "TrendsQuery",
+        "series": [{ "kind": "EventsNode", "event": "student_completes_card_set", "math": "dau" }],
+        "interval": "week",
+        "dateRange": { "date_from": "-8w" },
+        "properties": [
+          { "key": "environment", "type": "event", "operator": "exact", "value": "production" },
+          { "key": "is_internal", "type": "event", "operator": "exact", "value": false },
+          { "key": "qualifies", "type": "event", "operator": "exact", "value": true },
+          { "key": "metric_version", "type": "event", "operator": "exact", "value": "server_v1" }
+        ]
+      }
+    },
+    {
+      "name": "Journey — step counts across curator and students",
+      "query": {
+        "kind": "TrendsQuery",
+        "series": [
+          { "kind": "EventsNode", "event": "curator_publishes_card_set", "math": "total" },
+          { "kind": "EventsNode", "event": "student_opens_card_set", "math": "total" },
+          { "kind": "EventsNode", "event": "student_views_card", "math": "total" },
+          { "kind": "EventsNode", "event": "student_decides_card", "math": "total" },
+          { "kind": "EventsNode", "event": "student_completes_card_set", "math": "total" }
+        ],
+        "interval": "week",
+        "dateRange": { "date_from": "-8w" },
+        "properties": [
+          { "key": "environment", "type": "event", "operator": "exact", "value": "production" },
+          { "key": "is_internal", "type": "event", "operator": "exact", "value": false }
+        ]
+      }
+    },
+    {
+      "name": "Retention — qualified students returning in later weeks",
+      "query": {
+        "kind": "RetentionQuery",
+        "retentionFilter": {
+          "period": "Week",
+          "totalIntervals": 8,
+          "targetEntity": { "id": "student_completes_card_set", "name": "student_completes_card_set", "type": "events" },
+          "returningEntity": { "id": "student_completes_card_set", "name": "student_completes_card_set", "type": "events" },
+          "retentionType": "retention_first_time",
+          "retentionReference": "total",
+          "cumulative": false
+        },
+        "dateRange": { "date_from": "-8w" },
+        "properties": [
+          { "key": "environment", "type": "event", "operator": "exact", "value": "production" },
+          { "key": "is_internal", "type": "event", "operator": "exact", "value": false },
+          { "key": "qualifies", "type": "event", "operator": "exact", "value": true },
+          { "key": "metric_version", "type": "event", "operator": "exact", "value": "server_v1" }
+        ]
+      }
+    }
+  ]
+}

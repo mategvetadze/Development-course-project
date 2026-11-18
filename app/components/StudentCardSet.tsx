@@ -1,10 +1,10 @@
 
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { CardSet } from "@/lib/cards";
 import { apiError, apiUrl } from "@/lib/api";
-import { getPostHog } from "@/lib/posting-client";
+import { getPostHog, normalizeSource } from "@/lib/posting-client";
 
 const SKIP_REASONS = [
   "not_my_field",
@@ -58,29 +58,39 @@ export function StudentCardSet({ set, source }: { set: CardSet; source: string }
   const anon = useRef("");
   const inFlight = useRef(false);
   const opened = useRef(false);
+  const analytics = useRef<{ environment: string; is_internal: boolean } | null>(null);
+  const sessionStart = useRef<Promise<void> | null>(null);
   const viewed = useRef<Set<string>>(new Set());
   const viewedAt = useRef<Record<string, number>>({});
   const firstViewAt = useRef<number | null>(null);
   const cardEls = useRef<Record<string, HTMLElement | null>>({});
 
-  // student_opens_card_set: once per page load. The ref stops React's double run in dev.
-  useEffect(() => {
-    if (opened.current) return;
-    opened.current = true;
-    anon.current = anonymousId();
-    try {
-      const saved = Number(localStorage.getItem(`cc_first_view:${set.id}:${anon.current}`));
-      if (saved > 0 && saved <= nowMs()) firstViewAt.current = saved;
-    } catch { /* Storage can be unavailable in private browsing. */ }
-    const ph = getPostHog();
-    // Same id as the backend's anonymous_id, so browser and server events join up in PostHog.
-    ph?.identify(anon.current);
-    ph?.capture("student_opens_card_set", { set_id: set.id, source });
-  }, [set.id, source]);
+  const startSession = useCallback(() => {
+    if (!sessionStart.current) {
+      sessionStart.current = (async () => {
+        const res = await fetch(apiUrl(`/api/sets/${set.id}/start`), {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ anonymous_id: anon.current }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(apiError(data, "Could not start this set. Please try again."));
+        analytics.current = data.analytics;
+      })().catch((error) => {
+        sessionStart.current = null;
+        throw error;
+      });
+    }
+    return sessionStart.current;
+  }, [set.id]);
 
   // A reload must display the first decisions already accepted by the server.
   useEffect(() => {
     let cancelled = false;
+    if (!anon.current) anon.current = anonymousId();
+    try {
+      const saved = Number(localStorage.getItem(`cc_first_view:${set.id}:${anon.current}`));
+      if (saved > 0 && saved <= nowMs()) firstViewAt.current = saved;
+    } catch { /* Storage can be unavailable in private browsing. */ }
     setRestoring(true);
     async function restore() {
       try {
@@ -91,6 +101,15 @@ export function StudentCardSet({ set, source }: { set: CardSet; source: string }
         if (cancelled) return;
         setChoices(data.choices);
         setSummary(data.summary);
+        analytics.current = data.analytics;
+        if (data.session_exists) sessionStart.current = Promise.resolve();
+        if (!opened.current) {
+          opened.current = true;
+          const ph = getPostHog(anon.current);
+          ph?.capture("student_opens_card_set", {
+            set_id: set.id, source: normalizeSource(source), ...data.analytics,
+          });
+        }
         setRestoring(false);
       } catch (e) {
         if (!cancelled) setError(`${e instanceof Error ? e.message : "Could not load saved decisions."} Reload to retry.`);
@@ -98,18 +117,19 @@ export function StudentCardSet({ set, source }: { set: CardSet; source: string }
     }
     void restore();
     return () => { cancelled = true; };
-  }, [set.id]);
+  }, [set.id, source]);
 
   // student_views_card: once per card, when half of it is on screen.
   useEffect(() => {
-    if (summary) return;
+    if (summary || restoring) return;
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
+          if (!entry.isIntersecting || entry.intersectionRatio < 0.5) continue;
           const id = (entry.target as HTMLElement).dataset.cardId;
           const card = set.cards.find((c) => c.id === id);
           if (!card || viewed.current.has(card.id)) continue;
+          void startSession().catch(() => setError("Could not start this set. Tap a decision to retry."));
           viewed.current.add(card.id);
           const now = nowMs();
           viewedAt.current[card.id] = now;
@@ -123,6 +143,7 @@ export function StudentCardSet({ set, source }: { set: CardSet; source: string }
             set_id: set.id,
             card_id: card.id,
             position: card.position,
+            ...analytics.current,
           });
         }
       },
@@ -130,7 +151,7 @@ export function StudentCardSet({ set, source }: { set: CardSet; source: string }
     );
     for (const el of Object.values(cardEls.current)) if (el) observer.observe(el);
     return () => observer.disconnect();
-  }, [set, summary]);
+  }, [set, summary, restoring, startSession]);
 
   async function decide(cardId: string, decision: Decision, skip_reason?: string) {
     if (restoring || inFlight.current || choices[cardId]) return; // no double taps
@@ -138,15 +159,15 @@ export function StudentCardSet({ set, source }: { set: CardSet; source: string }
     if (!card) return;
     inFlight.current = true;
 
-    // Open the post BEFORE waiting for the server: iPhones block tabs opened after a wait.
-    if (decision === "apply" && card.source_url) {
-      window.open(card.source_url, "_blank", "noopener,noreferrer");
-    }
-
     setPending(cardId);
     setError(null);
     const now = nowMs();
     try {
+      // Open BEFORE either network wait; iPhones block tabs opened after a wait.
+      if (decision === "apply" && card.source_url) {
+        window.open(card.source_url, "_blank", "noopener,noreferrer");
+      }
+      await startSession();
       const res = await fetch(apiUrl("/api/decide"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -169,8 +190,8 @@ export function StudentCardSet({ set, source }: { set: CardSet; source: string }
       setChoices((prev) => ({ ...prev, [cardId]: data.decision }));
       setSkipFor(null);
       if (data.summary) setSummary(data.summary);
-    } catch {
-      setError("Could not save. Check your connection and tap again.");
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Could not save. Check your connection and tap again.");
     } finally {
       inFlight.current = false;
       setPending(null);
@@ -179,6 +200,7 @@ export function StudentCardSet({ set, source }: { set: CardSet; source: string }
 
   return (
     <section>
+      {restoring && !error && <p className="note" role="status">Loading saved decisions…</p>}
       {error && (
         <p className="note" role="alert" style={{ color: "#b42318" }}>
           {error}

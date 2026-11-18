@@ -1,2 +1,2 @@
--r requirements.txt
+-r requirements.lock
 httpx==0.28.1

@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 import { CuratorForm } from "@/components/CuratorForm";
 import { apiUrl } from "@/lib/api";
 
-export default function AdminPage({ params }: { params: { token: string } }) {
+export default function AdminPage() {
+  const params = useParams<{ token: string }>();
   const [allowed, setAllowed] = useState<boolean | null>(null);
 
   useEffect(() => {

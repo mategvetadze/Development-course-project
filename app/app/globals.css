@@ -30,6 +30,7 @@ p { color: var(--muted); line-height: 1.45; }
   border-radius: 16px;
   padding: 1rem;
   margin: 0.75rem 0;
+  overflow-wrap: anywhere;
 }
 .meta { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 1rem; font-size: 0.92rem; }
 .actions { display: flex; gap: 0.5rem; margin-top: 0.85rem; }

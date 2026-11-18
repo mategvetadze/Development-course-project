@@ -27,7 +27,7 @@ test('real HTTP publish → latest → React decisions → completion → reload
     window.open = () => null;
     globalThis.IntersectionObserver = class {
       constructor(callback) { this.callback = callback; }
-      observe(target) { this.callback([{ target, isIntersecting: true }]); }
+      observe(target) { this.callback([{ target, isIntersecting: true, intersectionRatio: 0.5 }]); }
       disconnect() {}
     };
     const container = document.getElementById('root');
@@ -86,6 +86,14 @@ test('real HTTP publish → latest → React decisions → completion → reload
       const saved = await (await fetch(`${api.origin}/api/sets/${cards.id}/decisions?anonymous_id=${localStorage.getItem('cc_anon')}`)).json();
       assert.equal(Object.keys(saved.choices).length, 5);
       assert.equal(saved.complete, true);
+      const persisted = await (await fetch(`${api.origin}/test/state/${localStorage.getItem('cc_anon')}`)).json();
+      assert.equal(persisted.decisions, 5);
+      assert.equal(persisted.completions.length, 1);
+      assert.equal(persisted.completions[0].qualifies, true);
+      assert.equal(persisted.events.filter(e => e.event === 'student_completes_card_set').length, 1);
+      const event = persisted.events.find(e => e.event === 'student_completes_card_set');
+      assert.equal(event.properties.ms_total, persisted.completions[0].ms_total);
+      assert.equal(event.properties.completion_id, persisted.completions[0].id);
     } finally {
       await act(async () => root.unmount());
       dom.window.close();
