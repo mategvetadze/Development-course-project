@@ -122,6 +122,7 @@ export function StudentCardSet({ set, source }: { set: CardSet; source: string }
   // student_views_card: once per card, when half of it is on screen.
   useEffect(() => {
     if (summary || restoring) return;
+    let disposed = false;
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -129,7 +130,8 @@ export function StudentCardSet({ set, source }: { set: CardSet; source: string }
           const id = (entry.target as HTMLElement).dataset.cardId;
           const card = set.cards.find((c) => c.id === id);
           if (!card || viewed.current.has(card.id)) continue;
-          void startSession().catch(() => setError("Could not start this set. Tap a decision to retry."));
+          // Persist session start before emitting a view. This also gives the
+          // browser event the same environment/internal filter as server events.
           viewed.current.add(card.id);
           const now = nowMs();
           viewedAt.current[card.id] = now;
@@ -139,18 +141,23 @@ export function StudentCardSet({ set, source }: { set: CardSet; source: string }
               localStorage.setItem(`cc_first_view:${set.id}:${anon.current}`, String(now));
             } catch { /* Keep the in-memory timestamp when storage is unavailable. */ }
           }
-          getPostHog()?.capture("student_views_card", {
-            set_id: set.id,
-            card_id: card.id,
-            position: card.position,
-            ...analytics.current,
+          void startSession().then(() => {
+            getPostHog(anon.current)?.capture("student_views_card", {
+              set_id: set.id,
+              card_id: card.id,
+              position: card.position,
+              ...(analytics.current ?? {}),
+            });
+          }).catch(() => {
+            viewed.current.delete(card.id); // allow a later viewing attempt
+            if (!disposed) setError("Could not start this set. Reload to retry.");
           });
         }
       },
       { threshold: 0.5 },
     );
     for (const el of Object.values(cardEls.current)) if (el) observer.observe(el);
-    return () => observer.disconnect();
+    return () => { disposed = true; observer.disconnect(); };
   }, [set, summary, restoring, startSession]);
 
   async function decide(cardId: string, decision: Decision, skip_reason?: string) {
