@@ -1,58 +1,73 @@
-# Event Schema
+# Event Schema — Prometheus / CareerCards
 
+**North star:** Number of students who complete apply-or-skip decisions for all five job cards within five minutes, per week
 
-Every event has four parts: name (actor_verb_object), fired by, properties, owner. No personal data on any event: no names, emails, phone numbers or CV content.
+**North star event:** `student_completes_card_set`
 
-| Event | Fired by | Properties | Owner | Live |
-|---|---|---|---|---|
-| `curator_publishes_card_set` | FastAPI after a successful publish | `set_id`, `card_count` | MG | pending verification |
-| `student_opens_card_set` | Next.js browser once per set page load | `set_id`, `source` | AP | pending verification |
-| `student_views_card` | Next.js browser when 50% visible | `set_id`, `card_id`, `position` | AP | pending verification |
-| `student_decides_card` | FastAPI after new decision saved | `set_id`, `card_id`, `position`, `decision`, `skip_reason`, `ms_on_card` | AP | pending verification |
-| `student_completes_card_set` | FastAPI after the fifth new decision | `set_id`, `apply_count`, `skip_count`, `ms_total` | MG | pending verification |
+**How the north star is computed from events:** PostHog **unique students** (distinct anonymous IDs) who fired `student_completes_card_set` with `qualifies = true`, `environment = production`, and `is_internal = false` in the calendar-week window. The comparable independent database count is `north_star_students` from `backend/sql/reconcile.sql` using the same time window and filters. An event total and a unique-student total are **not interchangeable**.
 
-**Lab 6 mapping:** All five journey steps already have events with the required name, fired-by, properties and owner. No new schema event is needed for the five-step boundary. Owners: MG = Mate Gvetadze; AP = Ani Purtskhvanidze; AS = Archil Sanikidze; ST = Saba Tabukashvili.
+## Events
 
-**North star:** count of `student_completes_card_set` with `ms_total` ≤ 300000, per week (DECISIONS.md, Wk5). `student_opens_card_set` and `student_views_card` are tracked but rejected as success measures: they do not prove a decision.
+The `Live` column stays `pending` until a separate teammate observes that exact event, once, in PostHog Activity after a phone action on mobile data at the deployed URL.
 
-Implementation (Week 7): browser events (student_opens_card_set, student_views_card) fire in app/components/StudentCardSet.tsx; server events (curator_publishes_card_set, student_decides_card, student_completes_card_set) fire in the FastAPI backend (backend/app/routers/) after the database write.
+| Step | Event (actor_verb_object) | Fired by | Properties (no names, emails, phones or message text) | Owner | Live |
+|---|---|---|---|---|---|
+| Supply (precursor) | `curator_publishes_card_set` | Curator's Publish action; FastAPI after database write | `set_id`, `card_count`, `environment`, `is_internal` | MG | pending |
+| Acquisition | `student_opens_card_set` | Student opening the five-card page; browser | `set_id`, `source` (`friend`, `groupchat`, `other`), `environment`, `is_internal` | AP | pending |
+| Activation (precursor) | `student_views_card` | Student viewing at least 50% of a card; browser | `set_id`, `card_id`, `position`, `environment`, `is_internal` | AP | pending |
+| Activation (precursor) | `student_decides_card` | Student making a newly saved choice; FastAPI records it | `set_id`, `card_id`, `position`, `decision`, `skip_reason`, `ms_on_card`, `environment`, `is_internal` | AP | pending |
+| Activation (north star) ★ | `student_completes_card_set` | Student finishing five distinct decisions; FastAPI after persistence | `set_id`, `apply_count`, `skip_count`, `ms_total`, `qualifies`, `completion_id`, `metric_version`, `environment`, `is_internal` | MG | pending |
+
+Retention, referral and revenue are deliberately not instrumented in this five-card MVP. No fake events are added to fill AARRR categories.
+
+## Rules we follow
+
+- Event names are lowercase `actor_verb_object` and spelled identically in schema, application, PostHog and dashboard.
+- Every event includes `set_id`. The PostHog `distinct_id` is a locally generated, anonymous browser ID, not a real person's identity.
+- A completion is counted once per `(set_id, anonymous_id)` by the database. We count **unique students per week** for the committed north-star sentence.
+- The student receives the value; a server-recorded completion event represents the student's finished action, not a curator's action.
+- The production event filter is `environment = production` AND `is_internal = false` AND, for the north star, `qualifies = true`.
+- Never put names, email addresses, telephone numbers, CVs, job-application text or admin tokens in events.
+
+## Reconcile plan (Lab 5)
+
+**Event most likely to fail silently:** `student_decides_card`.
+
+**How it would fail:** A student taps Apply and leaves for the original listing before the request is persisted; or the event is queued in `analytics_outbox` but not delivered to PostHog.
+
+**The check that would catch it:** Compare the count of newly inserted `decisions` rows with PostHog `student_decides_card` events for the same set, window and internal-user exclusion. Check pending events in `analytics_outbox`. Independently compare the north-star distinct student count against `card_set_completions` using `backend/sql/reconcile.sql`.
+
+**Who runs this in Week 7:** AP with MG (database access). This assignment is not proof that it was run.
+
+---
 
 ## Gate reconcile (Lab 7)
 
-Only change `Live` to `yes` in the Events table above after a different teammate performs the corresponding action on a phone at the **production URL** with mobile data and another teammate sees that exact event and properties in PostHog Activity. Do not count local development events as live.
+**Production URL walked:** PENDING — enter actual deployed frontend HTTPS URL.
 
-**Production URL walked:** PENDING — not supplied · **walked by:** PENDING (must not be the north-star builder MG) · **on a phone, mobile data:** PENDING
+**Walked by:** PENDING — teammate who did not implement the completion step; **on phone with mobile data:** PENDING.
 
-**Count window:** PENDING — write identical start/end times with timezone in both rows. Compare the same published set and exclude known internal testers from both counts.
+**Window:** PENDING — identical start, end and timezone for both sources; half-open interval `[start, end)`.
 
-| Source | Count | Window | Exactly how it was counted |
+| Source | Count | Window | Exactly how counted |
 |---|---|---|---|
-| PostHog | PENDING (do not enter 0 without checking) | PENDING same start/end, timezone | Trends: `student_completes_card_set`, total count, filter `ms_total <= 300000`, production and non-team users only; note set ID and property filters |
-| Database (Neon PostgreSQL) | PENDING | PENDING same start/end, timezone | Run the SQL below after confirming the database and window; filter test `anonymous_id`s consistently, and compare qualifying users in the same set |
+| PostHog | PENDING | PENDING | `student_completes_card_set`, **unique users**, filtered `qualifies = true`, `environment = production`, `is_internal = false`, same `set_id` if limiting the DB query to one set, same timestamp window |
+| Neon database | PENDING | PENDING | `north_star_students` from `backend/sql/reconcile.sql` or the parameterized command below; `environment = production`, exclude internal users, same set/time window |
 
-**Reconcile SQL (parameterize window / production set and exclusions; first view timestamp is not stored in the current decisions table):**
+Run from `backend/` after configuring `DATABASE_URL` and installing `requirements.txt`:
 
-```sql
--- This counts completed sets; it cannot independently validate the north star
--- <= 300000ms threshold with the current schema because ms_total is not stored.
-SELECT set_id, anonymous_id, COUNT(*) AS decisions,
-       MAX(created_at) AS completed_at
-FROM decisions
-WHERE created_at >= :window_start AND created_at < :window_end
-  AND set_id = :production_set_id
-  -- AND anonymous_id NOT IN (:internal_test_ids)
-GROUP BY set_id, anonymous_id
-HAVING COUNT(*) = 5;
+```bash
+python -m scripts.reconcile --from 2026-11-16T00:00:00+04:00 --to 2026-11-23T00:00:00+04:00 --environment production
 ```
 
-**Important reconciliation limitation:** The current database can count complete five-decision sets, but cannot independently check the north-star 5-minute threshold (`ms_total`) and cannot exactly reconstruct the fifth-decision event timestamp if historical data is incomplete. Before claiming a match for the *qualified* north star, add a persisted completion record with `ms_total`, `completed_at`, `set_id`, `anonymous_id` and a uniqueness constraint, or separately reconcile **unfiltered** completion events as an interim gate check and label that distinction. Never write “Match: yes” for mismatched definitions.
+The dates above are **illustrative query parameters, not claimed measurement dates**. Replace them with the exact chosen window, and use `--set-id <actual-set-uuid>` on both sources if reconciling one set. The command returns `completion_events`, `qualifying_completion_events` and `north_star_students`. Only `north_star_students` matches the North Star wording. `backend/sql/schema.sql` already persists completion start, finish, `ms_total` and `qualifies`; there is no need to invent a new table. See `backend/sql/migrations/001_*`, `002_*`, `003_*` when upgrading an existing database instead of initializing an empty one.
 
-**Match:** PENDING — no numbers observed
+**Match:** PENDING — enter `yes` only after recording equal, verified counts.
 
-**If no, first:** PENDING. Preserve both original counts, investigate event delivery/filter mismatches, link fix commit, then append recounts. Do not overwrite original counts.
+**If no, first and after fix:** PENDING — retain original numbers, explain gap, link fix commit, append corrected numbers; never overwrite a mismatch.
 
-**Silent failure we predicted in Lab 5:** A student taps Apply and leaves for the source post before the decision is saved; check that a decision row and server-side `student_decides_card` event both exist, and review missing events/failed requests. · **Did it happen?** PENDING
+**Silent failure predicted in Lab 5:** Apply navigation may outpace persistence or analytics delivery. **Did it happen?** PENDING — compare actual decision rows, outbox diagnostics and PostHog activity.
 
-**Internal filter set in PostHog:** PENDING — agree an exact property-based filter and apply to every insight. The current schema does **not** tag events with `is_internal`; identify team test IDs or add a safe test flag to both browser and server events before claiming filters work. · **Our test record is:** PENDING (do not publish personal contact details)
+**Internal filter set in PostHog:** PENDING — use exact filters `environment = production` and `is_internal = false` for every relevant insight. Set the team's real `cc_anon` values in the backend's `INTERNAL_ANONYMOUS_IDS` before internal tests; do not publish raw IDs in this document.
 
-**Checked by:** AP (assigned; actual check PENDING) · **events still not Live, with owner and by when:** all five pending — `curator_publishes_card_set` MG; `student_opens_card_set` AP; `student_views_card` AP; `student_decides_card` AP; `student_completes_card_set` MG. Each owner to set time before Lab 8.
+**Checked by:** PENDING. **Events still not Live:** all five until production phone walks and Activity evidence are captured. Assigned owners are in the Events table.

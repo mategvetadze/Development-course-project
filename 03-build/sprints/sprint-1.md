@@ -35,7 +35,7 @@ Use **GitHub Projects** linked from the repository's README (link **not yet supp
 **Acceptance criteria:**
 - Given four distinct saved choices, when I make the fifth choice on my phone, then the apply list appears with original links and deadlines (or states that I skipped all five).
 - And Neon contains exactly five decision rows for the same `set_id` and `anonymous_id`, not more.
-- And `student_completes_card_set` appears once in PostHog with `set_id`, `apply_count`, `skip_count`, `ms_total` (the north star qualifies only when `ms_total <= 300000`).
+- And `student_completes_card_set` appears once in PostHog with `set_id`, `apply_count`, `skip_count`, `ms_total` (the north star qualifies only when the server-computed `qualifies = true`).
 
 **Smallest demo:** Decide all five cards within five minutes; show the summary, the five database rows and one completion event.
 
@@ -55,9 +55,9 @@ Use **GitHub Projects** linked from the repository's README (link **not yet supp
 **As** Nino, **I** open the shared link and see five curated jobs on my phone, **so that** I avoid hunting across several sources.
 
 **Acceptance criteria:**
-- Given the public URL ending `?src=instagram` and a published set, when opened on a phone, then five cards are visible/scrollable with readable labels and no horizontal overflow.
-- And the page retrieves only the latest published set from Neon without requiring login.
-- And `student_opens_card_set` fires once per page load with `set_id` and `source=instagram` in PostHog.
+- Given the public URL ending `?src=friend` and a published set, when opened on a phone, then five cards are visible/scrollable with readable labels and no horizontal overflow.
+- And the Next.js page requests the latest published set through FastAPI (`GET /api/sets/latest`), which reads Neon, without requiring login.
+- And `student_opens_card_set` fires once per page load with `set_id` and `source=friend` in PostHog.
 
 **Smallest demo:** Open the URL in a new phone tab and show five cards plus the open event.
 
@@ -85,13 +85,13 @@ Use **GitHub Projects** linked from the repository's README (link **not yet supp
 
 ### S6 · Deploy and instrument · owner MG · reviewer ST · 3 h
 
-**Do the deployment setup first**, using `Lab-6/setup/SHIP-STACK-SETUP.md` if available, then complete the gate as the final story. Host Next.js on Vercel, FastAPI on Render, Neon Postgres and PostHog. Fix missing `app/lib/posthog-client.ts` (referenced by StudentCardSet in the ZIP) before a frontend build.
+**Do the deployment setup first**, using `Lab-6/setup/SHIP-STACK-SETUP.md` if available, then complete the gate as the final story. Host Next.js on Vercel, FastAPI on Render, Neon Postgres and PostHog. Verify the existing `app/lib/posting-client.ts` integration before deployment. The file is present and imported by `StudentCardSet.tsx`; do not add a duplicate with a different name.
 
 **Acceptance criteria:**
 - Given a phone on mobile data, when the README Live product URL is opened, then five published cards load and the fifth choice produces a summary.
 - And the URL is inserted into README; a different teammate walks every step on a phone.
 - And all five schema events are visible in PostHog Activity with properties, with the north-star event triggered from production.
-- And the gate reconciliation is written in `03-build/analytics/event-schema.md`: PostHog `student_decides_card` count vs Neon decision rows, and PostHog `student_completes_card_set` vs students with five decisions (same date range and environment). Record numbers, not an unsupported claim that they match.
+- And the gate reconciliation is written in `03-build/analytics/event-schema.md`: PostHog `student_decides_card` count vs Neon decision rows, and PostHog unique qualifying `student_completes_card_set` students vs `north_star_students` from `backend/sql/reconcile.sql` (same window, production filter and internal-user exclusion). Record numbers, not an unsupported claim that they match.
 
 **Smallest demo:** On a real phone, open the live URL, finish five decisions, show PostHog Activity and the recorded reconciliation numbers.
 

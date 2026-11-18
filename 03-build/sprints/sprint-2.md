@@ -13,7 +13,7 @@ The evidence below reflects the uploaded repository snapshot, **not** an indepen
 | S3 — Student opens five cards | AP | Not verified | Next.js renders cards if API returns a published set; production behavior, phone walk and `student_opens_card_set` unverified |
 | S4 — Student views job details | AP | Not verified | Card component renders role, company, requirements, hours, pay and deadline; `student_views_card` and phone behavior unverified |
 | S5 — Student applies or skips | AP | Not verified | Apply/Skip UI and POST `/api/decide` exist; no demonstrated production persistence or event |
-| S6 — Deploy and instrument | MG | Not verified | README has no confirmed public URL or dashboard; missing frontend PostHog client import and duplicate backend router were corrected in this prepared ZIP, but not deployed or tested live |
+| S6 — Deploy and instrument | MG | Not verified | README has no confirmed public URL or dashboard; frontend PostHog helper (`app/lib/posting-client.ts`) and backend routes exist, but were not deployed or tested live |
 
 **Slip rule:** Actual activation is unknown; do not assert it did or did not fire. Per Sprint 1, prioritize the working five-decision journey and its `student_completes_card_set` event over admin-page polish. MG and AS must record what moves if the deploy timeline slips.
 
@@ -45,7 +45,7 @@ The evidence below reflects the uploaded repository snapshot, **not** an indepen
 
 - Given a published set, when the production page opens, five cards appear without horizontal overflow and one `student_opens_card_set` event has `set_id` and `source`.
 - When a card is at least 50% visible, its details appear and `student_views_card` records `set_id`, `card_id`, `position` once per card per page load.
-- Verify the PostHog browser key, privacy settings and new `app/lib/posthog-client.ts` integration after deploy.
+- Verify the PostHog browser key, privacy settings and existing `app/lib/posting-client.ts` integration after deploy.
 - **Demo:** ST opens a phone URL and shows two distinct events in PostHog.
 
 ### L7-2 · Apply/Skip through a real API · owner AP · reviewer MG · 2 h (planned)
@@ -63,7 +63,7 @@ The evidence below reflects the uploaded repository snapshot, **not** an indepen
 - Check the key limitation: database has no persisted `ms_total`, so qualified 5-minute completion counts need a schema enhancement or an explicitly labeled unfiltered interim comparison.
 - **Demo:** MG reviews the two queries, filters and numbers side by side.
 
-**AP total planned: 5 h.** Other required work is not yet capacity-backed:
+**AP total planned: 5 h (provisional until the hours remaining are confirmed).** Other required work is not yet capacity-backed:
 
 ### L7-4 · Public deploy and server instrumentation · owner MG · reviewer ST · hours TBD
 
