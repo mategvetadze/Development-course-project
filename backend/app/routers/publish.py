@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Header, HTTPException
 
-from app.analytics import capture
+from app.analytics import enqueue
 from app.config import get_settings
 from app.db import get_conn
 from app.schemas import PublishRequest, PublishResponse
@@ -52,12 +52,10 @@ def publish_cards(
                             card.deadline,
                         ),
                     )
+                enqueue(conn, distinct_id="curator", event="curator_publishes_card_set",
+                        properties={"set_id": str(set_id), "card_count": 5,
+                                    **settings.analytics_context("curator")})
     except RuntimeError as e:
         raise HTTPException(status_code=503, detail=str(e)) from e
 
-    capture(
-        distinct_id="curator",
-        event="curator_publishes_card_set",
-        properties={"set_id": str(set_id), "card_count": 5},
-    )
     return PublishResponse(set_id=set_id, card_count=5)

@@ -17,10 +17,11 @@ const cardSet = { id: 'set-1', cards: Array.from({ length: 5 }, (_, i) => ({
   source: 'Example', field: 'IT', source_url: `https://example.com/${i}`, students_ok: true,
   experience: 'None', hours: 'Part time', pay: '', deadline: '2027-01-01',
 })) };
-const empty = { choices: {}, complete: false, summary: null };
+const empty = { choices: {}, complete: false, summary: null,
+  analytics: { environment: 'test', is_internal: false }, started_at: null, session_exists: false };
 const response = (data, ok = true) => ({ ok, json: async () => data });
 let dom, root, container, requests, opens, events, observer;
-let getState, submit;
+let getState, submit, startSession;
 
 beforeEach(() => {
   dom = new JSDOM('<div id="root"></div>', { url: 'http://localhost/' });
@@ -30,9 +31,11 @@ beforeEach(() => {
   localStorage.setItem('cc_anon', 'student');
   requests = []; opens = []; events = [];
   getState = async () => response(empty);
+  startSession = async () => response({ started_at: new Date().toISOString(), analytics: empty.analytics });
   submit = async () => response({ complete: false, decision: 'apply', summary: null });
   globalThis.fetch = async (url, options = {}) => {
     requests.push({ url, options });
+    if (url.endsWith('/start')) return startSession();
     return options.method === 'POST' ? submit(JSON.parse(options.body)) : getState();
   };
   window.open = (...args) => { opens.push({ args, requests: requests.length }); };
@@ -40,11 +43,12 @@ beforeEach(() => {
     constructor(callback) { observer = this; this.callback = callback; this.elements = []; }
     observe(el) { this.elements.push(el); }
     disconnect() {}
-    view() { this.callback(this.elements.map(target => ({ target, isIntersecting: true }))); }
+    view(ratio = 0.5) { this.callback(this.elements.map(target => ({ target, isIntersecting: true, intersectionRatio: ratio }))); }
   };
   process.env.NEXT_PUBLIC_POSTHOG_KEY = 'test-only';
   posthog.init = () => posthog;
   posthog.identify = () => {};
+  posthog.register = () => {};
   posthog.capture = (...args) => events.push(args);
   container = document.getElementById('root');
   root = createRoot(container);
@@ -63,7 +67,7 @@ async function click(element) {
 }
 
 test('reload restores saved choices and completed summary from API', async () => {
-  getState = async () => response({ choices: Object.fromEntries(cardSet.cards.map(c => [c.id, c.id === 'card-0' ? 'skip' : 'apply'])), complete: true,
+  getState = async () => response({ ...empty, choices: Object.fromEntries(cardSet.cards.map(c => [c.id, c.id === 'card-0' ? 'skip' : 'apply'])), complete: true,
     summary: [{ role: 'Saved role', deadline: '2027-01-01', source_url: 'https://example.com/saved' }] });
   await renderStudent();
   assert.match(requests[0]?.url || '', /\/api\/sets\/set-1\/decisions\?anonymous_id=student/);
@@ -91,7 +95,7 @@ test('apply opens synchronously, blocks duplicate taps, and uses canonical decis
   await renderStudent();
   const button = container.querySelector('.apply');
   await act(async () => { button.click(); button.click(); });
-  assert.equal(requests.filter(r => r.options.method === 'POST').length, 1);
+  assert.equal(requests.filter(r => r.url.endsWith('/api/decide')).length, 1);
   assert.equal(opens.length, 1);
   assert.equal(opens[0].requests, 1, 'open happens after restore but before POST');
   assert.deepEqual(opens[0].args, ['https://example.com/0', '_blank', 'noopener,noreferrer']);
@@ -138,10 +142,32 @@ test('first-view timing survives remount and view analytics fires once per card'
     act(() => observer.view());
     now = 6000;
     await click(container.querySelector('.apply'));
-    const body = JSON.parse(requests.find(r => r.options.method === 'POST').options.body);
+    const body = JSON.parse(requests.find(r => r.url.endsWith('/api/decide')).options.body);
     assert.equal(body.ms_total, 5000);
     assert.equal(body.anonymous_id, 'student');
   } finally { Date.now = realNow; }
+});
+
+test('views require 50 percent visibility and server context tags every browser event', async () => {
+  getState = async () => response({ ...empty, analytics: { environment: 'production', is_internal: true } });
+  await renderStudent();
+  act(() => observer.view(0.1));
+  assert.equal(events.filter(e => e[0] === 'student_views_card').length, 0);
+  await act(async () => observer.view(0.5));
+  assert.equal(events.filter(e => e[0] === 'student_views_card').length, 5);
+  assert.ok(events.every(e => e[1].environment === 'production' && e[1].is_internal === true));
+  assert.equal(requests.filter(r => r.url.endsWith('/start')).length, 1);
+});
+
+test('failed session start prevents a decision and remains retryable', async () => {
+  startSession = async () => response({ detail: 'Could not start this set' }, false);
+  await renderStudent();
+  await click(container.querySelector('.apply'));
+  assert.equal(requests.filter(r => r.url.endsWith('/api/decide')).length, 0);
+  assert.match(container.querySelector('[role="alert"]').textContent, /Could not start/);
+  startSession = async () => response({ started_at: new Date().toISOString(), analytics: empty.analytics });
+  await click(container.querySelector('.apply'));
+  assert.equal(requests.filter(r => r.url.endsWith('/api/decide')).length, 1);
 });
 
 test('curator displays field validation errors instead of generic failure', async () => {

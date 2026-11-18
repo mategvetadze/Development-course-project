@@ -3,7 +3,7 @@ from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, Query
 
-from app.analytics import capture
+from app.analytics import enqueue
 from app.config import get_settings
 from app.db import get_conn
 from app.metrics import ensure_session, lock_session, record_completion
@@ -104,40 +104,23 @@ def decide_card(body: DecideRequest):
                 state = decision_state(conn, body.set_id, body.anonymous_id)
                 completion = (record_completion(conn, body.set_id, body.anonymous_id, len(state.summary))
                               if inserted and state.complete else None)
+                if inserted:
+                    enqueue(conn, distinct_id=body.anonymous_id, event="student_decides_card", properties={
+                        "set_id": str(body.set_id), "card_id": str(body.card_id), "position": card["position"],
+                        "decision": body.decision,
+                        "skip_reason": body.skip_reason if body.decision == "skip" else None,
+                        "ms_on_card": body.ms_on_card, **state.analytics,
+                    })
+                if completion:
+                    enqueue(conn, distinct_id=body.anonymous_id, event="student_completes_card_set",
+                            event_id=completion["id"], timestamp=completion["completed_at"], properties={
+                                "set_id": str(body.set_id), "apply_count": completion["apply_count"],
+                                "skip_count": completion["skip_count"], "ms_total": completion["ms_total"],
+                                "completion_id": str(completion["id"]), "qualifies": completion["qualifies"],
+                                "metric_version": "server_v1", **state.analytics,
+                            })
     except RuntimeError as e:
         raise HTTPException(status_code=503, detail=str(e)) from e
 
-    # Only newly committed decisions attempt analytics; retries keep the first choice.
-    if inserted:
-        capture(
-            distinct_id=body.anonymous_id,
-            event="student_decides_card",
-            properties={
-                "set_id": str(body.set_id),
-                "card_id": str(body.card_id),
-                "position": card["position"],
-                "decision": body.decision,
-                "skip_reason": body.skip_reason if body.decision == "skip" else None,
-                "ms_on_card": body.ms_on_card,
-                **state.analytics,
-            },
-        )
-
-    # The per-student lock makes exactly one request observe the fifth new row.
-    if completion:
-        capture(
-            distinct_id=body.anonymous_id,
-            event="student_completes_card_set",
-            properties={
-                "set_id": str(body.set_id),
-                "apply_count": len(state.summary),
-                "skip_count": 5 - len(state.summary),
-                "ms_total": completion["ms_total"],
-                "completion_id": str(completion["id"]),
-                "qualifies": completion["qualifies"],
-                "metric_version": "server_v1",
-                **state.analytics,
-            },
-        )
     return DecideResponse(complete=state.complete, summary=state.summary,
                           decision=state.choices[str(body.card_id)])

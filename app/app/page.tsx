@@ -43,8 +43,12 @@ export default async function HomePage({
           <p className="note">Curator: publish five cards from the admin page first.</p>
         </div>
       ) : (
-        <StudentCardSet set={set} source={source} />
+        <StudentCardSet key={set.id} set={set} source={source} />
       )}
+      <p className="note">
+        CareerCards is a student project. We record anonymous decisions and completion times.
+        With analytics enabled, we also count visits and card views. We do not ask for names or contact details.
+      </p>
     </main>
   );
 }

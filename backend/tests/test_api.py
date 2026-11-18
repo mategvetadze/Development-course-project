@@ -46,13 +46,6 @@ class ApiTests(unittest.TestCase):
         get_settings.cache_clear()
         with get_conn() as conn:
             conn.execute(self.schema_file.read_text())
-        self.events = []
-        def capture(**event):
-            self.events.append(event)
-        for module in ("app.routers.publish", "app.routers.decide"):
-            p = patch(module + ".capture", side_effect=capture)
-            p.start()
-            self.addCleanup(p.stop)
         self.client = TestClient(app, raise_server_exceptions=False)
         self.addCleanup(self.client.close)
 
@@ -83,6 +76,11 @@ class ApiTests(unittest.TestCase):
 
     def completion_events(self):
         return [e for e in self.events if e["event"] == "student_completes_card_set"]
+
+    @property
+    def events(self):
+        with get_conn() as conn:
+            return conn.execute("select * from analytics_outbox order by occurred_at, id").fetchall()
 
     def test_publish_decide_reload_summary_and_idempotency(self):
         self.assertIsNone(self.client.get("/api/sets/latest").json())
@@ -221,6 +219,7 @@ class MigrationTests(ApiTests):
         with get_conn() as conn:
             conn.execute((ROOT / "sql/migrations/001_decision_integrity.sql").read_text())
             conn.execute((ROOT / "sql/migrations/002_server_completion.sql").read_text())
+            conn.execute((ROOT / "sql/migrations/003_analytics_outbox.sql").read_text())
 
     def test_preserves_legacy_invalid_rows_but_excludes_them_from_completion(self):
         # Recreate the old schema to demonstrate migration against existing bad data.
@@ -252,6 +251,7 @@ class AnalyticsTests(unittest.TestCase):
         from app.analytics import capture
         for stage in ("capture", "flush"):
             with self.subTest(stage=stage), patch("app.analytics.get_posthog") as client:
+                client.return_value.capture.return_value = (True, {})
                 getattr(client.return_value, stage).side_effect = OSError("offline")
                 with self.assertLogs("app.analytics", level="WARNING"):
                     capture("student", "student_decides_card", {})
