@@ -1,6 +1,6 @@
 # Pattern Journal · Archil Sanikidze (@Archi-lee-Sun)
 
-These entries were written retrospectively on 18 October 2026 from my interview records, repository commits, and recollection. They were not committed during the individual weeks.
+The entries for Weeks 1 to 4 were written retrospectively on 18 October 2026 from my interview records, repository commits, and recollection. They were not committed during the individual weeks.
 
 ## Week 1 · Act like an owner, not a role
 
@@ -25,3 +25,19 @@ Evidence: [interviews 03](../../01-discovery/interview-logs/03-student-cs.md), [
 The team's Week 4 problem statement cites the patterns analysis built from our interview evidence, including my logs. I supplied that evidence, but I did not write the Week 4 decision line, review the team's prototype plan, run a prototype session, or make a quick prototype test. I cannot claim personal prototype learning yet.
 
 Evidence: [Week 4 decision](../../DECISIONS.md), [patterns analysis](../../01-discovery/synthesis/patterns-analysis.md), [team prototype plan](../../02-design/prototype-plan.md).
+
+**Weeks 5 to 7:** Written retrospectively on November 21, 2026, applying the weekly principles to my November 17–18 commits and subsequent setup. These entries are copied from [my HW2](hw2.md#2-pattern-journal-weeks-5-to-7).
+
+## Week 5 · One metric that matters
+
+I applied the lecture's value/event/window principle to our existing [North Star](../../DECISIONS.md): students completing five decisions within five minutes, per week. With Codex, I added database-clock timing and distinct-anonymous-student counting instead of trusting client durations or equating completed sets with students. This extended my contribution into analytics; controlled fixtures checked duplicate identities and exact time boundaries without live users ([03195ef](https://github.com/mategvetadze/Development-course-project/commit/03195ef); W5 PDF pp. 5, 7, 25).
+
+## Week 6 · The smallest complete journey
+
+I kept the approved publish→read→decide→summary flow and existing stack, leaving accounts, scraping and search outside the implementation. My Codex-assisted work covered persistence and reload behavior across frontend and backend, beyond Discovery. A disposable PostgreSQL database and real HTTP fixture tested the complete slice without waiting for hosting ([PR #1](https://github.com/mategvetadze/Development-course-project/pull/1), [live_server.py](../../backend/tests/live_server.py); W6 PDF pp. 5, 9, 17).
+
+## Week 7 · Ship to learn
+
+I moved into infrastructure by creating the Neon database, running its schema and connecting Render/PostHog. Codex-assisted local SDK collectors and a 375px browser journey checked event delivery and saved decisions before production verification ([PR #2](https://github.com/mategvetadze/Development-course-project/pull/2)). These checks prepare the learning loop; a real-person session and production reconciliation remain outstanding (W7 PDF pp. 3, 15, 29).
+
+Lecture references use PDF page numbers: W5 = *PDFSE-W5-F26 (1).pdf*; W6 = *PDFSE-W6-Lecture-Slides (1).pdf*; W7 = *PDFSE-W7-F26.pdf*.
