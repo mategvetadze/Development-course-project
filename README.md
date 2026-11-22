@@ -7,7 +7,7 @@
 | Link | Status |
 |---|---|
 | Prototype v1 | [Open clickable prototype preview](https://htmlpreview.github.io/?https://github.com/mategvetadze/Development-course-project/blob/main/02-design/prototype/index.html) · **verify it actually works on a phone**; replace with deployed `/prototype/index.html` when available |
-| Live product | **PENDING** — MG: replace with independently verified deployed frontend HTTPS URL after a phone/mobile-data test |
+| Live product | https://development-course-project-production.up.railway.app/ (student) · [/admin](https://development-course-project-production.up.railway.app/admin) (curator) · API on same host |
 | Analytics dashboard (PostHog) | **PENDING** — MG: insert shareable three-insight dashboard URL, verified in a logged-out browser |
 | GitHub Projects board | **PENDING** — add the actual four-column board link (next / doing / review / done) |
 | 12-month model | coming Week 12 |

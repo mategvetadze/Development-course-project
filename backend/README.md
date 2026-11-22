@@ -2,6 +2,13 @@
 
 Sprint 1 API for Prometheus: curator publishes 5 cards → student apply/skip → summary + PostHog events.
 
+## Pages (Jinja2)
+
+| Path | What |
+|---|---|
+| `GET /` | Student UI (apply / skip) |
+| `GET /admin` | Curator UI (enter admin token, publish 5 cards) |
+
 ## Endpoints
 
 | Method | Path | Auth | What |

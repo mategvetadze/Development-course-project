@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}CareerCards · Curator{% endblock %}
+{% block body %}
+<p class="note">CareerCards · curator</p>
+<h1>Publish this week's five cards</h1>
+<p>Fill eligibility, hours, pay and deadline so a student can decide without opening the original post.</p>
+
+<div id="gate" class="card">
+  <form id="token-form">
+    <label>Admin token
+      <input type="password" id="token" autocomplete="off" required>
+    </label>
+    <button class="apply" type="submit">Open publish form</button>
+  </form>
+  <p class="note">Token stays in this browser tab only — never put it in the URL.</p>
+</div>
+
+<div id="form-wrap" hidden></div>
+<p id="msg" class="note"></p>
+{% endblock %}
+{% block scripts %}
+<script>
+const empty = () => ({
+  role: "", company: "", field: "", source: "", source_url: "",
+  students_ok: true, experience: "", hours: "", pay: "", deadline: ""
+});
+
+document.getElementById("token-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const token = document.getElementById("token").value.trim();
+  if (!token) return;
+  document.getElementById("gate").hidden = true;
+  const wrap = document.getElementById("form-wrap");
+  wrap.hidden = false;
+  wrap.innerHTML = Array.from({ length: 5 }, (_, i) => `
+    <div class="card" data-i="${i}">
+      <p class="note">Card ${i + 1}</p>
+      ${["role","company","field","source","source_url","experience","hours","pay","deadline"].map(k => `
+        <label>${k}${k === "deadline" ? " (YYYY-MM-DD)" : ""}${k === "source_url" ? " (https://…)" : ""}
+          <input type="${k === "deadline" ? "date" : k === "source_url" ? "url" : "text"}" data-k="${k}" required>
+        </label>`).join("")}
+      <label class="note"><input type="checkbox" data-k="students_ok" checked> Students / first-years OK</label>
+    </div>`).join("") + `<button class="apply" type="button" id="publish">Publish</button>`;
+
+  // Seed example values so a first demo works quickly (edit before real week).
+  const samples = [
+    { role: "Backend Intern", company: "TBC Bank", field: "CS", source: "LinkedIn", source_url: "https://www.linkedin.com/jobs/", experience: "Java or Python basics; students welcome", hours: "Part-time 20 hrs/week", pay: "800 GEL / month", deadline: "2026-12-15" },
+    { role: "Junior QA Intern", company: "EPAM", field: "CS", source: "jobs.ge", source_url: "https://jobs.ge/", experience: "Attention to detail; no years required", hours: "Full-time internship", pay: "Pay: not stated", deadline: "2026-12-10" },
+    { role: "Frontend Intern", company: "Bank of Georgia", field: "CS", source: "hr.ge", source_url: "https://www.hr.ge/", experience: "HTML/CSS/JS; open to 2nd–4th year", hours: "Part-time 15–25 hrs", pay: "600 GEL / month", deadline: "2026-12-20" },
+    { role: "Data Assistant Intern", company: "Local Tech Studio", field: "CS", source: "Telegram", source_url: "https://jobs.ge/", experience: "Excel + basic Python", hours: "Flexible 15 hrs/week", pay: "500 GEL / month", deadline: "2026-12-08" },
+    { role: "Junior Software Engineer", company: "Startup Hub Kutaisi", field: "CS", source: "University chat", source_url: "https://www.linkedin.com/jobs/", experience: "1–2 years OR strong projects (students OK)", hours: "Full-time", pay: "1200 GEL / month", deadline: "2026-12-30" },
+  ];
+  wrap.querySelectorAll(".card[data-i]").forEach((card, i) => {
+    const s = samples[i];
+    Object.entries(s).forEach(([k, v]) => {
+      const el = card.querySelector(`[data-k="${k}"]`);
+      if (el && el.type !== "checkbox") el.value = v;
+    });
+  });
+
+  document.getElementById("publish").addEventListener("click", async () => {
+    const cards = [];
+    for (const card of wrap.querySelectorAll(".card[data-i]")) {
+      const row = {};
+      card.querySelectorAll("[data-k]").forEach(el => {
+        row[el.getAttribute("data-k")] = el.type === "checkbox" ? el.checked : el.value.trim();
+      });
+      cards.push(row);
+    }
+    const msg = document.getElementById("msg");
+    msg.textContent = "Publishing…";
+    try {
+      const res = await fetch("/api/publish", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-Admin-Token": token },
+        body: JSON.stringify({ cards }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(typeof data.detail === "string" ? data.detail : JSON.stringify(data.detail || data));
+      msg.textContent = `Published: ${data.card_count} cards. Open / for students.`;
+      msg.innerHTML += ` <a href="/?src=friend">Go to student view</a>`;
+    } catch (e) {
+      msg.textContent = e.message;
+      msg.className = "error";
+    }
+  });
+});
+</script>
+{% endblock %}

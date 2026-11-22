@@ -6,3 +6,4 @@ pydantic==2.10.2
 pydantic-settings==2.6.1
 posthog==3.7.4
 python-dotenv==1.2.4
+jinja2==3.1.6

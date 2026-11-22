@@ -1,12 +1,15 @@
+from pathlib import Path
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 import asyncio
 from contextlib import asynccontextmanager, suppress
 import logging
 
 from app.analytics import dispatch_pending
 from app.config import get_settings
-from app.routers import decide, health, publish, sets
+from app.routers import decide, health, pages, publish, sets
 
 settings = get_settings()
 
@@ -46,7 +49,11 @@ app.add_middleware(
     allow_headers=["Content-Type", "X-Admin-Token"],
 )
 
+app.include_router(pages.router)
 app.include_router(health.router)
 app.include_router(sets.router)
 app.include_router(publish.router)
 app.include_router(decide.router)
+
+_static = Path(__file__).resolve().parent / "static"
+app.mount("/static", StaticFiles(directory=str(_static)), name="static")

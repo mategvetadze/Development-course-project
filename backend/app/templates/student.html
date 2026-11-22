@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% block title %}CareerCards · Student{% endblock %}
+{% block body %}
+<p class="note">CareerCards · student view</p>
+<h1>Five openings. One decision each.</h1>
+<p>Read who can apply, experience, hours, pay and deadline. Tap Apply or Skip — you should not need to open the original post just to see if you qualify.</p>
+<div id="root">
+  <div class="card"><p class="note">Loading…</p></div>
+</div>
+<p class="note">Anonymous decisions only. No names or contact details.</p>
+{% endblock %}
+{% block scripts %}
+<script>
+const SKIP_REASONS = [
+  ["not_my_field", "Not my field"],
+  ["not_eligible", "I don't qualify"],
+  ["hours", "Hours don't fit"],
+  ["pay", "Pay"],
+  ["not_interested", "Not interested"],
+  ["other", "Other"],
+];
+const source = new URLSearchParams(location.search).get("src") || "other";
+
+function anonId() {
+  const key = "cc_anon";
+  let id = localStorage.getItem(key);
+  if (!id) { id = crypto.randomUUID(); localStorage.setItem(key, id); }
+  return id;
+}
+
+async function api(path, opts) {
+  const res = await fetch(path, opts);
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.detail || data.error || ("HTTP " + res.status));
+  return data;
+}
+
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+async function main() {
+  const root = document.getElementById("root");
+  const anon = anonId();
+  let set;
+  try {
+    set = await api("/api/sets/latest", { cache: "no-store" });
+  } catch (e) {
+    root.innerHTML = `<div class="card"><p class="error">${esc(e.message)}</p></div>`;
+    return;
+  }
+  if (!set) {
+    root.innerHTML = `<div class="card"><p>No published set yet.</p><p class="note">Curator: publish five cards from <a href="/admin">/admin</a> first.</p></div>`;
+    return;
+  }
+
+  let choices = {};
+  let summary = null;
+  let skipFor = null;
+  let pending = null;
+  let sessionPromise = null;
+  const viewedAt = {};
+  let firstViewAt = null;
+
+  async function ensureSession() {
+    if (!sessionPromise) {
+      sessionPromise = api(`/api/sets/${set.id}/start`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ anonymous_id: anon }),
+      }).catch(err => { sessionPromise = null; throw err; });
+    }
+    return sessionPromise;
+  }
+
+  try {
+    const state = await api(`/api/sets/${set.id}/decisions?anonymous_id=${encodeURIComponent(anon)}`, { cache: "no-store" });
+    choices = state.choices || {};
+    summary = state.summary;
+    if (state.session_exists) sessionPromise = Promise.resolve();
+  } catch (_) { /* first visit */ }
+
+  async function decide(cardId, position, decision, skip_reason) {
+    pending = cardId;
+    render();
+    try {
+      await ensureSession();
+      if (!firstViewAt) firstViewAt = Date.now();
+      const ms_on_card = viewedAt[cardId] ? Date.now() - viewedAt[cardId] : 0;
+      const data = await api("/api/decide", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          set_id: set.id,
+          card_id: cardId,
+          position,
+          decision,
+          skip_reason: skip_reason || null,
+          ms_on_card,
+          anonymous_id: anon,
+          ms_total: Date.now() - firstViewAt,
+        }),
+      });
+      choices[cardId] = decision;
+      skipFor = null;
+      if (decision === "apply") {
+        const card = set.cards.find(c => c.id === cardId);
+        if (card?.source_url) window.open(card.source_url, "_blank", "noopener,noreferrer");
+      }
+      if (data.complete) summary = data.summary || [];
+    } catch (e) {
+      alert(e.message);
+    } finally {
+      pending = null;
+      render();
+    }
+  }
+
+  function render() {
+    root.innerHTML = set.cards.map(card => {
+      const choice = choices[card.id];
+      viewedAt[card.id] = viewedAt[card.id] || Date.now();
+      if (!firstViewAt) firstViewAt = Date.now();
+      return `<article class="card">
+        <p class="note">${card.position}/5 · ${esc(card.source)} · ${esc(card.field)}</p>
+        <h2>${esc(card.role)}</h2>
+        <p>${esc(card.company)}</p>
+        <div class="meta">
+          <div><strong>Students OK</strong><div>${card.students_ok ? "Yes" : "No"}</div></div>
+          <div><strong>Experience</strong><div>${esc(card.experience)}</div></div>
+          <div><strong>Hours</strong><div>${esc(card.hours)}</div></div>
+          <div><strong>Pay</strong><div>${esc(card.pay || "Pay: not stated")}</div></div>
+          <div><strong>Deadline</strong><div>${esc(card.deadline)}</div></div>
+        </div>
+        ${choice ? `<p class="note">Recorded: ${choice}</p>` : `
+          <div class="actions">
+            <button type="button" class="skip" data-act="skip-open" data-id="${card.id}" ${pending ? "disabled" : ""}>Skip</button>
+            <button type="button" class="apply" data-act="apply" data-id="${card.id}" data-pos="${card.position}" ${pending ? "disabled" : ""}>Apply</button>
+          </div>`}
+        ${skipFor === card.id ? `<div class="actions">${SKIP_REASONS.map(([k,l]) =>
+          `<button type="button" class="skip" data-act="skip" data-id="${card.id}" data-pos="${card.position}" data-reason="${k}" ${pending ? "disabled" : ""}>${l}</button>`
+        ).join("")}</div>` : ""}
+      </article>`;
+    }).join("") + (summary ? `<section class="card"><h2>Your apply list</h2>${
+      summary.length ? `<ul>${summary.map(s => `<li><a href="${esc(s.source_url)}" target="_blank" rel="noreferrer">${esc(s.role)}</a> · ${esc(s.deadline)}</li>`).join("")}</ul>` : "<p>You skipped all five.</p>"
+    }</section>` : "");
+
+    root.querySelectorAll("button[data-act]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-id");
+        const pos = Number(btn.getAttribute("data-pos"));
+        const act = btn.getAttribute("data-act");
+        if (act === "skip-open") { skipFor = id; render(); return; }
+        if (act === "apply") decide(id, pos, "apply");
+        if (act === "skip") decide(id, pos, "skip", btn.getAttribute("data-reason"));
+      });
+    });
+  }
+
+  void ensureSession().catch(() => {});
+  render();
+}
+main();
+</script>
+{% endblock %}
