@@ -80,7 +80,7 @@ Wk8 · Field-week read: state B, predicted 2 completions from real people, real 
 
 ## 8. Who is next
 
-Our field table as a funnel: named 3 · link delivered 1 (T3, 24 Nov) · opened [ ] · finished [ ]
+Our field table as a funnel: named 3 · link delivered 1 (T3, 24 Nov) · opened 1 · finished 1
 
 | Next person | Channel, and our evidence for it | Sent by | Sent in the lab? |
 |---|---|---|---|
