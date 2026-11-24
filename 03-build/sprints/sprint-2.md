@@ -92,7 +92,7 @@ AP reports that real-person prototype testing took place and 3–5 prospects are
 |---|---|---|---|---|
 | T1 — third-year computer science student, job seeker | Interview 07 (confirm contact consent) | Direct message or in person, production link `?src=friend` | AP, after rung 3; time TBD | pending |
 | T2 — second-year business student, job seeker | Interview 08 (confirm contact consent) | Direct message, production link `?src=friend` | AP, after rung 3; time TBD | pending |
-| T3 — management student, job seeker | Interview 01 (confirm contact consent) | Direct message, production link `?src=groupchat` | ST, after rung 3; time TBD | pending |
+| T3 — management student, job seeker | Interview 01 (confirm contact consent) | Direct message, production link `?src=groupchat` | ST, after rung 3; time TBD | Yes, 25 Nov ~02:00: finished all five, Apply on all five |
 
 **What we tell them:** “We built a five-job-card page to help students decide which listings fit. Please choose Apply or Skip for each card using this public link; we record anonymous card views and decisions, not your name. Let us know what confused you.”
 
