@@ -23,9 +23,8 @@
 
 ## Run log
 
-Day 0 (24 Nov): 1 link delivered (T3, Instagram, 23:57). Opened: [ ].
-
-Day 1 (25 Nov): [links delivered today, opens, finishes]
+Day 0 (24 Nov): 1 link delivered (T3, Instagram, 23:57). Opened: yes.
+Day 1 (25 Nov): T3 finished all five cards around 02:00, Apply on all five. Running total: 1 delivered, 1 opened, 1 finished.
 
 ## Result (filled in when it ends, not before)
 
