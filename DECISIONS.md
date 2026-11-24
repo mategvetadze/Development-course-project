@@ -18,3 +18,10 @@ Wk6 · Stack: FastAPI Python backend (`backend/`) + Next.js phone UI (`app/`) + 
 Wk7 · Gate open at rung 0: missing public URL, events in PostHog, reconcile numbers and dashboard, owners and times in sprint-2.md · evidence: 03-build/sprints/sprint-2.md · owner: AP
 
 Wk7 · Gate status clarified: no public URL, production PostHog events, matched counts or dashboard were verifiable in the supplied repository snapshot; gate remains open at rung 0 until a phone walk confirms rung 1 · evidence: README.md, 03-build/analytics/event-schema.md, 03-build/sprints/sprint-2.md · owner: AP
+
+
+
+
+Wk8 · Field-week read: state B, predicted 2 completions from real people, real 0; widest drop before the product (3 named, 0 links sent), actor: our team; links now go out as soon as a phone walk passes, Experiment 1 tests direct messages to interviewees · evidence: 03-build/analytics/break-readout.md, 03-build/sprints/sprint-2.md · owner: ST
+
+Wk8 · AI feature: fill the card fields (students OK, experience, hours, pay, deadline) from a pasted job post, so hidden requirements in "junior" posts show on the card; the curator approves every card before it is published · evidence: 03-build/evals/eval-set.md, logs 06, 07, 08, 10, 11 · owner: ST
