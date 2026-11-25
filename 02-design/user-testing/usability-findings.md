@@ -1,142 +1,183 @@
 
 # Usability Findings — Prometheus / CareerCards
 
-Record one block per **actual** session within one hour of testing. Use the frozen task and pass/fail rule from `02-design/user-testing/test-plan.md`.
+## 1. Testing goal
 
-Do not invent times, quotes, or results.
+We want to understand whether students can review five job opportunities and make Apply/Skip decisions quickly, without repeatedly opening the original job advertisements.
 
-**Session evidence status:** AP reports that real-person prototype testing took place, but the submitted repository contains **0 session records with observations and times**.
+Our assumption is that short, relevant job cards help students decide faster.
 
-Therefore **0 of 3 required sessions are documented**.
+The target users are students looking for internships or entry-level opportunities.
 
-This does **not** mean that no testing happened; supporting logs still need to be entered.
+## 2. Frozen testing task
 
-**Prototype track:** B — an existing clickable prototype, but fewer than three documented frozen-test sessions (see Wk6 entry in `DECISIONS.md`).
-
-## Frozen task and verdict (unchanged from the test plan)
+The task comes from `02-design/user-testing/test-plan.md`:
 
 > Here are five job posts on paper cards. For each one, tell me out loud whether you would apply or skip it, and why. Use only the cards. The envelope has the full post, but you can only open it if you really need it.
 
-For the clickable prototype, asking to see the original job post counts as opening the envelope.
+For the clickable prototype, requesting the original job advertisement counts as opening the envelope.
 
-**PASS** only when the participant:
+### PASS criteria
 
-1. Finishes all five decisions within five minutes.
-2. Asks to open the original post for no more than one card.
-3. Says they would still check the original post before deciding for no more than one card.
+A participant passes only if all three conditions are met:
 
-Otherwise **FAIL**.
+1. They finish all five decisions within five minutes.
+2. They request the original job post for no more than one card.
+3. They say they would still need to check the original post before deciding for no more than one card.
 
-The five-tester decision rule is: if **3 or more of 5** sessions fail, the assumption is wrong and the team tests removing irrelevant/duplicate posts instead.
+Otherwise, the session is marked FAIL.
 
-## Session 1 · T1 · third-year student/job seeker
+If at least three of five completed sessions fail, the team should reconsider the assumption and investigate removing irrelevant or duplicate opportunities.
 
+## 3. Session records
+
+The team identified three participants for usability testing. The records below preserve the planned participants and testing responsibilities.
+
+### Session 1 — T1
+
+**Participant:** Third-year student and job seeker  
 **Source:** Interview 07  
 **Planned runner:** AP  
 **Planned logger:** MG
 
-**Actual date/time:** PENDING — enter from real notes
+| Measurement | Result |
+|---|---|
+| Actual testing date | Not documented |
+| Device / prototype | Not documented |
+| Actual runner and logger | Not documented |
+| Time to first interaction | Not documented |
+| Time to five decisions | Not documented |
+| Original job posts requested | Not documented |
+| Posts they would still check | Not documented |
+| Predicted mistake observed | Not documented |
+| PASS / FAIL | Not assessed |
 
-**Device and prototype link:** PENDING
+**Observed behavior:** Original session notes are required.
 
-**Actual runner/logger:** PENDING
+**Participant feedback:** No verified quotation is available.
 
-**Time to first tap:** PENDING
+**What we learned:** Cannot draw a participant-specific conclusion without the actual observations.
 
-**Time to five decisions (or not completed):** PENDING
+### Session 2 — T2
 
-**Original-post requests (count):** PENDING
-
-**Said they would still check original post (count):** PENDING
-
-**Predicted first mistake observed?** PENDING
-
-| Time | Observed behavior | Exact participant words (only if recorded verbatim) | Note |
-|---|---|---|---|
-| PENDING | PENDING | PENDING | PENDING |
-
-**Answer to "What were you expecting to happen?":** PENDING
-
-**Result against frozen rule:** NOT ASSESSED — real session record needed
-
-**Surprise / learning:** PENDING
-
-## Session 2 · T2 · second-year student/job seeker
-
+**Participant:** Second-year student and job seeker  
 **Source:** Interview 08  
 **Planned runner:** AP  
 **Planned logger:** AS
 
-**Actual date/time:** PENDING — enter from real notes
+| Measurement | Result |
+|---|---|
+| Actual testing date | Not documented |
+| Device / prototype | Not documented |
+| Actual runner and logger | Not documented |
+| Time to first interaction | Not documented |
+| Time to five decisions | Not documented |
+| Original job posts requested | Not documented |
+| Posts they would still check | Not documented |
+| Predicted mistake observed | Not documented |
+| PASS / FAIL | Not assessed |
 
-**Device and prototype link:** PENDING
+**Observed behavior:** Original session notes are required.
 
-**Actual runner/logger:** PENDING
+**Participant feedback:** No verified quotation is available.
 
-**Time to first tap:** PENDING
+**What we learned:** Cannot draw a participant-specific conclusion without the actual observations.
 
-**Time to five decisions (or not completed):** PENDING
+### Session 3 — T3
 
-**Original-post requests (count):** PENDING
-
-**Said they would still check original post (count):** PENDING
-
-**Predicted first mistake observed?** PENDING
-
-| Time | Observed behavior | Exact participant words (only if recorded verbatim) | Note |
-|---|---|---|---|
-| PENDING | PENDING | PENDING | PENDING |
-
-**Answer to "What were you expecting to happen?":** PENDING
-
-**Result against frozen rule:** NOT ASSESSED — real session record needed
-
-**Surprise / learning:** PENDING
-
-## Session 3 · T3 · management student/job seeker
-
+**Participant:** Management student and job seeker  
 **Source:** Interview 01  
 **Planned runner:** AS  
 **Planned logger:** AP
 
-**Actual date/time:** PENDING — enter from real notes
+| Measurement | Result |
+|---|---|
+| Actual testing date | Not documented |
+| Device / prototype | Not documented |
+| Actual runner and logger | Not documented |
+| Time to first interaction | Not documented |
+| Time to five decisions | Not documented |
+| Original job posts requested | Not documented |
+| Posts they would still check | Not documented |
+| Predicted mistake observed | Not documented |
+| PASS / FAIL | Not assessed |
 
-**Device and prototype link:** PENDING
+**Observed behavior:** Original session notes are required.
 
-**Actual runner/logger:** PENDING
+**Participant feedback:** No verified quotation is available.
 
-**Time to first tap:** PENDING
+**What we learned:** Cannot draw a participant-specific conclusion without the actual observations.
 
-**Time to five decisions (or not completed):** PENDING
+## 4. Additional evidence — Production walkthrough
 
-**Original-post requests (count):** PENDING
+A separate production walkthrough was documented by teammate ST in his individual Homework 2.
 
-**Said they would still check original post (count):** PENDING
+**Date:** November 24, 2026  
+**Tester:** ST  
+**Environment:** Railway production deployment
 
-**Predicted first mistake observed?** PENDING
+The teammate reported that:
 
-| Time | Observed behavior | Exact participant words (only if recorded verbatim) | Note |
-|---|---|---|---|
-| PENDING | PENDING | PENDING | PENDING |
+- The production URL loaded.
+- Five job cards appeared.
+- Apply/Skip interactions worked.
+- The student journey reached the final apply list.
+- Five deadlines appeared in the resulting list.
 
-**Answer to "What were you expecting to happen?":** PENDING
+This supports the team's claim that the deployed product can complete its primary journey.
 
-**Result against frozen rule:** NOT ASSESSED — real session record needed
+However, this was an internal teammate walkthrough, not one of the three required participant usability sessions.
 
-**Surprise / learning:** PENDING
+It also does not establish whether browser analytics events were captured in PostHog.
 
-## After the sessions: apply the decision rule
+**Evidence source:** `members/tabukashvilisaba/hw2.md` (or the teammate's submitted HW2 file).
 
-**Documented sessions:** 0 of 3 required for the Week 7 catch-up.
+## 5. Findings and limitations
 
-**Verified failures:** PENDING
+### Finding 1 — The production journey was demonstrated
 
-**Five-person decision rule:** 3 or more FAIL results out of 5 require changing course.
+The teammate walkthrough provides evidence that the live product was able to display opportunities and complete the Apply/Skip journey.
 
-**Current conclusion:** No defensible PASS/FAIL conclusion without the actual sessions.
+### Finding 2 — Usability remains unverified
 
-Confirm participant dates and original observations before updating this section or `DECISIONS.md`.
+The repository does not yet contain participant timings, observed difficulties, original-post request counts, or verified PASS/FAIL results.
 
-If the rule leads to a genuine decision, append a line to `DECISIONS.md` using:
+We therefore cannot determine whether students can reliably complete the five decisions within five minutes.
 
-`Wk7 · Prototype test: [what the rule actually decided] · evidence: 02-design/user-testing/usability-findings.md (session IDs) · owner: [initials]`
+### Finding 3 — Analytics require separate verification
+
+The team must confirm whether production events are arriving in PostHog, particularly:
+
+- `student_opens_card_set`
+- `student_views_card`
+- `student_decides_card`
+- `student_completes_card_set`
+
+Production functionality alone does not establish successful event tracking.
+
+## 6. Decision against the frozen rule
+
+| Measure | Current evidence |
+|---|---|
+| Required documented sessions | 3 |
+| Completed session records | 0 |
+| Verified PASS results | 0 |
+| Verified FAIL results | 0 |
+| Five-person decision threshold | 3 FAIL out of 5 |
+
+**Decision:** Insufficient participant evidence to accept or reject the assumption.
+
+The team should recover its original testing notes or conduct the missing sessions using the frozen task and criteria.
+
+After recording the results, the team should update this file and append the corresponding evidence-based decision to `DECISIONS.md`.
+
+## 7. Next actions
+
+1. AP and MG: recover or conduct T1's session and record actual measurements.
+2. AP and AS: recover or conduct T2's session and record actual measurements.
+3. AS and AP: recover or conduct T3's session and record actual measurements.
+4. Evaluate each documented session against the frozen PASS/FAIL criteria.
+5. Check the final decision against the five-person rule when five sessions are available.
+6. Record the resulting decision and evidence in `DECISIONS.md`.
+
+**Current status:** Prototype testing is planned, the production journey has been demonstrated internally, and participant usability evidence is still incomplete.
