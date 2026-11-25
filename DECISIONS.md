@@ -1,13 +1,11 @@
+
 Wk2 · Investigate: how students in Kutaisi search for a job and why most applications go unanswered · evidence: 00-foundation/problem-pool.md (Saba, Giorgi), 00-foundation/four-filters-scorecard.md · runner-up: beginner tutors finding students · owner: AS
+
 Wk3 · Prediction "We are wrong if students describing their job search do not raise on their own, before we mention it, either that there are too few jobs in their field or that the pay and requirements offered are unfair." verdict: killed · evidence: 01-discovery/interview-logs/01-student-management.md, 01-discovery/interview-logs/02-student-cs.md, 01-discovery/interview-logs/03-student-cs.md, 01-discovery/interview-logs/04-student-cs.md, 01-discovery/interview-logs/05-student-cs.md, 01-discovery/interview-logs/06-student-law.md, 01-discovery/interview-logs/07-student-cs.md, 01-discovery/interview-logs/08-student-business.md · owner: AS
 
 Wk4 · Problem statement v1: Students lose time and miss opportunities because relevant job posts are scattered across many sources and mixed with irrelevant ones · evidence: 01-discovery/problem-statement.md, 01-discovery/synthesis/patterns-analysis.md · owner: ST
 
-
 Wk5 · North star: Number of students who complete apply-or-skip decisions for all five job cards within five minutes, per week; rejected prototype opens (does not prove value) and job card views (does not prove decisions) · evidence: 03-build/analytics/event-schema.md, 01-discovery/interview-logs/01-student-management.md, 01-discovery/interview-logs/08-student-business.md · owner: AP
-
-
-
 
 Wk6 · MVP boundary: 5-step journey (curator publishes five cards to Nino completes five apply-or-skip decisions and sees an apply list); cut scraping, sign-in, reminders, field picker, search/filters · evidence: 03-build/mvp-boundary.md, 01-discovery/problem-statement.md, interview logs 01, 06, 07, 08, 02-design/prototype-plan.md · owner: MG
 
@@ -19,9 +17,8 @@ Wk7 · Gate open at rung 0: missing public URL, events in PostHog, reconcile num
 
 Wk7 · Gate status clarified: no public URL, production PostHog events, matched counts or dashboard were verifiable in the supplied repository snapshot; gate remains open at rung 0 until a phone walk confirms rung 1 · evidence: README.md, 03-build/analytics/event-schema.md, 03-build/sprints/sprint-2.md · owner: AP
 
-
-
-
 Wk8 · Field-week read: state B, predicted 2 completions from real people, real 0; widest drop before the product (3 named, 0 links sent), actor: our team; links now go out as soon as a phone walk passes, Experiment 1 tests direct messages to interviewees · evidence: 03-build/analytics/break-readout.md, 03-build/sprints/sprint-2.md · owner: ST
 
 Wk8 · AI feature: fill the card fields (students OK, experience, hours, pay, deadline) from a pasted job post, so hidden requirements in "junior" posts show on the card; the curator approves every card before it is published · evidence: 03-build/evals/eval-set.md, logs 06, 07, 08, 10, 11 · owner: ST
+
+Wk7 · Verification update (recorded 25 Nov): Railway URL is listed in README but a production phone walk is still unverified; AP ran the Next.js UI locally, FastAPI /health succeeded, but database readiness and latest-set endpoint failed, so none of the five gate rungs can yet be marked passed · evidence: README.md, 03-build/analytics/event-schema.md, 03-build/sprints/sprint-2.md; local GET /health, /health/ready, /api/sets/latest results · owner: AP

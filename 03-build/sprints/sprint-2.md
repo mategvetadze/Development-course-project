@@ -1,109 +1,171 @@
-# Sprint 2 — Prometheus / CareerCards · Lab 7 to Lab 8
+# Sprint 2 — Prometheus / CareerCards
 
-The evidence below reflects the uploaded repository snapshot, **not** an independently verified deployment or a fresh Git history. Code presence is not the definition of done.
+**Period:** Lab 7 to Lab 8
+
+**Goal:** Deploy the complete five-card student journey, verify analytics, reconcile database and PostHog counts, and prepare for real-user field testing.
 
 ## Sprint 1 review
 
-**Definition of done (Sprint 1):** merged to `main`, live at README production URL, walked on a phone by another teammate, and event in PostHog Activity with schema properties.
+**Definition of done:** Code merged to `main`, working at the public production URL, checked on a phone by another teammate, with the corresponding event visible in PostHog Activity.
 
-| Story | Owner | Done by our definition? | If not: which clause is missing, and what happened |
+| Story | Owner | Done by our definition? | Missing requirement |
 |---|---|---|---|
-| S1 — Finish 5 decisions and show apply list (north star) | MG | Not verified | Backend handler and student summary are present, but no production URL, independent phone walk or PostHog evidence was provided |
-| S2 — Curator publishes 5 cards | MG | Not verified | Admin form and publish API are present; actual five published records, deployment, phone review and event unverified |
-| S3 — Student opens five cards | AP | Not verified | Next.js renders cards if API returns a published set; production behavior, phone walk and `student_opens_card_set` unverified |
-| S4 — Student views job details | AP | Not verified | Card component renders role, company, requirements, hours, pay and deadline; `student_views_card` and phone behavior unverified |
-| S5 — Student applies or skips | AP | Not verified | Apply/Skip UI and POST `/api/decide` exist; no demonstrated production persistence or event |
-| S6 — Deploy and instrument | MG | Not verified | README has no confirmed public URL or dashboard; frontend PostHog helper (`app/lib/posting-client.ts`) and backend routes exist, but were not deployed or tested live |
+| S1 — Complete five decisions and show apply list | MG | Not verified | Backend implementation exists, but production completion and event verification are missing |
+| S2 — Curator publishes five cards | MG | Not verified | Publishing functionality exists; successful production publishing and review are not confirmed |
+| S3 — Display five opportunities | AP | Not verified | Frontend implementation exists; production API data and mobile review need verification |
+| S4 — Display job details | AP | Not verified | Frontend displays requirements, company, pay, hours and deadline; production review is pending |
+| S5 — Apply and Skip interactions | AP | Not verified | Interface and API integration exist; persistence and completion need production testing |
+| S6 — Deploy and instrument | MG | Not verified | Railway URL is listed, but phone accessibility, database readiness and PostHog events are unverified |
 
-**Slip rule:** Actual activation is unknown; do not assert it did or did not fire. Per Sprint 1, prioritize the working five-decision journey and its `student_completes_card_set` event over admin-page polish. MG and AS must record what moves if the deploy timeline slips.
+**Slip rule:** Keep the five-card decision journey, saved decisions and north star completion event as priorities. Move nonessential interface improvements to a later sprint if deployment or integration takes longer than planned.
 
 ## The gate
 
-| Rung | Reached? | Evidence: link or number | If not: owner, by when |
+| Rung | Reached? | Evidence | If not: owner and deadline |
 |---|---|---|---|
-| 1 — Public production URL loads on phone/mobile data | Not verified | README Live product link pending | MG — before Lab 8, exact time to agree |
-| 2 — Five-card journey finishes there | Not verified | No recorded reviewer phone walk | AP (frontend) + MG (API); ST reviews — before Lab 8 |
-| 3 — North star event in PostHog Activity from production | Not verified | No Activity evidence | MG (server), AP (browser checks) — before Lab 8 |
-| 4 — PostHog and database counts reconcile | Not verified | No matched window/counts | AP (check), MG (DB access) — before Lab 8 |
-| 5 — Three-tile dashboard shared in README | Not verified | Dashboard link pending | MG (owner), ST (reviewer) — before Lab 8 |
+| 1 — Production URL loads on a phone | Not verified | Railway URL listed in `README.md`; mobile-data test pending | MG — before Lab 8 |
+| 2 — Complete journey works in production | Not verified | Local frontend runs, but local database readiness failed | AP + MG — before Lab 8 |
+| 3 — North star event appears in PostHog | Not verified | Production Activity evidence pending | MG + AP — before Lab 8 |
+| 4 — PostHog and database counts match | Not verified | Actual counts and shared time window pending | MG + AP — before Lab 8 |
+| 5 — Dashboard is linked in README | Not verified | Public three-insight dashboard link pending | MG — before Lab 8 |
 
 ## Real hours before Lab 8
 
 | Initials | Hours free | When, specifically |
-|---|---:|---|
-| AP — Ani Purtskhvanidze | **5 confirmed by AP** | “5 hours today and last week” reported on Nov 17; how many are still available before Lab 8 needs confirmation |
-| MG — Mate Gvetadze | TBD | MG to confirm upcoming slots |
-| AS — Archil Sanikidze | TBD | AS to confirm upcoming slots |
-| ST — Saba Tabukashvili | TBD | ST to confirm upcoming slots |
-| **Total confirmed future capacity** | **up to 5 h, subject to AP clarifying past vs future** | Do not add unconfirmed teammates' hours |
+|---|---|---|
+| AP — Ani Purtskhvanidze | 5 hours reported; remaining availability to confirm | Frontend integration and testing; exact remaining slots TBD |
+| MG — Mate Gvetadze | TBD | Confirm with MG |
+| AS — Archil Sanikidze | TBD | Confirm with AS |
+| ST — Saba Tabukashvili | TBD | Confirm with ST |
+| **Total confirmed future capacity** | **TBD** | Confirm remaining AP hours and teammates' availability |
 
-## Stories this week — missing gate rungs first
+## Stories this week
 
-### L7-1 · Fix the local build and client events · owner AP · reviewer ST · 2 h (planned)
+### L7-1 — Frontend and browser analytics
 
-**As** Nino, **I** load the five-card page on a phone **so that** I can start making decisions and the team can measure entry.
+**Owner:** AP  
+**Reviewer:** ST  
+**Estimated hours:** 2
 
-- Given a published set, when the production page opens, five cards appear without horizontal overflow and one `student_opens_card_set` event has `set_id` and `source`.
-- When a card is at least 50% visible, its details appear and `student_views_card` records `set_id`, `card_id`, `position` once per card per page load.
-- Verify the PostHog browser key, privacy settings and existing `app/lib/posting-client.ts` integration after deploy.
-- **Demo:** ST opens a phone URL and shows two distinct events in PostHog.
+**As** a student looking for an internship, **I want** to open five relevant job cards on my phone **so that** I can quickly review available opportunities.
 
-### L7-2 · Apply/Skip through a real API · owner AP · reviewer MG · 2 h (planned)
+**Acceptance criteria:**
 
-**As** Nino, **I** choose Apply or Skip for each card **so that** I finish with a saved apply list.
+- Given a published set, the frontend displays exactly five cards.
+- Each card displays its company, role, eligibility, requirements, pay, hours and deadline.
+- The interface works on a phone without horizontal scrolling.
+- `student_opens_card_set` fires once with the required schema properties.
+- `student_views_card` fires when each card becomes at least 50% visible.
+- Another teammate verifies the events in production PostHog Activity.
 
-- Given a card, when Apply is pressed, source URL opens and the server writes one `decisions` row; when Skip reason is selected, a decision saves without leaving the site.
-- Given five saved decisions, when the fifth is made, an apply list or “skipped all five” appears. A double tap cannot create duplicate decisions.
-- `student_decides_card` and `student_completes_card_set` show the schema properties from **production** and match DB writes (server owned by MG).
-- **Demo:** MG reviews the five-card flow on mobile data and sees the stored results.
+**Smallest demo:** Open the production website on a phone, show the five cards, and verify the browser events.
 
-### L7-3 · Gate reconciliation / frontend review · owner AP · reviewer MG · 1 h (planned)
+### L7-2 — Apply/Skip frontend integration
 
-- PostHog and Neon counts use a precisely documented shared window, filters and definition. Store actual results in the gate block of the event schema, never fabricated zeroes.
-- Check the key limitation: database has no persisted `ms_total`, so qualified 5-minute completion counts need a schema enhancement or an explicitly labeled unfiltered interim comparison.
-- **Demo:** MG reviews the two queries, filters and numbers side by side.
+**Owner:** AP  
+**Reviewer:** MG  
+**Estimated hours:** 2
 
-**AP total planned: 5 h (provisional until the hours remaining are confirmed).** Other required work is not yet capacity-backed:
+**As** a student, **I want** to choose Apply or Skip for each job **so that** I can finish with a list of opportunities I want to pursue.
 
-### L7-4 · Public deploy and server instrumentation · owner MG · reviewer ST · hours TBD
+**Acceptance criteria:**
 
-- Deploy FastAPI and PostgreSQL/Neon connection, configure server PostHog secret and CORS, and deploy Next.js with `NEXT_PUBLIC_API_URL` and browser PostHog key.
-- Show `/health` on the API, public Next.js page on mobile data, five decisions saved, and north-star event fired after commit. Do not expose `.env` secrets.
-- **Demo:** ST walks the deployed URL on a phone; MG shows events in Activity.
+- Apply opens the original job listing and attempts to save the decision.
+- Skip allows the student to select a reason.
+- The backend successfully stores each decision.
+- A repeated tap does not create duplicate records.
+- After five saved decisions, the apply list or skipped-all message appears.
+- The server fires `student_decides_card` and `student_completes_card_set` with the required properties.
 
-### L7-5 · Dashboard / private-user exclusion · owner MG · reviewer AS · hours TBD
+**Smallest demo:** Complete five Apply/Skip decisions and show the saved summary.
 
-- Create Trends for `student_completes_card_set`, an ordered step funnel or counts, and Retention; apply the same internal-user filter to all three; share link in README and check it in a private browser.
-- **Demo:** AS opens public share link without logging in and checks the three tiles.
+### L7-3 — Analytics and frontend review
 
-### L7-6 · Five verified opportunities / field-user coordination · owner AS · reviewer ST · hours TBD
+**Owner:** AP  
+**Reviewer:** MG  
+**Estimated hours:** 1
 
-- Confirm five real, accessible posts, deadline, salary/eligibility and source URLs; publish through the verified API after deployment.
-- Coordinate the 3–5 prior discovery participants with ST/AP; do not imply contact occurred unless logged.
-- **Demo:** ST opens the five published cards and verifies source links.
+**Acceptance criteria:**
 
-**Capacity guardrail:** Only AP's 5 hours are provisionally confirmed. The team must fill MG/AS/ST hours and reduce or divide work before calling the full Sprint 2 plan feasible; do not claim the 5 Lab 7 rungs were passed.
+- Verify the student journey on a phone using mobile data.
+- Verify browser events in PostHog Activity.
+- Compare the qualifying north star event count with the database count using the same time window and filters.
+- Check `ms_total` and `qualifies` in the existing completion records.
+- Document actual results in `03-build/analytics/event-schema.md`.
+
+**Smallest demo:** Show production frontend actions and their corresponding PostHog records.
+
+**AP planned work: 5 hours.** These estimates must fit AP's confirmed remaining availability.
+
+### L7-4 — Production deployment
+
+**Owner:** MG  
+**Reviewer:** ST  
+**Estimated hours:** TBD
+
+**Acceptance criteria:**
+
+- The public website loads on mobile data.
+- FastAPI connects to the configured PostgreSQL database.
+- The database contains the required tables and migrations.
+- All five decisions can be saved in production.
+- The completion event reaches PostHog.
+- The public URL is linked in README.
+
+### L7-5 — Analytics dashboard
+
+**Owner:** MG  
+**Reviewer:** AS  
+**Estimated hours:** TBD
+
+**Acceptance criteria:**
+
+- Create a Trends insight for `student_completes_card_set`.
+- Create a journey Funnel or step-count insight.
+- Create a Retention insight.
+- Apply consistent production and internal-user filters.
+- Share the dashboard using a link that opens without a login.
+- Add the link to README.
+
+### L7-6 — Five verified opportunities and field-user coordination
+
+**Owner:** AS  
+**Reviewer:** ST  
+**Estimated hours:** TBD
+
+**Acceptance criteria:**
+
+- Verify five real opportunity listings and their source URLs.
+- Confirm the requirements and deadlines.
+- Publish the five cards through the application.
+- Coordinate the real-user field test with the other team members.
+
+**Capacity rule:** Confirm MG, AS and ST availability before treating the complete story plan as feasible.
 
 ## Field week — who uses it
 
-AP reports that real-person prototype testing took place and 3–5 prospects are available. The uploaded `02-design/user-testing/usability-findings.md` still records **0 logged sessions**, so their identities, actions, results, and links cannot be verified until those records are added. Select 3–5 **non-classmate** people from the prior interviews and confirm each agrees to receive a public link.
+The team plans to contact 3–5 students matching the ICP. Participants must be real potential users rather than classmates, with identities represented by code names.
 
-| Code name and role | Log or session they come from | How link reaches them | Sent by and by when | Opened? |
+| Code name and role | Previous source | How the link reaches them | Sent by and by when | Opened? |
 |---|---|---|---|---|
-| T1 — third-year computer science student, job seeker | Interview 07 (confirm contact consent) | Direct message or in person, production link `?src=friend` | AP, after rung 3; time TBD | pending |
-| T2 — second-year business student, job seeker | Interview 08 (confirm contact consent) | Direct message, production link `?src=friend` | AP, after rung 3; time TBD | pending |
-| T3 — management student, job seeker | Interview 01 (confirm contact consent) | Direct message, production link `?src=groupchat` | ST, after rung 3; time TBD | Yes, 25 Nov ~02:00: finished all five, Apply on all five |
+| T1 — Third-year CS student, job seeker | Interview 07 | Direct message with production URL, after consent | AP — after production verification | Pending |
+| T2 — Second-year business student, job seeker | Interview 08 | Direct message with production URL, after consent | AP — after production verification | Pending |
+| T3 — Management student, job seeker | Interview 01 | Direct message with production URL, after consent | ST — confirm date | Completion reported in earlier draft; supporting evidence pending |
 
-**What we tell them:** “We built a five-job-card page to help students decide which listings fit. Please choose Apply or Skip for each card using this public link; we record anonymous card views and decisions, not your name. Let us know what confused you.”
+**What we tell them:**
 
-## Prediction (record before sending links; do not edit once the field week starts)
+"We built a small website that shows five job opportunities. Please review them and choose Apply or Skip for each one. We record anonymous interactions to understand whether the experience helps students make decisions. Let us know if anything is confusing."
 
-**By Lab 8:** Target **2** `student_completes_card_set` events from real people (`ms_total <= 300000`), plus at least **3** distinct real `student_opens_card_set` events.
+## Prediction
 
-**We are wrong if:** 0 of the 3 contacted non-classmate students complete five decisions. These are **targets, not results**.
+**By Lab 8:** We predict at least **2** qualifying `student_completes_card_set` events from real people, and at least **3** distinct real-user `student_opens_card_set` events.
 
-**Mid-week look:** AP to review dashboard after the first real-user sessions (day/time TBD), then append dated event counts and any action taken; do not backfill a claimed check.
+**We are wrong if:** None of the three contacted students completes all five decisions.
+
+This is the original prediction target, not a claim about the actual result. Do not edit the prediction after the field week starts.
+
+**Mid-week look:** AP will review the dashboard after real-user testing. Record the actual date, counts and resulting action when this check occurs.
 
 ## The DECISIONS.md line
 
-`Wk7 · Gate open at rung 0 (unverified): production URL, phone journey, PostHog Activity, counts and dashboard lack evidence; owners and remaining tasks in sprint-2.md · evidence: README.md, 03-build/analytics/event-schema.md, 03-build/sprints/sprint-2.md · owner: AP`
+`Wk7 · Gate open at rung 0 (unverified): production phone access, completed journey, PostHog Activity, reconciliation and dashboard still require evidence; owners and remaining work in sprint-2.md · evidence: README.md, 03-build/analytics/event-schema.md, 03-build/sprints/sprint-2.md · owner: AP`
